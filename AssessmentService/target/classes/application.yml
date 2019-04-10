@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Assessment
+  datasource:
+    url: jdbc:h2:mem:testdb;Mode=PostgreSQL
+    platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: create
+      
+server:
+  port: 9097
+  
+eureka:
+  client:
+    service-url:
+      default-zone: ${EUREKA_HOME}
