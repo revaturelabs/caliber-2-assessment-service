@@ -70,9 +70,9 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactBatchService(Note n) {
 		try {
-			ResponseEntity<BatchEntity> response = bc.getBatchById(n.getBatchId());
-			if(response != null && response.hasBody()) {
-				n.setBatchId(response.getBody().getBatchId());
+			BatchEntity response = bc.getBatchById(n.getBatchId());
+			if(response != null) {
+				n.setBatchId(response.getBatchId());
 			} else {
 				n.setBatchId(-1);
 			}

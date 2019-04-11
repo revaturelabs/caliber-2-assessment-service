@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.caliber.beans.BatchEntity;
 
-@FeignClient(name="category", url="localhost:9090/")
+@FeignClient(name="batch", url="localhost:9090/")
 public interface BatchClient {
 	
 	@RequestMapping(method = RequestMethod.GET, value="all/batch/{id}")
-	public ResponseEntity<BatchEntity> getBatchById(@PathVariable(value="id") Integer batchId);
+	public BatchEntity getBatchById(@PathVariable(value="id") Integer batchId);
 }
