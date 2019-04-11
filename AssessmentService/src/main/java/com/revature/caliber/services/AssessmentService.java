@@ -55,6 +55,11 @@ public class AssessmentService implements AssessmentServiceInterface{
 				as.setBatchId(-1);
 			}
 			return true;
+		} catch(NullPointerException npe) {
+			log.warn("Batch id does not exist");
+			log.warn(npe.getMessage());
+			as.setBatchId(-1);
+			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with BatchService");
 			log.warn(e.getMessage());
