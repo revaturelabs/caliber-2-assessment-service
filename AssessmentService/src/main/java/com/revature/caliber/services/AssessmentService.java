@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.repositories.AssessmentRepository;
 
+@Service
 public class AssessmentService implements AssessmentServiceInterface{
 	
 	Logger log = Logger.getLogger("AssessmentService.class");
@@ -46,9 +48,9 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactBatchService(Assessment as) {
 		try {
-			ResponseEntity<BatchEntity> response = bc.getBatchById(as.getBatchId());
-			if(response != null && response.hasBody()) {
-				as.setBatchId(response.getBody().getBatchId());
+			BatchEntity response = bc.getBatchById(as.getBatchId());
+			if(response != null) {
+				as.setBatchId(response.getBatchId());
 			} else {
 				as.setBatchId(-1);
 			}
