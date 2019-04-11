@@ -60,5 +60,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 			return false;
 		}
 	}
-
+	
+	//TODO: create contactCategoryService method
 }

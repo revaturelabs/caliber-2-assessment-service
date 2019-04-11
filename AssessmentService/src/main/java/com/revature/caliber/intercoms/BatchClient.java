@@ -12,5 +12,5 @@ import com.revature.caliber.beans.BatchEntity;
 public interface BatchClient {
 	
 	@RequestMapping(method = RequestMethod.GET, value="all/batch/{id}")
-	public ResponseEntity <BatchEntity> getBatchById(@PathVariable(value="id") Integer batchId);
+	public ResponseEntity<BatchEntity> getBatchById(@PathVariable(value="id") Integer batchId);
 }
