@@ -1,0 +1,117 @@
+package com.revature.caliber.services;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.Note;
+import com.revature.caliber.beans.Trainee;
+import com.revature.caliber.intercoms.BatchClient;
+import com.revature.caliber.intercoms.TraineeClient;
+import com.revature.caliber.repositories.AssessmentRepository;
+import com.revature.caliber.repositories.NoteRepository;
+
+@Service
+public class NoteService implements NoteServiceInterface{
+	
+	Logger log = Logger.getLogger("NoteService.class");
+	
+	@Autowired
+	private NoteRepository gp;
+	
+	@Autowired
+	private AssessmentRepository ap;
+	
+	@Autowired
+	private TraineeClient tc;
+	
+	@Autowired
+	private BatchClient bc;
+
+	@Override
+	public List<Note> findAllNotes() {
+		boolean traineeServiceError = false;
+		boolean batchServiceError = false;
+		List<Note> NoteList = gp.findAll();
+		for(int i = 0; i < NoteList.size(); i++) {
+			Note n = NoteList.get(i);
+			if(!contactTraineeService(n) && traineeServiceError == false) {
+				for(int j = i; j < NoteList.size(); j++) {
+					NoteList.get(j).setTraineeId(-1);
+					traineeServiceError = true;
+				}
+			}
+			if(!contactBatchService(n) && batchServiceError == false) {
+				for(int j = i; j < NoteList.size(); j++) {
+					NoteList.get(j).setBatchId(-1);
+					batchServiceError = true;
+				}
+			}
+			if(batchServiceError == true && traineeServiceError == true) {
+				break;
+			}
+		}
+		
+		return NoteList;
+	}
+
+	@Override
+	public Note findNoteById(Integer id) {
+		Note n = gp.findOne(id);
+		contactTraineeService(n);
+		contactBatchService(n);
+		
+		return n;
+	}
+	
+	private boolean contactBatchService(Note n) {
+		try {
+			ResponseEntity<BatchEntity> response = bc.getBatchById(n.getBatchId());
+			if(response != null && response.hasBody()) {
+				n.setBatchId(response.getBody().getBatchId());
+			} else {
+				n.setBatchId(-1);
+			}
+			return true;
+		} catch(Exception e) {
+			log.warn("Could not connect with BatchService");
+			log.warn(e.getMessage());
+			n.setBatchId(-1);
+			return false;
+		}
+	}
+	
+	private boolean contactTraineeService(Note n) {
+		try {
+			List<Trainee> response = tc.findAllTrainees();
+			
+			boolean found = false;
+			
+			if(response != null) {
+				for(int i = 0; i < response.size(); i++) {
+					if(response.get(i).getTraineeId().equals(n.getTraineeId())) {
+						n.setTraineeId(response.get(i).getTraineeId());
+						found = true;
+					}
+				}
+			}
+			
+			if(!found) {
+				n.setTraineeId(-1);
+			}
+			
+			return true;
+		} catch(Exception e) {
+			log.warn("Could not connect with TraineeService");
+			log.warn(e.getMessage());
+			n.setTraineeId(-1);
+			return false;
+		}
+	}
+	
+
+}
