@@ -1,6 +1,8 @@
 package com.revature.caliber.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.Note;
 import com.revature.caliber.beans.Note;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
@@ -21,7 +24,7 @@ public class NoteService implements NoteServiceInterface{
 	Logger log = Logger.getLogger("NoteService.class");
 	
 	@Autowired
-	private NoteRepository gp;
+	private NoteRepository np;
 	
 	@Autowired
 	private AssessmentRepository ap;
@@ -31,37 +34,34 @@ public class NoteService implements NoteServiceInterface{
 	
 	@Autowired
 	private BatchClient bc;
-
+	
 	@Override
 	public List<Note> findAllNotes() {
-		boolean traineeServiceError = false;
-		boolean batchServiceError = false;
-		List<Note> NoteList = gp.findAll();
-		for(int i = 0; i < NoteList.size(); i++) {
-			Note n = NoteList.get(i);
-			if(!contactTraineeService(n) && traineeServiceError == false) {
-				for(int j = i; j < NoteList.size(); j++) {
-					NoteList.get(j).setTraineeId(-1);
-					traineeServiceError = true;
+		List<Note> noteList = np.findAll();
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < noteList.size(); i++) {
+			Note g = noteList.get(i);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
 				}
 			}
-			if(!contactBatchService(n) && batchServiceError == false) {
-				for(int j = i; j < NoteList.size(); j++) {
-					NoteList.get(j).setBatchId(-1);
-					batchServiceError = true;
-				}
-			}
-			if(batchServiceError == true && traineeServiceError == true) {
-				break;
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
 			}
 		}
 		
-		return NoteList;
+		return noteList;
 	}
 
 	@Override
 	public Note findNoteById(Integer id) {
-		Note n = gp.findOne(id);
+		Note n = np.findOne(id);
 		contactTraineeService(n);
 		contactBatchService(n);
 		
@@ -70,9 +70,10 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactBatchService(Note n) {
 		try {
-			ResponseEntity<BatchEntity> response = bc.getBatchById(n.getBatchId());
-			if(response != null && response.hasBody()) {
-				n.setBatchId(response.getBody().getBatchId());
+			BatchEntity response = bc.getBatchById(n.getBatchId());
+			
+			if(response != null) {
+				n.setBatchId(response.getBatchId());
 			} else {
 				n.setBatchId(-1);
 			}
@@ -87,20 +88,9 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactTraineeService(Note n) {
 		try {
-			List<Trainee> response = tc.findAllTrainees();
+			Trainee response = tc.findTraineeById(n.getTraineeId());
 			
-			boolean found = false;
-			
-			if(response != null) {
-				for(int i = 0; i < response.size(); i++) {
-					if(response.get(i).getTraineeId().equals(n.getTraineeId())) {
-						n.setTraineeId(response.get(i).getTraineeId());
-						found = true;
-					}
-				}
-			}
-			
-			if(!found) {
+			if(response == null) {
 				n.setTraineeId(-1);
 			}
 			

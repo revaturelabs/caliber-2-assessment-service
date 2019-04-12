@@ -1,6 +1,8 @@
 package com.revature.caliber.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +31,21 @@ public class GradeService implements GradeServiceInterface{
 	@Override
 	public List<Grade> findAllGrades() {
 		List<Grade> gradeList = gp.findAll();
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			if(!contactTraineeService(g)) {
-				for(int j = i; j < gradeList.size(); j++) {
-					gradeList.get(j).setTraineeId(-1);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
 				}
-				break;
+			}
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
 			}
 		}
 		
@@ -52,20 +62,9 @@ public class GradeService implements GradeServiceInterface{
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
-			List<Trainee> response = tc.findAllTrainees();
+			Trainee response = tc.findTraineeById(g.getTraineeId());
 			
-			boolean found = false;
-			
-			if(response != null) {
-				for(int i = 0; i < response.size(); i++) {
-					if(response.get(i).getTraineeId().equals(g.getTraineeId())) {
-						g.setTraineeId(response.get(i).getTraineeId());
-						found = true;
-					}
-				}
-			}
-			
-			if(!found) {
+			if(response == null) {
 				g.setTraineeId(-1);
 			}
 			
