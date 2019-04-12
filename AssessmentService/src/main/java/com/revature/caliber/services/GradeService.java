@@ -55,7 +55,7 @@ public class GradeService implements GradeServiceInterface{
 	@Override
 	public Grade findGradeById(Integer id) {
 		Grade g = gp.findOne(id);
-		contactTraineeService(g);
+		if(g != null) contactTraineeService(g);
 		
 		return g;
 	}

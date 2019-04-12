@@ -1,0 +1,250 @@
+2019-04-12 13:14:10 DEBUG class:26 - Inside getAllAssessments
+2019-04-12 13:14:12 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:12 WARN  class:70 - status 504 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":"2019-04-12T17:14:12.659+0000","status":504,"error":"Gateway Timeout","message":"com.netflix.zuul.exception.ZuulException: Hystrix Readed time out"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089252935,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253117,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253131,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253143,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253158,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253172,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:13 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:13 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089253185,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254056,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254068,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254078,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254091,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254103,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254115,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254125,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254137,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254148,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254159,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254169,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254179,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254189,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254198,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254211,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254220,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254229,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254241,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254251,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3000"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254261,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3000"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254270,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254280,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254292,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254303,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3002"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254314,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3002"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254324,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3003"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254334,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3003"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254346,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3006"}
+2019-04-12 13:14:14 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:14 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089254356,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3006"}
+2019-04-12 13:14:17 DEBUG class:26 - Inside getAllAssessments
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257398,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257408,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257417,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257427,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257435,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257445,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257454,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257463,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2050"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257522,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257530,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257540,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257550,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257560,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257570,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257579,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257588,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257598,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257607,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257616,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257625,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257635,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257644,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257654,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257665,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257677,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257686,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/2201"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257697,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3000"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257707,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3000"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257717,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257727,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257737,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3001"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257747,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3002"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257783,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3002"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257794,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3003"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257805,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3003"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257814,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3006"}
+2019-04-12 13:14:17 WARN  class:69 - Could not connect with BatchService
+2019-04-12 13:14:17 WARN  class:70 - status 500 reading BatchClient#getBatchById(Integer); content:
+{"timestamp":1555089257826,"status":500,"error":"Internal Server Error","exception":"java.lang.NullPointerException","message":"No message available","path":"/all/batch/3006"}
+2019-04-12 13:14:23 DEBUG class:26 - Inside getAllGrades
+2019-04-12 13:14:33 DEBUG class:26 - Inside getAllNotes
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
+2019-04-12 13:14:33 WARN  class:101 - Could not connect with TraineeService
+2019-04-12 13:14:33 WARN  class:102 - status 400 reading TraineeClient#findTraineeById(Integer); content:
+
