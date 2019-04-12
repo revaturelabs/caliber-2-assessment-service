@@ -1,6 +1,8 @@
 package com.revature.caliber.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +26,32 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 	@Override
 	public List<Assessment> findAllAssessments() {
-		List<Assessment> asList = ar.findAll();
-		for(int i = 0; i < asList.size(); i++) {
-			Assessment as = asList.get(i);
+		List<Assessment> AssessmentList = ar.findAll();
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < AssessmentList.size(); i++) {
+			Assessment a = AssessmentList.get(i);
 			
-			contactBatchService(as);
+			if(!alreadyConnected.containsKey(a.getBatchId())) {
+				if(contactBatchService(a)) {
+					alreadyConnected.put(a.getBatchId(), true);
+				} else {
+					alreadyConnected.put(a.getBatchId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(a.getBatchId())) {
+				a.setBatchId(-1);
+			}
 		}
-		return asList;
+		
+		return AssessmentList;
 	}
  
 	@Override
 	public Assessment findAssessmentById(Integer id) {
 		Assessment as = ar.findOne(id);
-		contactBatchService(as);
+		if(as != null) contactBatchService(as);
 		
 		return as;
 	}
