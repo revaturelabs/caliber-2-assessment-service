@@ -19,6 +19,7 @@
 .springBeans
 /build
 /code
+log.txt
 MANIFEST.MF
 _site/
 activemq-data
