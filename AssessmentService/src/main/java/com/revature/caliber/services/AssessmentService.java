@@ -74,7 +74,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 
 	@Override
-	public float calculateAverageByAssessment() {
+	public float calculateAverageByAssessment(Integer batchId, Integer assessmentId) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
