@@ -27,9 +27,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 		List<Assessment> asList = ar.findAll();
 		for(int i = 0; i < asList.size(); i++) {
 			Assessment as = asList.get(i);
-			if(!contactBatchService(as)) {
-				asList.get(i).setBatchId(-1);
-			}
+			
+			contactBatchService(as);
 		}
 		return asList;
 	}

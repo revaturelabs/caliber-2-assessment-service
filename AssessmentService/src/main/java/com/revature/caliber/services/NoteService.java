@@ -34,26 +34,13 @@ public class NoteService implements NoteServiceInterface{
 
 	@Override
 	public List<Note> findAllNotes() {
-		boolean traineeServiceError = false;
-		boolean batchServiceError = false;
+		
 		List<Note> NoteList = gp.findAll();
 		for(int i = 0; i < NoteList.size(); i++) {
 			Note n = NoteList.get(i);
-			if(!contactTraineeService(n) && traineeServiceError == false) {
-				for(int j = i; j < NoteList.size(); j++) {
-					NoteList.get(j).setTraineeId(-1);
-					traineeServiceError = true;
-				}
-			}
-			if(!contactBatchService(n) && batchServiceError == false) {
-				for(int j = i; j < NoteList.size(); j++) {
-					NoteList.get(j).setBatchId(-1);
-					batchServiceError = true;
-				}
-			}
-			if(batchServiceError == true && traineeServiceError == true) {
-				break;
-			}
+			
+			contactTraineeService(n);
+			contactBatchService(n);
 		}
 		
 		return NoteList;
