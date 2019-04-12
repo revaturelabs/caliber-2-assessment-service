@@ -4,6 +4,7 @@
 *.iws
 *.jar
 *.sw?
+*.md
 *~
 .#*
 .*.md.html
@@ -19,6 +20,7 @@
 .springBeans
 /build
 /code
+log.txt
 MANIFEST.MF
 _site/
 activemq-data
