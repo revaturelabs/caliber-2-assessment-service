@@ -51,7 +51,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public Assessment findAssessmentById(Integer id) {
 		Assessment as = ar.findOne(id);
-		contactBatchService(as);
+		if(as != null) contactBatchService(as);
 		
 		return as;
 	}
