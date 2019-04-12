@@ -72,6 +72,12 @@ public class AssessmentService implements AssessmentServiceInterface{
 			return false;
 		}
 	}
+
+	@Override
+	public float calculateAverageByAssessment() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	//TODO: create contactCategoryService method
 }
