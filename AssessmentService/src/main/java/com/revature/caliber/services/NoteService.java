@@ -62,8 +62,10 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public Note findNoteById(Integer id) {
 		Note n = np.findOne(id);
-		contactTraineeService(n);
-		contactBatchService(n);
+		if(n!= null) {
+			contactTraineeService(n);
+			contactBatchService(n);
+		}
 		
 		return n;
 	}
