@@ -81,7 +81,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public float calculateAverageByAssessment(Integer batchId, Integer assessmentId) {
 		List<Trainee> traineesBatch = (List<Trainee>) tc.findAllByBatch(batchId);
-		List<Trainee> traineesAssessment = a
+	
 		return 0;
 	}
 	
