@@ -83,6 +83,7 @@ public class NoteService implements NoteServiceInterface{
 					if(response.get(i).getTraineeId().equals(n.getTraineeId())) {
 						n.setTraineeId(response.get(i).getTraineeId());
 						found = true;
+						break;
 					}
 				}
 			}

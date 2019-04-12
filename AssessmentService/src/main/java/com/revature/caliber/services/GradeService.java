@@ -57,6 +57,7 @@ public class GradeService implements GradeServiceInterface{
 					if(response.get(i).getTraineeId().equals(g.getTraineeId())) {
 						g.setTraineeId(response.get(i).getTraineeId());
 						found = true;
+						break;
 					}
 				}
 			}
