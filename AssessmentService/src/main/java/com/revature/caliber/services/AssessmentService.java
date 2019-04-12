@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
+import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.AssessmentRepository;
 
 @Service
@@ -23,6 +25,9 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	@Autowired
 	private BatchClient bc;
+	
+	@Autowired
+	private TraineeClient tc;
 
 	@Override
 	public List<Assessment> findAllAssessments() {
@@ -75,7 +80,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 	@Override
 	public float calculateAverageByAssessment(Integer batchId, Integer assessmentId) {
-		// TODO Auto-generated method stub
+		List<Trainee> traineesBatch = (List<Trainee>) tc.findAllByBatch(batchId);
+		List<Trainee> traineesAssessment = a
 		return 0;
 	}
 	
