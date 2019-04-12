@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
@@ -28,12 +27,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 		List<Assessment> asList = ar.findAll();
 		for(int i = 0; i < asList.size(); i++) {
 			Assessment as = asList.get(i);
-			if(!contactBatchService(as)) {
-				for(int j = i; j < asList.size(); j++) {
-					asList.get(j).setBatchId(-1);
-				}
-				break;
-			}
+			
+			contactBatchService(as);
 		}
 		return asList;
 	}
@@ -54,11 +49,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 			} else {
 				as.setBatchId(-1);
 			}
-			return true;
-		} catch(NullPointerException npe) {
-			log.warn("Batch id does not exist");
-			log.warn(npe.getMessage());
-			as.setBatchId(-1);
 			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with BatchService");

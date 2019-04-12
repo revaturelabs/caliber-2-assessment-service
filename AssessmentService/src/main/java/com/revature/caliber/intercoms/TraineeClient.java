@@ -14,6 +14,6 @@ import com.revature.caliber.beans.Trainee;
 //TODO: No way to get trainee by id in UserService?
 @FeignClient(name="trainee", url="localhost:9090/")
 public interface TraineeClient {
-	@RequestMapping(method = RequestMethod.GET, value="all/trainees")
+	@RequestMapping(method = RequestMethod.GET, value="all/trainee/all")
 	public List<Trainee> findAllTrainees();
 }

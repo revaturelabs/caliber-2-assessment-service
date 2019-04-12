@@ -31,12 +31,8 @@ public class GradeService implements GradeServiceInterface{
 		List<Grade> gradeList = gp.findAll();
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			if(!contactTraineeService(g)) {
-				for(int j = i; j < gradeList.size(); j++) {
-					gradeList.get(j).setTraineeId(-1);
-				}
-				break;
-			}
+			
+			contactTraineeService(g);
 		}
 		
 		return gradeList;
