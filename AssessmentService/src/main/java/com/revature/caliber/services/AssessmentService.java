@@ -57,8 +57,15 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	@Override
-	public void deleteAssessment(Assessment as) {
-		ar.delete(as);
+	public Boolean deleteAssessment(Assessment as) {
+		Boolean exists = false;
+		if(ar.findOne(as.getAssessmentId()) != null) exists = true;
+		if(exists) {
+			ar.delete(as);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	private boolean contactBatchService(Assessment as) {
