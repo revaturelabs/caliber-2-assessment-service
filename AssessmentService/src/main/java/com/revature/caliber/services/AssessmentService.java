@@ -57,6 +57,15 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	@Override
+	public Boolean deleteAssessment(Assessment as) {
+		Boolean exists = false;
+		if(ar.findOne(as.getAssessmentId()) != null) exists = true;
+		if(exists) {
+			ar.delete(as);
+			return true;
+		} else {
+			return false;
+		}
 	public Assessment createAssessment(Assessment as) {
 		if(ar.findOne(as.getAssessmentId()) != null) return null;
 		return ar.save(as);
@@ -67,11 +76,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 		log.debug("Updating Assessment: " + as);
 		return ar.save(as);
   }
-    
-  @Override
-	public void deleteAssessment(Assessment as) {
-		ar.delete(as);
-	}
 	
 	private boolean contactBatchService(Assessment as) {
 		try {
