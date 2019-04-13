@@ -66,7 +66,16 @@ public class AssessmentService implements AssessmentServiceInterface{
 		} else {
 			return false;
 		}
-	}
+	public Assessment createAssessment(Assessment as) {
+		if(ar.findOne(as.getAssessmentId()) != null) return null;
+		return ar.save(as);
+  }
+  
+  @Override
+	public Assessment updateAssessment(Assessment as) {
+		log.debug("Updating Assessment: " + as);
+		return ar.save(as);
+  }
 	
 	private boolean contactBatchService(Assessment as) {
 		try {

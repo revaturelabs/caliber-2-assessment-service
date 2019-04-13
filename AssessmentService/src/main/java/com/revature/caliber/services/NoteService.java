@@ -70,6 +70,24 @@ public class NoteService implements NoteServiceInterface{
 		return n;
 	}
 	
+	@Override
+	public Note createNote(Note n) {
+		log.debug("Creating Note: " + n);
+		return np.save(n);
+	}
+	
+	@Override
+	public Note updateNote(Note n) {
+		log.debug("Updating Note: " + n);
+		return np.save(n);
+	}
+
+	@Override
+	public void deleteNote(Note n) {
+		log.debug("Deleing Note: " + n);
+		np.delete(n);
+	}
+	
 	private boolean contactBatchService(Note n) {
 		try {
 			BatchEntity response = bc.getBatchById(n.getBatchId());
