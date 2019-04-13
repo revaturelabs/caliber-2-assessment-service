@@ -56,6 +56,25 @@ public class GradeService implements GradeServiceInterface{
 		
 		return g;
 	}
+
+	@Override
+	public Grade createGrade(Grade g) {
+		log.debug("Creating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public Grade updateGrade(Grade g) {
+		log.debug("Updating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public void deleteGrade(Grade g) {
+		log.debug("Deleting Grade: " + g);
+		gp.delete(g);
+		
+	}
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
