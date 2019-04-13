@@ -82,9 +82,16 @@ public class NoteService implements NoteServiceInterface{
 	}
 
 	@Override
-	public void deleteNote(Note n) {
+	public Boolean deleteNote(Note n) {
 		log.debug("Deleing Note: " + n);
-		np.delete(n);
+		Boolean exists = false;
+		if(np.findOne(n.getNoteId()) != null) exists = true;
+		if(exists) {
+			np.delete(n);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	private boolean contactBatchService(Note n) {

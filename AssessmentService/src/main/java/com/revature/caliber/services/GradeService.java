@@ -70,9 +70,16 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public void deleteGrade(Grade g) {
+	public Boolean deleteGrade(Grade g) {
 		log.debug("Deleting Grade: " + g);
-		gp.delete(g);
+		Boolean exists = false;
+		if(gp.findOne(g.getGradeId()) != null) exists = true;
+		if(exists) {
+			gp.delete(g);
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 	
