@@ -30,15 +30,19 @@ public class AssessmentController {
     private AssessmentService as;
     
     @GetMapping("/all/assessment/all")
-    public List<Assessment> findAllAssessments(){
+    public ResponseEntity<List<Assessment>> findAllAssessments(){
         log.debug("Inside getAllAssessments");
-        return as.findAllAssessments();
+        List<Assessment> temp = as.findAllAssessments();
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
     @GetMapping("/all/assessment/{id}")
-    public Assessment findAssessmentById(@PathVariable("id") Integer id){
+    public ResponseEntity<Assessment> findAssessmentById(@PathVariable("id") Integer id){
         log.debug("Inside findAssessmentById");
-        return as.findAssessmentById(id);
+        Assessment temp = as.findAssessmentById(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
     @PostMapping(value="/all/assessment/create", consumes=MediaType.APPLICATION_JSON_VALUE)
