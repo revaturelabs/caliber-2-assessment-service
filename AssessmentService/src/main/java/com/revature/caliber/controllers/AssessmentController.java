@@ -52,7 +52,7 @@ public class AssessmentController {
 	public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Assessment assessment) {
 		Boolean temp = as.deleteAssessment(assessment);
 		if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<>(temp, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(temp, HttpStatus.OK);
 	}
     
 }
