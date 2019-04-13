@@ -74,6 +74,7 @@ public class AssessmentService implements AssessmentServiceInterface{
   @Override
 	public Assessment updateAssessment(Assessment as) {
 		log.debug("Updating Assessment: " + as);
+		if(ar.findOne(as.getAssessmentId()) == null) return null;
 		return ar.save(as);
   }
 	
