@@ -67,9 +67,10 @@ public class GradeController {
 
     @DeleteMapping(value="all/grade/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Void> deleteLocation(@Valid @RequestBody Grade grade) {
-      gs.deleteGrade(grade);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Grade grade) {
+      Boolean temp = gs.deleteGrade(grade);
+      if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
 }

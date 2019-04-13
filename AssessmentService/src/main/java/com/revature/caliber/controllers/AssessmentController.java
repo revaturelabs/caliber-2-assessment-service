@@ -52,8 +52,9 @@ public class AssessmentController {
     @PostMapping(value="/all/assessment/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Assessment> createAssessment(@RequestBody Assessment assessment) {
-    	as.createAssessment(assessment);
-    	return new ResponseEntity<>(assessment, HttpStatus.CREATED);
+    	Assessment temp = as.createAssessment(assessment);
+    	if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+    	return new ResponseEntity<>(temp, HttpStatus.CREATED);
     }
   
     @PutMapping(value="all/assessment/update", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -67,9 +68,10 @@ public class AssessmentController {
 
     @DeleteMapping(value="all/assessment/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Void> deleteLocation(@Valid @RequestBody Assessment assessment) {
-      as.deleteAssessment(assessment);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Assessment assessment) {
+      Boolean temp = as.deleteAssessment(assessment);
+      if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
 }

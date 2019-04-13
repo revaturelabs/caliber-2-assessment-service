@@ -69,9 +69,10 @@ public class NoteController {
 
     @DeleteMapping(value="all/note/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Void> deleteLocation(@Valid @RequestBody Note note) {
-      ns.deleteNote(note);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Note note) {
+      Boolean temp = ns.deleteNote(note);
+      if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
 }
