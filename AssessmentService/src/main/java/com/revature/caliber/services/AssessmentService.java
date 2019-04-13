@@ -58,6 +58,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	@Override
 	public Assessment createAssessment(Assessment as) {
+		if(ar.findOne(as.getAssessmentId()) != null) return null;
 		return ar.save(as);
 	}
 	

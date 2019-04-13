@@ -48,8 +48,9 @@ public class AssessmentController {
     @PostMapping(value="/all/assessment/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Assessment> createAssessment(@RequestBody Assessment assessment) {
-    	as.createAssessment(assessment);
-    	return new ResponseEntity<>(assessment, HttpStatus.CREATED);
+    	Assessment temp = as.createAssessment(assessment);
+    	if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+    	return new ResponseEntity<>(temp, HttpStatus.CREATED);
     }
     
 }
