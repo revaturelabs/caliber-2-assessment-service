@@ -65,6 +65,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	public Assessment updateAssessment(Assessment as) {
 		log.debug("Updating Assessment: " + as);
 		return ar.save(as);
+  }
     
   @Override
 	public void deleteAssessment(Assessment as) {
