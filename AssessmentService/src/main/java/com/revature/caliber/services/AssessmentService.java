@@ -56,6 +56,22 @@ public class AssessmentService implements AssessmentServiceInterface{
 		return as;
 	}
 	
+	@Override
+	public Assessment createAssessment(Assessment as) {
+		return ar.save(as);
+  }
+  
+  @Override
+	public Assessment updateAssessment(Assessment as) {
+		log.debug("Updating Assessment: " + as);
+		return ar.save(as);
+  }
+    
+  @Override
+	public void deleteAssessment(Assessment as) {
+		ar.delete(as);
+	}
+	
 	private boolean contactBatchService(Assessment as) {
 		try {
 			BatchEntity response = bc.getBatchById(as.getBatchId());

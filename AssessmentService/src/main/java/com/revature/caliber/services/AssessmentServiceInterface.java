@@ -10,5 +10,8 @@ import com.revature.caliber.beans.Assessment;
 public interface AssessmentServiceInterface {
 	public List<Assessment> findAllAssessments();
 	public Assessment findAssessmentById(Integer id);
+	public Assessment createAssessment(Assessment as);
+	public Assessment updateAssessment(Assessment as);
+	public void deleteAssessment(Assessment as);
 
 }
