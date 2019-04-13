@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +24,19 @@ public class GradeController {
     private GradeService gs;
     
     @GetMapping("/all/grade/all")
-    public List<Grade> findAllGrades(){
+    public ResponseEntity<List<Grade>> findAllGrades(){
         log.debug("Inside getAllGrades");
-        return gs.findAllGrades();
+        List<Grade> temp =  gs.findAllGrades();
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
     @GetMapping("/all/grade/{id}")
-    public Grade findGradeById(@PathVariable("id") Integer id){
+    public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
         log.debug("Inside findGradeById");
-        return gs.findGradeById(id);
+        Grade temp = gs.findGradeById(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
 }
