@@ -11,5 +11,7 @@ public interface NoteServiceInterface {
 	public List<Note> findAllNotes();
 	public Note findNoteById(Integer id);
 	public Note createNote(Note n);
+	public Note updateNote(Note n);
+	public void deleteNote(Note n);
 
 }
