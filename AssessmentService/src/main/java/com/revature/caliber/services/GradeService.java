@@ -23,9 +23,6 @@ public class GradeService implements GradeServiceInterface{
 	private GradeRepository gp;
 	
 	@Autowired
-	private AssessmentRepository ap;
-	
-	@Autowired
 	private TraineeClient tc;
 
 	@Override
