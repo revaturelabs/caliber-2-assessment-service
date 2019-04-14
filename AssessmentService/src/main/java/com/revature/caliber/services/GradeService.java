@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.TraineeClient;
-import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
 
 @Service
@@ -98,6 +97,54 @@ public class GradeService implements GradeServiceInterface{
 			g.setTraineeId(-1);
 			return false;
 		}
+	}
+
+	@Override
+	public List<Grade> findGradesByTraineeId(Integer id) {
+		List<Grade> gradeList = gp.findGradesByTraineeId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
+			}
+		}
+		
+		return gradeList;
+	}
+
+	@Override
+	public List<Grade> findGradesByAssessmentId(Integer id) {
+		List<Grade> gradeList = gp.findGradesByAssessmentId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
+			}
+		}
+		
+		return gradeList;
 	}
 	
 
