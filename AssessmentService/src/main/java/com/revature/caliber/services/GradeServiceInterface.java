@@ -13,5 +13,6 @@ public interface GradeServiceInterface {
 	public Grade createGrade(Grade g);
 	public Grade updateGrade(Grade g);
 	public Boolean deleteGrade(Grade g);
-
+	public List<Grade> findGradesByTraineeId(Integer id);
+	public List<Grade> findGradesByAssessmentId(Integer id);
 }
