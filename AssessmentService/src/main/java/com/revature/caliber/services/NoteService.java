@@ -6,11 +6,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.BatchEntity;
-import com.revature.caliber.beans.Note;
 import com.revature.caliber.beans.Note;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
@@ -68,6 +66,32 @@ public class NoteService implements NoteServiceInterface{
 		}
 		
 		return n;
+	}
+	
+	@Override
+	public Note createNote(Note n) {
+		log.debug("Creating Note: " + n);
+		if(np.findOne(n.getNoteId()) != null) return null;
+		return np.save(n);
+	}
+	
+	@Override
+	public Note updateNote(Note n) {
+		log.debug("Updating Note: " + n);
+		return np.save(n);
+	}
+
+	@Override
+	public Boolean deleteNote(Note n) {
+		log.debug("Deleing Note: " + n);
+		Boolean exists = false;
+		if(np.findOne(n.getNoteId()) != null) exists = true;
+		if(exists) {
+			np.delete(n);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	private boolean contactBatchService(Note n) {

@@ -23,9 +23,6 @@ public class GradeService implements GradeServiceInterface{
 	private GradeRepository gp;
 	
 	@Autowired
-	private AssessmentRepository ap;
-	
-	@Autowired
 	private TraineeClient tc;
 
 	@Override
@@ -58,6 +55,32 @@ public class GradeService implements GradeServiceInterface{
 		if(g != null) contactTraineeService(g);
 		
 		return g;
+	}
+
+	@Override
+	public Grade createGrade(Grade g) {
+		log.debug("Creating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public Grade updateGrade(Grade g) {
+		log.debug("Updating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public Boolean deleteGrade(Grade g) {
+		log.debug("Deleting Grade: " + g);
+		Boolean exists = false;
+		if(gp.findOne(g.getGradeId()) != null) exists = true;
+		if(exists) {
+			gp.delete(g);
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	private boolean contactTraineeService(Grade g) {
