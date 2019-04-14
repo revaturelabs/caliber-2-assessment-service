@@ -14,5 +14,6 @@ public interface AssessmentServiceInterface {
 	public Boolean deleteAssessment(Assessment as);
 	public Assessment createAssessment(Assessment as);
 	public Assessment updateAssessment(Assessment as);
-
+	public List<Assessment> findAssessmentsByBatchId(Integer batchId);
+	public List<Assessment> findAssessmentsByCategory(Integer categoryId);
 }

@@ -41,6 +41,22 @@ public class AssessmentController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/assessment/batch/{id}")
+    public ResponseEntity<List<Assessment>> findAssessmentsByBatch(@PathVariable("id") Integer id){
+        log.debug("Inside findAssessmentsByBatch");
+        List<Assessment> temp = as.findAssessmentsByBatchId(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
+    @GetMapping("/all/assessment/category/{id}")
+    public ResponseEntity<List<Assessment>> findAssessmentsByCategory(@PathVariable("id") Integer id){
+        log.debug("Inside findAssessmentsByCategory");
+        List<Assessment> temp = as.findAssessmentsByCategory(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/assessment/{id}")
     public ResponseEntity<Assessment> findAssessmentById(@PathVariable("id") Integer id){
         log.debug("Inside findAssessmentById");

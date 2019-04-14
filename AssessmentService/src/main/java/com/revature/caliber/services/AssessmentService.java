@@ -103,10 +103,58 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public float calculateAverageByAssessment(Integer batchId, Integer assessmentId) {
 		List<Trainee> traineesBatch = (List<Trainee>) tc.findAllByBatch(batchId);
 	
 		return 0;
+=======
+	public List<Assessment> findAssessmentsByBatchId(Integer batchId) {
+		List<Assessment> AssessmentList = ar.findAssessmentsByBatchId(batchId);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < AssessmentList.size(); i++) {
+			Assessment a = AssessmentList.get(i);
+			
+			if(!alreadyConnected.containsKey(a.getBatchId())) {
+				if(contactBatchService(a)) {
+					alreadyConnected.put(a.getBatchId(), true);
+				} else {
+					alreadyConnected.put(a.getBatchId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(a.getBatchId())) {
+				a.setBatchId(-1);
+			}
+		}
+		
+		return AssessmentList;
+	}
+
+	@Override
+	public List<Assessment> findAssessmentsByCategory(Integer categoryId) {
+		List<Assessment> AssessmentList = ar.findAssessmentsByAssessmentCategory(categoryId);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < AssessmentList.size(); i++) {
+			Assessment a = AssessmentList.get(i);
+			
+			if(!alreadyConnected.containsKey(a.getBatchId())) {
+				if(contactBatchService(a)) {
+					alreadyConnected.put(a.getBatchId(), true);
+				} else {
+					alreadyConnected.put(a.getBatchId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(a.getBatchId())) {
+				a.setBatchId(-1);
+			}
+		}
+		
+		return AssessmentList;
+>>>>>>> 0734a623108015465aed0e87ae3e5841df18624b
 	}
 	
 	//TODO: create contactCategoryService method
