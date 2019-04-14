@@ -13,7 +13,6 @@ import com.revature.caliber.beans.Note;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.TraineeClient;
-import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.NoteRepository;
 
 @Service
@@ -24,8 +23,6 @@ public class NoteService implements NoteServiceInterface{
 	@Autowired
 	private NoteRepository np;
 	
-	@Autowired
-	private AssessmentRepository ap;
 	
 	@Autowired
 	private TraineeClient tc;
@@ -127,6 +124,54 @@ public class NoteService implements NoteServiceInterface{
 			n.setTraineeId(-1);
 			return false;
 		}
+	}
+
+	@Override
+	public List<Note> findNotesByTraineeId(Integer id) {
+		List<Note> noteList = np.findNotesByTraineeId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < noteList.size(); i++) {
+			Note g = noteList.get(i);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
+			}
+		}
+		
+		return noteList;
+	}
+
+	@Override
+	public List<Note> findNotesByBatchId(Integer id) {
+		List<Note> noteList = np.findNotesByBatchId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < noteList.size(); i++) {
+			Note g = noteList.get(i);
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(g.getTraineeId(), true);
+				} else {
+					alreadyConnected.put(g.getTraineeId(), false);
+				}
+			}
+			
+			if(!alreadyConnected.get(g.getTraineeId())) {
+				g.setTraineeId(-1);
+			}
+		}
+		
+		return noteList;
 	}
 	
 

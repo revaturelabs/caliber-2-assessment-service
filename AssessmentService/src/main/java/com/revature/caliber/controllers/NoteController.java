@@ -41,6 +41,22 @@ public class NoteController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/note/trainee/{id}")
+    public ResponseEntity<List<Note>> findNotesByTrainee(@PathVariable("id") Integer id){
+        log.debug("Inside findNotesByTrainee");
+        List<Note> temp = ns.findNotesByTraineeId(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
+    @GetMapping("/all/note/batch/{id}")
+    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id){
+        log.debug("Inside findNotesByBatch");
+        List<Note> temp = ns.findNotesByBatchId(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/note/{id}")
     public ResponseEntity<Note> findNoteById(@PathVariable("id") Integer id){
         log.debug("Inside findNoteById");
