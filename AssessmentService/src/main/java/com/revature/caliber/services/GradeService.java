@@ -84,11 +84,7 @@ public class GradeService implements GradeServiceInterface{
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
-			Trainee response = tc.findTraineeById(g.getTraineeId());
-			
-			if(response == null) {
-				g.setTraineeId(-1);
-			}
+			if(g.getTraineeId() != null) tc.findTraineeById(g.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
