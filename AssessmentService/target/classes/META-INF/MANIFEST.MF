@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: AssessmentService
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Kevin
+Built-By: Kelby Behounek
 Implementation-Vendor-Id: com.revature.caliber
-Build-Jdk: 1.8.0_201
+Build-Jdk: 1.8.0_181
 Implementation-URL: http://projects.spring.io/spring-boot/AssessmentSe
  rvice/
 Created-By: Maven Integration for Eclipse
