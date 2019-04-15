@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 @Entity
 @Table(name="ASSESSMENT")
 //@Document(collection = "assessment")
