@@ -57,6 +57,14 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/grade/assessment/average/{id}")
+    public ResponseEntity<Float> findAverageGradeByAssessment(@PathVariable("id") Integer id){
+        log.debug("Inside findAverageGradeByAssessment");
+        Float temp =  gs.findAverageAssessment(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/grade/{id}")
     public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
         log.debug("Inside findGradeById");
