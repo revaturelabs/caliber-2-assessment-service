@@ -101,12 +101,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactBatchService(Assessment as) {
 		try {
-			BatchEntity response = bc.getBatchById(as.getBatchId());
-			if(response != null) {
-				as.setBatchId(response.getBatchId());
-			} else {
-				as.setBatchId(-1);
-			}
+			if(as.getBatchId() != null) bc.getBatchById(as.getBatchId());
+			
 			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with BatchService");
@@ -188,12 +184,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactCategoryService(Assessment as) {
 		try {
-			Category response = cc.getCategoryById(as.getAssessmentCategory()).getBody();
-			if(response != null) {
-				as.setAssessmentCategory(response.getCategoryId());
-			} else {
-				as.setAssessmentCategory(-1);
-			}
+			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
+			
 			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with CategoryService");

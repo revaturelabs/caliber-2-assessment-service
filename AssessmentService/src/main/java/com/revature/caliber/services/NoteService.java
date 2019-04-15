@@ -103,16 +103,11 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactBatchService(Note n) {
 		try {
-			BatchEntity response = bc.getBatchById(n.getBatchId());
+			if(n.getBatchId() != null) bc.getBatchById(n.getBatchId());
 			
-			if(response != null) {
-				n.setBatchId(response.getBatchId());
-			} else {
-				n.setBatchId(-1);
-			}
 			return true;
 		} catch(Exception e) {
-			log.warn("Could not connect with BatchService");
+			log.warn("Could not find Batch with id: " + n.getBatchId());
 			log.warn(e.getMessage());
 			n.setBatchId(-1);
 			return false;
@@ -121,15 +116,11 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactTraineeService(Note n) {
 		try {
-			Trainee response = tc.findTraineeById(n.getTraineeId());
-			
-			if(response == null) {
-				n.setTraineeId(-1);
-			}
+			if(n.getTraineeId() != null) tc.findTraineeById(n.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
-			log.warn("Could not connect with TraineeService");
+			log.warn("Could not find Trainee with id: " + n.getTraineeId());
 			log.warn(e.getMessage());
 			n.setTraineeId(-1);
 			return false;
