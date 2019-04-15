@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.Category;
 import com.revature.caliber.intercoms.BatchClient;
+import com.revature.caliber.intercoms.CategoryClient;
 import com.revature.caliber.repositories.AssessmentRepository;
 
 @Service
@@ -23,26 +25,36 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	@Autowired
 	private BatchClient bc;
+	
+	@Autowired
+	private CategoryClient cc;
 
 	@Override
 	public List<Assessment> findAllAssessments() {
 		List<Assessment> AssessmentList = ar.findAll();
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
+		Map<Integer, Boolean> categoryConnected = new HashMap<>();
 		
 		for(int i = 0; i < AssessmentList.size(); i++) {
 			Assessment a = AssessmentList.get(i);
 			
-			if(!alreadyConnected.containsKey(a.getBatchId())) {
+			if(!batchConnected.containsKey(a.getBatchId())) {
 				if(contactBatchService(a)) {
-					alreadyConnected.put(a.getBatchId(), true);
+					batchConnected.put(a.getBatchId(), true);
 				} else {
-					alreadyConnected.put(a.getBatchId(), false);
+					batchConnected.put(a.getBatchId(), false);
+				}
+			}
+			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
+				if(contactBatchService(a)) {
+					categoryConnected.put(a.getAssessmentCategory(), true);
+				} else {
+					categoryConnected.put(a.getAssessmentCategory(), false);
 				}
 			}
 			
-			if(!alreadyConnected.get(a.getBatchId())) {
-				a.setBatchId(-1);
-			}
+			if(!batchConnected.get(a.getBatchId())) a.setBatchId(-1);
+			if(!categoryConnected.get(a.getAssessmentCategory())) a.setAssessmentCategory(-1);
 		}
 		
 		return AssessmentList;
@@ -51,7 +63,10 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public Assessment findAssessmentById(Integer id) {
 		Assessment as = ar.findOne(id);
-		if(as != null) contactBatchService(as);
+		if(as != null) {
+			contactBatchService(as);
+			contactCategoryService(as);
+		}
 		
 		return as;
 	}
@@ -79,5 +94,20 @@ public class AssessmentService implements AssessmentServiceInterface{
 		}
 	}
 	
-	//TODO: create contactCategoryService method
+	private boolean contactCategoryService(Assessment as) {
+		try {
+			Category response = cc.getCategoryById(as.getAssessmentCategory()).getBody();
+			if(response != null) {
+				as.setAssessmentCategory(response.getCategoryId());
+			} else {
+				as.setAssessmentCategory(-1);
+			}
+			return true;
+		} catch(Exception e) {
+			log.warn("Could not connect with CategoryService");
+			log.warn(e.getMessage());
+			as.setAssessmentCategory(-1);
+			return false;
+		}
+	}
 }

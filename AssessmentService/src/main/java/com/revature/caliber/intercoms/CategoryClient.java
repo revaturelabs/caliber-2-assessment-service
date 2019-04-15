@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.caliber.beans.Category;
+
 @FeignClient(name="category", url="localhost:9090/")
 public interface CategoryClient {
 	
-	//TODO: ask TEAM3 about this boi; change Integer to Category bean
 	@RequestMapping(method = RequestMethod.GET, value="all/category/{id}")
-	public ResponseEntity <Integer> getCategoryById(@PathVariable(value="id") Integer categoryId);
+	public ResponseEntity<Category> getCategoryById(@PathVariable(value="id") Integer categoryId);
 }
