@@ -12,11 +12,7 @@ import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.beans.Category;
 import com.revature.caliber.intercoms.BatchClient;
-<<<<<<< HEAD
-import com.revature.caliber.intercoms.TraineeClient;
-=======
 import com.revature.caliber.intercoms.CategoryClient;
->>>>>>> 130904c112ff3dd29ca37b1bf24bcdf43754043c
 import com.revature.caliber.repositories.AssessmentRepository;
 
 @Service
@@ -31,14 +27,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 	private BatchClient bc;
 	
 	@Autowired
-<<<<<<< HEAD
-	private TraineeClient tc;
-=======
 	private CategoryClient cc;
->>>>>>> 130904c112ff3dd29ca37b1bf24bcdf43754043c
 
-	private GradeServiceInterface gs = new GradeService();
-	
 	@Override
 	public List<Assessment> findAllAssessments() {
 		List<Assessment> AssessmentList = ar.findAll();
