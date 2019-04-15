@@ -31,18 +31,18 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+					alreadyConnected.put(tempGrade, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					alreadyConnected.put(tempGrade, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
 		}
 		
 		return gradeList;
@@ -84,11 +84,7 @@ public class GradeService implements GradeServiceInterface{
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
-			Trainee response = tc.findTraineeById(g.getTraineeId());
-			
-			if(response == null) {
-				g.setTraineeId(-1);
-			}
+			if(g.getTraineeId() != null) tc.findTraineeById(g.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
@@ -106,18 +102,18 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+					alreadyConnected.put(tempGrade, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					alreadyConnected.put(tempGrade, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
 		}
 		
 		return gradeList;
@@ -130,18 +126,18 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+					alreadyConnected.put(tempGrade, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					alreadyConnected.put(tempGrade, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
 		}
 		
 		return gradeList;

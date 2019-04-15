@@ -33,22 +33,32 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public List<Note> findAllNotes() {
 		List<Note> noteList = np.findAll();
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		Map<Integer, Boolean> traineeConected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
 		for(int i = 0; i < noteList.size(); i++) {
-			Note g = noteList.get(i);
+			Note n = noteList.get(i);
+			Integer tempTrainee = n.getTraineeId();
+			Integer tempBatch = n.getBatchId();
 			
-			if(!alreadyConnected.containsKey(g.getTraineeId())) {
-				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+			if(!traineeConected.containsKey(n.getTraineeId())) {
+				if(contactTraineeService(n)) {
+					traineeConected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					traineeConected.put(tempTrainee, false);
+				}
+			}
+			if(!batchConnected.containsKey(n.getBatchId())) {
+				if(contactBatchService(n)) {
+					batchConnected.put(tempBatch, true);
+				} else {
+					batchConnected.put(tempBatch, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
+			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
+			
 		}
 		
 		return noteList;
@@ -93,16 +103,11 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactBatchService(Note n) {
 		try {
-			BatchEntity response = bc.getBatchById(n.getBatchId());
+			if(n.getBatchId() != null) bc.getBatchById(n.getBatchId());
 			
-			if(response != null) {
-				n.setBatchId(response.getBatchId());
-			} else {
-				n.setBatchId(-1);
-			}
 			return true;
 		} catch(Exception e) {
-			log.warn("Could not connect with BatchService");
+			log.warn("Could not find Batch with id: " + n.getBatchId());
 			log.warn(e.getMessage());
 			n.setBatchId(-1);
 			return false;
@@ -111,15 +116,11 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactTraineeService(Note n) {
 		try {
-			Trainee response = tc.findTraineeById(n.getTraineeId());
-			
-			if(response == null) {
-				n.setTraineeId(-1);
-			}
+			if(n.getTraineeId() != null) tc.findTraineeById(n.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
-			log.warn("Could not connect with TraineeService");
+			log.warn("Could not find Trainee with id: " + n.getTraineeId());
 			log.warn(e.getMessage());
 			n.setTraineeId(-1);
 			return false;
@@ -129,22 +130,32 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public List<Note> findNotesByTraineeId(Integer id) {
 		List<Note> noteList = np.findNotesByTraineeId(id);
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		Map<Integer, Boolean> traineeConected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
 		for(int i = 0; i < noteList.size(); i++) {
-			Note g = noteList.get(i);
+			Note n = noteList.get(i);
+			Integer tempTrainee = n.getTraineeId();
+			Integer tempBatch = n.getBatchId();
 			
-			if(!alreadyConnected.containsKey(g.getTraineeId())) {
-				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+			if(!traineeConected.containsKey(n.getTraineeId())) {
+				if(contactTraineeService(n)) {
+					traineeConected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					traineeConected.put(tempTrainee, false);
+				}
+			}
+			if(!batchConnected.containsKey(n.getBatchId())) {
+				if(contactBatchService(n)) {
+					batchConnected.put(tempBatch, true);
+				} else {
+					batchConnected.put(tempBatch, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
+			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
+			
 		}
 		
 		return noteList;
@@ -153,22 +164,32 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public List<Note> findNotesByBatchId(Integer id) {
 		List<Note> noteList = np.findNotesByBatchId(id);
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		Map<Integer, Boolean> traineeConected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
 		for(int i = 0; i < noteList.size(); i++) {
-			Note g = noteList.get(i);
+			Note n = noteList.get(i);
+			Integer tempTrainee = n.getTraineeId();
+			Integer tempBatch = n.getBatchId();
 			
-			if(!alreadyConnected.containsKey(g.getTraineeId())) {
-				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+			if(!traineeConected.containsKey(n.getTraineeId())) {
+				if(contactTraineeService(n)) {
+					traineeConected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					traineeConected.put(tempTrainee, false);
+				}
+			}
+			if(!batchConnected.containsKey(n.getBatchId())) {
+				if(contactBatchService(n)) {
+					batchConnected.put(tempBatch, true);
+				} else {
+					batchConnected.put(tempBatch, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
+			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
+			
 		}
 		
 		return noteList;
