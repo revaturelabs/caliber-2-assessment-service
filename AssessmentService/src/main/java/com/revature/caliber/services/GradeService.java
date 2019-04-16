@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.TraineeClient;
+import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
+import com.revature.caliber.services.AssessmentService;
 
 @Service
 public class GradeService implements GradeServiceInterface{
@@ -25,6 +28,9 @@ public class GradeService implements GradeServiceInterface{
 	
 	@Autowired
 	private TraineeClient tc;
+	
+	@Autowired
+	private AssessmentRepository ar;
 	
 	@Autowired
 	private AssessmentService as;
@@ -150,6 +156,33 @@ public class GradeService implements GradeServiceInterface{
 
 
 	@Override
+	public Float findAvgAssessments(Integer id, Integer weekNum) {
+		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
+		List<Grade> grades =  new ArrayList<>();
+		int temp = 0;
+		float temp2 =0;
+		for(Assessment a : assessments) {
+			grades.addAll(this.findGradesByAssessmentId(a.getAssessmentId()));
+			temp += a.getRawScore();
+			System.out.println(temp + " this is temp in for loop");
+		}
+		System.out.println("This is the grades list " + grades);
+		for(Grade gd : grades) {
+			
+			System.out.println(temp + " this is temp2 in for loop");
+			temp2 += gd.getScore();
+		}
+		
+		System.out.println(temp2 + " this is temp2 out of loop");
+		System.out.println(temp + " this is temp out of loop");
+		return temp2/temp;
+
+	}
+
+
+
+
+  @Override
 	public Float findAverageAssessment(Integer id) {
 		List<Grade> grades = this.findGradesByAssessmentId(id);
 		Float average = 0f;
@@ -159,6 +192,7 @@ public class GradeService implements GradeServiceInterface{
 		return (average/grades.size());
 	}
 	
+
 	
 
 
