@@ -194,6 +194,41 @@ public class NoteService implements NoteServiceInterface{
 		
 		return noteList;
 	}
+
+	@Override
+	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum) {
+		List<Note> noteList = np.findNotesByBatchIdAndWeekNumber(bid, weekNum);
+		
+		Map<Integer, Boolean> traineeConected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
+		
+		for(int i = 0; i < noteList.size(); i++) {
+			Note n = noteList.get(i);
+			Integer tempTrainee = n.getTraineeId();
+			Integer tempBatch = n.getBatchId();
+			
+			if(!traineeConected.containsKey(n.getTraineeId())) {
+				if(contactTraineeService(n)) {
+					traineeConected.put(tempTrainee, true);
+				} else {
+					traineeConected.put(tempTrainee, false);
+				}
+			}
+			if(!batchConnected.containsKey(n.getBatchId())) {
+				if(contactBatchService(n)) {
+					batchConnected.put(tempBatch, true);
+				} else {
+					batchConnected.put(tempBatch, false);
+				}
+			}
+			
+			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
+			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
+			
+		}
+		
+		return noteList;
+	}
 	
 
 }

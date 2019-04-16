@@ -198,7 +198,7 @@ public class GradeService implements GradeServiceInterface{
 
 	@Override
 	public List<Grade> findGradesByBatchIdAndWeekNum(Integer id, Integer weekNum) {
-		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNum(id, weekNum);
+		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
 		List<Integer> assessmentIds = new ArrayList<>();
 		for(Assessment a : assessmentList) {
 			assessmentIds.add(a.getAssessmentId());
