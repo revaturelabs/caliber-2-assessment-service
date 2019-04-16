@@ -11,5 +11,4 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Integer>
 	public List<Assessment> findAssessmentsByBatchId(Integer id);
 	public List<Assessment> findAssessmentsByAssessmentCategory(Integer id);
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
-
 }
