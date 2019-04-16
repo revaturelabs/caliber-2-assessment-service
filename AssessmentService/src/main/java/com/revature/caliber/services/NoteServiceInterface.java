@@ -11,5 +11,8 @@ public interface NoteServiceInterface {
 	public List<Note> findAllNotes();
 	public Note findNoteById(Integer id);
 	public Note createNote(Note n);
-
+	public Note updateNote(Note n);
+	public Boolean deleteNote(Note n);
+	public List<Note> findNotesByTraineeId(Integer id);
+	public List<Note> findNotesByBatchId(Integer id);
 }
