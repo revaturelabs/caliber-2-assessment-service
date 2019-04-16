@@ -148,6 +148,20 @@ public class GradeService implements GradeServiceInterface{
 		return gradeList;
 	}
 
+
+	@Override
+	public Float findAverageAssessment(Integer id) {
+		List<Grade> grades = this.findGradesByAssessmentId(id);
+		Float average = 0f;
+		for(Grade g : grades) {
+			average += g.getScore();
+		}
+		return (average/grades.size());
+	}
+	
+	
+
+
 	@Override
 	public List<Grade> findGradesByBatchIdAndWeekNum(Integer id, Integer weekNum) {
 		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNum(id, weekNum);
