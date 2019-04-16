@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
-import com.revature.caliber.beans.BatchEntity;
-import com.revature.caliber.beans.Category;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.CategoryClient;
 import com.revature.caliber.repositories.AssessmentRepository;
@@ -25,7 +23,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	@Autowired
 	private BatchClient bc;
-	
+		
 	@Autowired
 	private CategoryClient cc;
 
@@ -178,7 +176,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
 			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
 		}
-		
+	
 		return AssessmentList;
 	}
 
@@ -206,6 +204,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 		System.out.println(AssessmentList);
 		return AssessmentList;
 	}
+
 	
 
 	private boolean contactCategoryService(Assessment as) {

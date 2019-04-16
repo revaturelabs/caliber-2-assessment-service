@@ -13,4 +13,5 @@ import com.revature.caliber.beans.Trainee;
 public interface TraineeClient {
 	@RequestMapping(method = RequestMethod.GET, value="all/trainee/{id}")
 	public Trainee findTraineeById(@PathVariable("id") Integer id);
+	
 }
