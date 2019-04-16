@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
-import com.revature.caliber.beans.BatchEntity;
-import com.revature.caliber.beans.Category;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.CategoryClient;
 import com.revature.caliber.repositories.AssessmentRepository;
@@ -25,7 +23,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	@Autowired
 	private BatchClient bc;
-	
+		
 	@Autowired
 	private CategoryClient cc;
 
@@ -37,24 +35,28 @@ public class AssessmentService implements AssessmentServiceInterface{
 		
 		for(int i = 0; i < AssessmentList.size(); i++) {
 			Assessment a = AssessmentList.get(i);
+			Integer tempBatch = a.getBatchId();
+			Integer tempCategory = a.getAssessmentCategory();
 			
 			if(!batchConnected.containsKey(a.getBatchId())) {
+				
 				if(contactBatchService(a)) {
-					batchConnected.put(a.getBatchId(), true);
+					batchConnected.put(tempBatch, true);
 				} else {
-					batchConnected.put(a.getBatchId(), false);
+					batchConnected.put(tempBatch, false);
 				}
 			}
 			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
+				
 				if(contactBatchService(a)) {
-					categoryConnected.put(a.getAssessmentCategory(), true);
+					categoryConnected.put(tempCategory, true);
 				} else {
-					categoryConnected.put(a.getAssessmentCategory(), false);
+					categoryConnected.put(tempCategory, false);
 				}
 			}
 			
-			if(!batchConnected.get(a.getBatchId())) a.setBatchId(-1);
-			if(!categoryConnected.get(a.getAssessmentCategory())) a.setAssessmentCategory(-1);
+			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
+			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
 		}
 		
 		return AssessmentList;
@@ -97,12 +99,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactBatchService(Assessment as) {
 		try {
-			BatchEntity response = bc.getBatchById(as.getBatchId());
-			if(response != null) {
-				as.setBatchId(response.getBatchId());
-			} else {
-				as.setBatchId(-1);
-			}
+			if(as.getBatchId() != null) bc.getBatchById(as.getBatchId());
+			
 			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with BatchService");
@@ -115,22 +113,33 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public List<Assessment> findAssessmentsByBatchId(Integer batchId) {
 		List<Assessment> AssessmentList = ar.findAssessmentsByBatchId(batchId);
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
+		Map<Integer, Boolean> categoryConnected = new HashMap<>();
 		
 		for(int i = 0; i < AssessmentList.size(); i++) {
 			Assessment a = AssessmentList.get(i);
+			Integer tempBatch = a.getBatchId();
+			Integer tempCategory = a.getAssessmentCategory();
 			
-			if(!alreadyConnected.containsKey(a.getBatchId())) {
+			if(!batchConnected.containsKey(a.getBatchId())) {
+				
 				if(contactBatchService(a)) {
-					alreadyConnected.put(a.getBatchId(), true);
+					batchConnected.put(tempBatch, true);
 				} else {
-					alreadyConnected.put(a.getBatchId(), false);
+					batchConnected.put(tempBatch, false);
+				}
+			}
+			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
+				
+				if(contactBatchService(a)) {
+					categoryConnected.put(tempCategory, true);
+				} else {
+					categoryConnected.put(tempCategory, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(a.getBatchId())) {
-				a.setBatchId(-1);
-			}
+			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
+			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
 		}
 		
 		return AssessmentList;
@@ -139,6 +148,42 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public List<Assessment> findAssessmentsByCategory(Integer categoryId) {
 		List<Assessment> AssessmentList = ar.findAssessmentsByAssessmentCategory(categoryId);
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
+		Map<Integer, Boolean> categoryConnected = new HashMap<>();
+		
+		for(int i = 0; i < AssessmentList.size(); i++) {
+			Assessment a = AssessmentList.get(i);
+			Integer tempBatch = a.getBatchId();
+			Integer tempCategory = a.getAssessmentCategory();
+			
+			if(!batchConnected.containsKey(a.getBatchId())) {
+				
+				if(contactBatchService(a)) {
+					batchConnected.put(tempBatch, true);
+				} else {
+					batchConnected.put(tempBatch, false);
+				}
+			}
+			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
+				
+				if(contactBatchService(a)) {
+					categoryConnected.put(tempCategory, true);
+				} else {
+					categoryConnected.put(tempCategory, false);
+				}
+			}
+			
+			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
+			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
+		}
+	
+		return AssessmentList;
+	}
+
+
+	@Override
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+		List<Assessment> AssessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
 		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
 		
 		for(int i = 0; i < AssessmentList.size(); i++) {
@@ -156,18 +201,16 @@ public class AssessmentService implements AssessmentServiceInterface{
 				a.setBatchId(-1);
 			}
 		}
-		
+		System.out.println(AssessmentList);
 		return AssessmentList;
 	}
+
 	
+
 	private boolean contactCategoryService(Assessment as) {
 		try {
-			Category response = cc.getCategoryById(as.getAssessmentCategory()).getBody();
-			if(response != null) {
-				as.setAssessmentCategory(response.getCategoryId());
-			} else {
-				as.setAssessmentCategory(-1);
-			}
+			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
+			
 			return true;
 		} catch(Exception e) {
 			log.warn("Could not connect with CategoryService");
@@ -176,4 +219,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 			return false;
 		}
 	}
+
+
 }

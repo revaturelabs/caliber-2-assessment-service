@@ -57,12 +57,30 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/grade/assessment/average/{id}")
+    public ResponseEntity<Float> findAverageGradeByAssessment(@PathVariable("id") Integer id){
+        log.debug("Inside findAverageGradeByAssessment");
+        Float temp =  gs.findAverageAssessment(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/grade/{id}")
     public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
         log.debug("Inside findGradeById");
         Grade temp = gs.findGradeById(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
+    @GetMapping("/all/grade/batch/{id}/week/{num}")
+    public ResponseEntity<List<Grade>> findGradeByWeekNum(@PathVariable("id")Integer id, @PathVariable("num")Integer num){
+    	log.debug("Inside findGradeByWeekNum");
+    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNum(id, num);
+    	if(temp == null) 
+    		return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+    	
+    	return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
     @PostMapping(value="/all/grade/create", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -88,5 +106,15 @@ public class GradeController {
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
+    
+    @GetMapping("/all/grade/assessments/average/batch/{id}/week/{weekNum}")
+    public ResponseEntity<Float> findAverageGradeByWeek(@PathVariable("id") Integer id, @PathVariable("weekNum") Integer weekNum){
+        log.debug("Inside findAverageGradeByWeek");
+        Float temp =  gs.findAvgAssessments(id, weekNum);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
+
     
 }
