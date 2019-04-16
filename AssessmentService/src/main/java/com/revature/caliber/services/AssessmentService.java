@@ -184,8 +184,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 
 	@Override
-	public List<Assessment> findAssessmentsByBatchIdandWeekNumber(Integer id, Integer weekNumber) {
-		List<Assessment> AssessmentList = ar.findAssessmentsByBatchIdandWeekNumber(id, weekNumber);
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+		List<Assessment> AssessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
 		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
 		
 		for(int i = 0; i < AssessmentList.size(); i++) {
@@ -203,7 +203,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 				a.setBatchId(-1);
 			}
 		}
-		
+		System.out.println(AssessmentList);
 		return AssessmentList;
 	}
 	
