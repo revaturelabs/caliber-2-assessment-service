@@ -197,7 +197,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 	@Override
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNum(Integer id, Integer weekNum) {
-		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNum(id, weekNum);
+		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
 		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
 		
 		for(int i=0; i<assessmentList.size(); i++) {
