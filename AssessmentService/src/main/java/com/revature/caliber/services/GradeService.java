@@ -1,5 +1,6 @@
 package com.revature.caliber.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.TraineeClient;
-import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
 
 @Service
@@ -23,10 +24,10 @@ public class GradeService implements GradeServiceInterface{
 	private GradeRepository gp;
 	
 	@Autowired
-	private AssessmentRepository ap;
+	private TraineeClient tc;
 	
 	@Autowired
-	private TraineeClient tc;
+	private AssessmentService as;
 
 	@Override
 	public List<Grade> findAllGrades() {
@@ -35,18 +36,18 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(g.getTraineeId(), true);
+					alreadyConnected.put(tempGrade, true);
 				} else {
-					alreadyConnected.put(g.getTraineeId(), false);
+					alreadyConnected.put(tempGrade, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(g.getTraineeId())) {
-				g.setTraineeId(-1);
-			}
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
 		}
 		
 		return gradeList;
@@ -59,14 +60,36 @@ public class GradeService implements GradeServiceInterface{
 		
 		return g;
 	}
+
+	@Override
+	public Grade createGrade(Grade g) {
+		log.debug("Creating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public Grade updateGrade(Grade g) {
+		log.debug("Updating Grade: " + g);
+		return gp.save(g);
+	}
+
+	@Override
+	public Boolean deleteGrade(Grade g) {
+		log.debug("Deleting Grade: " + g);
+		Boolean exists = false;
+		if(gp.findOne(g.getGradeId()) != null) exists = true;
+		if(exists) {
+			gp.delete(g);
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
-			Trainee response = tc.findTraineeById(g.getTraineeId());
-			
-			if(response == null) {
-				g.setTraineeId(-1);
-			}
+			if(g.getTraineeId() != null) tc.findTraineeById(g.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
@@ -76,6 +99,96 @@ public class GradeService implements GradeServiceInterface{
 			return false;
 		}
 	}
+
+	@Override
+	public List<Grade> findGradesByTraineeId(Integer id) {
+		List<Grade> gradeList = gp.findGradesByTraineeId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(tempGrade, true);
+				} else {
+					alreadyConnected.put(tempGrade, false);
+				}
+			}
+			
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
+		}
+		
+		return gradeList;
+	}
+
+	@Override
+	public List<Grade> findGradesByAssessmentId(Integer id) {
+		List<Grade> gradeList = gp.findGradesByAssessmentId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(tempGrade, true);
+				} else {
+					alreadyConnected.put(tempGrade, false);
+				}
+			}
+			
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
+		}
+		
+		return gradeList;
+	}
+
+
+	@Override
+	public Float findAverageAssessment(Integer id) {
+		List<Grade> grades = this.findGradesByAssessmentId(id);
+		Float average = 0f;
+		for(Grade g : grades) {
+			average += g.getScore();
+		}
+		return (average/grades.size());
+	}
+	
 	
 
+
+	@Override
+	public List<Grade> findGradesByBatchIdAndWeekNum(Integer id, Integer weekNum) {
+		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNum(id, weekNum);
+		List<Integer> assessmentIds = new ArrayList<>();
+		for(Assessment a : assessmentList) {
+			assessmentIds.add(a.getAssessmentId());
+		}
+		List<Grade> gradeList = gp.findGradesByAssessmentIdIn(assessmentIds);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			Integer tempGrade = g.getTraineeId();
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(tempGrade, true);
+				} else {
+					alreadyConnected.put(tempGrade, false);
+				}
+			}
+			
+			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			
+		}
+		
+		return gradeList;
+	}
+	
 }
