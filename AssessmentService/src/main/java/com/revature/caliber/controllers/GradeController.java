@@ -97,4 +97,14 @@ public class GradeController {
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/grade/assessments/average/batch/{id}/week/{weekNum}")
+    public ResponseEntity<Float> findAverageGradeByWeek(@PathVariable("id") Integer id, @PathVariable("weekNum") Integer weekNum){
+        log.debug("Inside findAverageGradeByWeek");
+        Float temp =  gs.findAvgAssessments(id, weekNum);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
+
+    
 }
