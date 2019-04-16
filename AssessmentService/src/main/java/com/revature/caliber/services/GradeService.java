@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
-import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
-import com.revature.caliber.services.AssessmentService;
 
 @Service
 public class GradeService implements GradeServiceInterface{
@@ -198,7 +195,7 @@ public class GradeService implements GradeServiceInterface{
 
 	@Override
 	public List<Grade> findGradesByBatchIdAndWeekNum(Integer id, Integer weekNum) {
-		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNum(id, weekNum);
+		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
 		List<Integer> assessmentIds = new ArrayList<>();
 		for(Assessment a : assessmentList) {
 			assessmentIds.add(a.getAssessmentId());
