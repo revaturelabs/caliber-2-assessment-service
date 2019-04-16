@@ -15,4 +15,5 @@ public interface NoteServiceInterface {
 	public Boolean deleteNote(Note n);
 	public List<Note> findNotesByTraineeId(Integer id);
 	public List<Note> findNotesByBatchId(Integer id);
+	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum);
 }
