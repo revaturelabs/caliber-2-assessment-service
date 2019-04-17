@@ -155,6 +155,7 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 
+
 	@Override
 	public Float findAvgAssessments(Integer id, Integer weekNum) {
 		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
@@ -186,8 +187,6 @@ public class GradeService implements GradeServiceInterface{
 		}
 		return (average/grades.size());
 	}
-	
 
-	
 	
 }
