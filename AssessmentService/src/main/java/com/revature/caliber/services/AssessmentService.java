@@ -179,6 +179,19 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 		return AssessmentList;
 	}
+	
+	private boolean contactCategoryService(Assessment as) {
+		try {
+			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
+			
+			return true;
+		} catch(Exception e) {
+			log.warn("Could not connect with CategoryService");
+			log.warn(e.getMessage());
+			as.setAssessmentCategory(-1);
+			return false;
+		}
+	}
 
 
 	@Override
@@ -201,23 +214,11 @@ public class AssessmentService implements AssessmentServiceInterface{
 				a.setBatchId(-1);
 			}
 		}
-		System.out.println(AssessmentList);
 		return AssessmentList;
 	}
 
 	
 
-	private boolean contactCategoryService(Assessment as) {
-		try {
-			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
-			
-			return true;
-		} catch(Exception e) {
-			log.warn("Could not connect with CategoryService");
-			log.warn(e.getMessage());
-			as.setAssessmentCategory(-1);
-			return false;
-		}
-	}
+
 
 }
