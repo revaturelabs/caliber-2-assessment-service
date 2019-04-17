@@ -34,6 +34,17 @@ public class GradeController {
     @Autowired
     private GradeService gs;
     
+    @GetMapping("/all/grade")
+    public ResponseEntity<List<Grade>> findGradeByWeekNumber(@RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNumber){
+    	log.debug("Inside findGradeByWeekNumber");
+    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNumber(batchId, weekNumber);
+            
+    	if(temp == null)     
+    		return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            
+    	return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/grade/all")
     public ResponseEntity<List<Grade>> findAllGrades(){
         log.debug("Inside getAllGrades");
