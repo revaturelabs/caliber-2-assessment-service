@@ -57,13 +57,6 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
-    @GetMapping("/all/grade/assessment/average/{id}")
-    public ResponseEntity<Float> findAverageGradeByAssessment(@PathVariable("id") Integer id){
-        log.debug("Inside findAverageGradeByAssessment");
-        Float temp =  gs.findAverageAssessment(id);
-        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(temp, HttpStatus.OK);
-    }
     
     @GetMapping("/all/grade/{id}")
     public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
@@ -73,15 +66,6 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
-    @GetMapping("/all/grade/batch/{id}/week/{num}")
-    public ResponseEntity<List<Grade>> findGradeByWeekNum(@PathVariable("id")Integer id, @PathVariable("num")Integer num){
-    	log.debug("Inside findGradeByWeekNum");
-    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNum(id, num);
-    	if(temp == null) 
-    		return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
-    	
-    	return new ResponseEntity<>(temp, HttpStatus.OK);
-    }
     
     @PostMapping(value="/all/grade/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
@@ -106,5 +90,8 @@ public class GradeController {
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
+
+    
+
     
 }
