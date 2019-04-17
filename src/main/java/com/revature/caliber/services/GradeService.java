@@ -23,6 +23,12 @@ public class GradeService implements GradeServiceInterface{
 	
 	@Autowired
 	private TraineeClient tc;
+	
+	@Autowired
+	private AssessmentRepository ar;
+	
+	@Autowired
+	private AssessmentService as;
 
 	@Override
 	public List<Grade> findAllGrades() {
@@ -142,5 +148,5 @@ public class GradeService implements GradeServiceInterface{
 		
 		return gradeList;
 	}
-	
+
 }
