@@ -10,4 +10,5 @@ public interface NoteRepository extends JpaRepository<Note, Integer>{
 	
 	public List<Note> findNotesByTraineeId(Integer id);
 	public List<Note> findNotesByBatchId(Integer id);
+	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum);
 }
