@@ -15,4 +15,6 @@ public interface AssessmentServiceInterface {
 	public Assessment updateAssessment(Assessment as);
 	public List<Assessment> findAssessmentsByBatchId(Integer batchId);
 	public List<Assessment> findAssessmentsByCategory(Integer categoryId);
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
+
 }

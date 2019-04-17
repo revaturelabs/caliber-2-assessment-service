@@ -15,4 +15,8 @@ public interface GradeServiceInterface {
 	public Boolean deleteGrade(Grade g);
 	public List<Grade> findGradesByTraineeId(Integer id);
 	public List<Grade> findGradesByAssessmentId(Integer id);
+	public List<Grade> findGradesByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
+	public Float findAvgAssessments(Integer id, Integer weekNum);
+	public Float findAverageAssessment(Integer id);
+
 }

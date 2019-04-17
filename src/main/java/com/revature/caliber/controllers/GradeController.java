@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Grade;
@@ -33,6 +34,17 @@ public class GradeController {
     @Autowired
     private GradeService gs;
     
+    @GetMapping("/all/grade")
+    public ResponseEntity<List<Grade>> findGradeByWeekNumber(@RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNumber){
+    	log.debug("Inside findGradeByWeekNumber");
+    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNumber(batchId, weekNumber);
+            
+    	if(temp == null)     
+    		return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            
+    	return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     @GetMapping("/all/grade/all")
     public ResponseEntity<List<Grade>> findAllGrades(){
         log.debug("Inside getAllGrades");
@@ -45,14 +57,6 @@ public class GradeController {
     public ResponseEntity<List<Grade>> findGradesByTrainee(@PathVariable("id") Integer id){
         log.debug("Inside findGradesByTrainee");
         List<Grade> temp =  gs.findGradesByTraineeId(id);
-        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(temp, HttpStatus.OK);
-    }
-    
-    @GetMapping("/all/grade/assessment/{id}")
-    public ResponseEntity<List<Grade>> findGradesByAssessment(@PathVariable("id") Integer id){
-        log.debug("Inside findGradesByAssessment");
-        List<Grade> temp =  gs.findGradesByAssessmentId(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
@@ -89,6 +93,25 @@ public class GradeController {
       Boolean temp = gs.deleteGrade(grade);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+
+    
+    @GetMapping("/all/grade/average")
+    public ResponseEntity<Float> findAverageGradeByWeek(@RequestParam(name="assessment", required=false) Integer assessmentId, @RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNum){
+    	if(assessmentId != null && batchId == null && weekNum == null) {
+            log.debug("Inside findAverageGradeByAssessment");
+            Float temp =  gs.findAverageAssessment(assessmentId);
+            if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(temp, HttpStatus.OK);
+        } else if (assessmentId == null && batchId != null && weekNum != null) {
+        	log.debug("Inside findAverageGradeByWeek");
+            Float temp =  gs.findAvgAssessments(batchId, weekNum);
+            if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(temp, HttpStatus.OK);
+        } else  {
+        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    	
     }
 
     

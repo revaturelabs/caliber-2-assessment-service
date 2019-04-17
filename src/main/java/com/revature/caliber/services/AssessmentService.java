@@ -179,10 +179,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 		return AssessmentList;
 	}
-
-
 	
-
 	private boolean contactCategoryService(Assessment as) {
 		try {
 			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
@@ -194,6 +191,28 @@ public class AssessmentService implements AssessmentServiceInterface{
 			as.setAssessmentCategory(-1);
 			return false;
 		}
+	}
+
+	@Override
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i=0; i<assessmentList.size(); i++) {
+			Assessment a = assessmentList.get(i);
+			
+			if(!alreadyConnected.containsKey(a.getWeekNumber())) {
+				if(contactBatchService(a)) 
+					alreadyConnected.put(a.getWeekNumber(), true);
+				
+				else
+					alreadyConnected.put(a.getWeekNumber(), false);
+			}
+			
+			if(!alreadyConnected.get(a.getWeekNumber()))
+				a.setWeekNumber(-1);
+		}
+		return assessmentList;
 	}
 
 
