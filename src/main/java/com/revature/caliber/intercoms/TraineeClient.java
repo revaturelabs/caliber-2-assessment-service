@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.revature.caliber.beans.Trainee;
 
 
-//TODO: No way to get trainee by id in UserService?
 @FeignClient(name="trainee", url="localhost:9090/",fallback=TraineeClientFallback.class)
 public interface TraineeClient {
 	@RequestMapping(method = RequestMethod.GET, value="all/trainee/{id}")
