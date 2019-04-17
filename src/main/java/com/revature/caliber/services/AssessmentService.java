@@ -48,7 +48,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 			}
 			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
 				
-				if(contactBatchService(a)) {
+				if(contactCategoryService(a)) {
 					categoryConnected.put(tempCategory, true);
 				} else {
 					categoryConnected.put(tempCategory, false);
@@ -131,7 +131,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 			}
 			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
 				
-				if(contactBatchService(a)) {
+				if(contactCategoryService(a)) {
 					categoryConnected.put(tempCategory, true);
 				} else {
 					categoryConnected.put(tempCategory, false);
@@ -166,7 +166,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 			}
 			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
 				
-				if(contactBatchService(a)) {
+				if(contactCategoryService(a)) {
 					categoryConnected.put(tempCategory, true);
 				} else {
 					categoryConnected.put(tempCategory, false);

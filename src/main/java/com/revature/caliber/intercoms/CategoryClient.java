@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.caliber.beans.Category;
 
-@FeignClient(name="category", url="localhost:9090/", fallback=CategoryClientFallback.class)
+@FeignClient(name="zuul", fallback=CategoryClientFallback.class)
 public interface CategoryClient {
 	
 	@RequestMapping(method = RequestMethod.GET, value="all/category/{id}")
