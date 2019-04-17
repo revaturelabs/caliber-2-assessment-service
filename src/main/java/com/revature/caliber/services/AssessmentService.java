@@ -218,8 +218,4 @@ public class AssessmentService implements AssessmentServiceInterface{
 		return AssessmentList;
 	}
 
-
-
-
-
 }
