@@ -68,10 +68,10 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
-    @GetMapping("/all/grade/batch/{id}/week/{num}")
-    public ResponseEntity<List<Grade>> findGradeByWeekNum(@PathVariable("id")Integer id, @PathVariable("num")Integer num){
+    @GetMapping("/all/grade")
+    public ResponseEntity<List<Grade>> findGradeByWeekNum(@RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNum){
     	log.debug("Inside findGradeByWeekNum");
-    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNum(id, num);
+    	List<Grade> temp = gs.findGradesByBatchIdAndWeekNumber(batchId, weekNum);
     	if(temp == null) 
     		return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
     	
