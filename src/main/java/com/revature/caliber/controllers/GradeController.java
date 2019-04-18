@@ -33,6 +33,7 @@ public class GradeController {
     
     @Autowired
     private GradeService gs;
+<<<<<<< HEAD
     
     @GetMapping("/all/grade/")
     public ResponseEntity<List<Grade>> findGradeByWeekNumber(@RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNumber){
@@ -45,6 +46,9 @@ public class GradeController {
     	return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+=======
+   
+>>>>>>> 746e52ac77e2bbf06c4362f309396e9c2f1eb2d2
     @GetMapping("/all/grade/all")
     public ResponseEntity<List<Grade>> findAllGrades(){
         log.debug("Inside getAllGrades");
@@ -61,6 +65,7 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+<<<<<<< HEAD
     @GetMapping("/all/grade/assessment/{id}")
     public ResponseEntity<List<Grade>> findGradesByAssessment(@PathVariable("id") Integer id){
         log.debug("Inside findGradesByAssessment");
@@ -68,6 +73,20 @@ public class GradeController {
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
+=======
+    @GetMapping("/all/grade/batch/{id}")
+    public ResponseEntity<List<Grade>> findGradesByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNumber){
+        log.debug("Inside findGradesByBatch");
+        List<Grade> temp =  null;
+        
+        if(weekNumber != null) temp = gs.findGradesByBatchIdAndWeekNumber(id, weekNumber);
+        else temp = gs.findGradesByBatchId(id);
+        
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+ 
+>>>>>>> 746e52ac77e2bbf06c4362f309396e9c2f1eb2d2
     
     @GetMapping("/all/grade/{id}")
     public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
