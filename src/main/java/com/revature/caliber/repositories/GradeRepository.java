@@ -9,7 +9,6 @@ import com.revature.caliber.beans.Grade;
 public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	
 	public List<Grade> findGradesByTraineeId(Integer id);
-	public List<Grade> findGradesByBatchId(Integer id);
 	public List<Grade> findGradesByAssessmentId(Integer id);
 	public List<Grade> findGradesByAssessmentIdIn(List<Integer> id);
 }
