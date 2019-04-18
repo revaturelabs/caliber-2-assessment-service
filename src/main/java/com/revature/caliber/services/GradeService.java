@@ -189,23 +189,19 @@ public class GradeService implements GradeServiceInterface{
 	@Override
 	public Float findAvgAssessments(Integer id, Integer weekNum) {
 		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
-		List<Grade> grades =  new ArrayList<>();
-		System.out.println(assessments);
 		int temp = 0;
 		float temp2 =0;
 		for(Assessment a : assessments) {
-			grades.addAll(this.findGradesByAssessmentId(a.getAssessmentId()));
+			List<Grade> grades = this.findGradesByAssessmentId(a.getAssessmentId());
+			for(Grade gd : grades) {
+				temp2 += (gd.getScore()/100)*a.getRawScore();
+			}
 			temp += a.getRawScore()*grades.size();
-			System.out.println("this is temp in for loop" + temp);
-		}
-		for(Grade gd : grades) {
 			
-			temp2 += gd.getScore();
-			System.out.println("this is temp2 in for loop" + temp2);
 		}
-		System.out.println("this is temp out of loop" + temp);
-		System.out.println("this is temp2 out of loop" + temp2);
-		return temp2/temp;
+
+		return (temp2/temp)*100;
+
 
 	}
 
