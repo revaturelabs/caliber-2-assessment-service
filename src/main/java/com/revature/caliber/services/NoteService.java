@@ -8,9 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.beans.Note;
-import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.NoteRepository;
