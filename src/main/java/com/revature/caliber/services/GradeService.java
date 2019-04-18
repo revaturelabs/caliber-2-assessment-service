@@ -102,30 +102,6 @@ public class GradeService implements GradeServiceInterface{
 			return false;
 		}
 	}
-	
-	@Override
-	public List<Grade> findGradesByBatchId(Integer id) {
-		List<Grade> gradeList = gp.findGradesByBatchId(id);
-		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
-		
-		for(int i = 0; i < gradeList.size(); i++) {
-			Grade g = gradeList.get(i);
-			Integer tempTrainee = g.getTraineeId();
-			
-			if(!alreadyConnected.containsKey(g.getTraineeId())) {
-				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
-				}
-			}
-			
-			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
-			
-		}
-		
-		return gradeList;
-	}
 
 	@Override
 	public List<Grade> findGradesByTraineeId(Integer id) {
