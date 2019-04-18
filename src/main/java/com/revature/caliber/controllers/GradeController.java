@@ -56,9 +56,9 @@ public class GradeController {
         List<Grade> temp =  null;
         
         if(weekNumber != null) temp = gs.findGradesByBatchIdAndWeekNumber(id, weekNumber);
+        else temp = gs.findGradesByBatchId(id);
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
-        
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
  
