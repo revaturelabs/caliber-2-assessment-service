@@ -35,15 +35,10 @@ public class NoteController {
     private NoteService ns;
     
     @GetMapping("/all/note/all")
-    public ResponseEntity<List<Note>> findAllNotes(@RequestParam(name="batch", required=false) Integer bid, @RequestParam(name="week", required=false) Integer weekNum){
+    public ResponseEntity<List<Note>> findAllNotes(@RequestParam(name="week", required=false) Integer weekNum){
         log.debug("Inside getAllNotes");
-        List<Note> temp = null;
-        
-        if(bid != null && weekNum != null) {
-        	temp = ns.findNotesByBatchIdAndWeekNumber(bid, weekNum);
-        } else {
-        	if(bid == null && weekNum == null) temp = ns.findAllNotes();
-        }
+        List<Note> temp = ns.findAllNotes();
+     
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
@@ -57,9 +52,13 @@ public class NoteController {
     }
     
     @GetMapping("/all/note/batch/{id}")
-    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNum){
         log.debug("Inside findNotesByBatch");
-        List<Note> temp = ns.findNotesByBatchId(id);
+        List<Note> temp = null;
+        
+        if(weekNum != null) temp = ns.findNotesByBatchIdAndWeekNumber(id, weekNum);
+        else ns.findNotesByBatchId(id);
+        
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
