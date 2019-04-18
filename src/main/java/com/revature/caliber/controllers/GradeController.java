@@ -59,6 +59,14 @@ public class GradeController {
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
+    @GetMapping("/all/grade/assessment/{id}")
+    public ResponseEntity<List<Grade>> findGradesByAssessment(@PathVariable("id") Integer id){
+        log.debug("Inside findGradesByAssessment");
+        List<Grade> temp =  gs.findGradesByAssessmentId(id);
+        if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+    
     
     @PostMapping(value="/all/grade/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
