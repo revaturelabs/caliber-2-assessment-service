@@ -193,29 +193,27 @@ public class AssessmentService implements AssessmentServiceInterface{
 		}
 	}
 
-
-
 	@Override
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
-		List<Assessment> AssessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
+		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
 		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
 		
-		for(int i = 0; i < AssessmentList.size(); i++) {
-			Assessment a = AssessmentList.get(i);
+		for(int i=0; i<assessmentList.size(); i++) {
+			Assessment a = assessmentList.get(i);
 			
-			if(!alreadyConnected.containsKey(a.getBatchId())) {
-				if(contactBatchService(a)) {
-					alreadyConnected.put(a.getBatchId(), true);
-				} else {
-					alreadyConnected.put(a.getBatchId(), false);
-				}
+			if(!alreadyConnected.containsKey(a.getWeekNumber())) {
+				if(contactBatchService(a)) 
+					alreadyConnected.put(a.getWeekNumber(), true);
+				
+				else
+					alreadyConnected.put(a.getWeekNumber(), false);
 			}
 			
-			if(!alreadyConnected.get(a.getBatchId())) {
-				a.setBatchId(-1);
-			}
+			if(!alreadyConnected.get(a.getWeekNumber()))
+				a.setWeekNumber(-1);
 		}
-		return AssessmentList;
+		return assessmentList;
 	}
+
 
 }
