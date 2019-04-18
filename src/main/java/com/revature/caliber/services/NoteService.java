@@ -83,6 +83,7 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public Note updateNote(Note n) {
 		log.debug("Updating Note: " + n);
+		if(np.findOne(n.getNoteId()) == null) return null;
 		return np.save(n);
 	}
 

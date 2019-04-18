@@ -67,12 +67,14 @@ public class GradeService implements GradeServiceInterface{
 	@Override
 	public Grade createGrade(Grade g) {
 		log.debug("Creating Grade: " + g);
+		if(gp.findOne(g.getGradeId()) != null) return null;
 		return gp.save(g);
 	}
 
 	@Override
 	public Grade updateGrade(Grade g) {
 		log.debug("Updating Grade: " + g);
+		if(gp.findOne(g.getGradeId()) == null) return null;
 		return gp.save(g);
 	}
 
