@@ -181,6 +181,35 @@ public class GradeService implements GradeServiceInterface{
 		
 		return gradeList;
 	}
+	
+	@Override
+	public List<Grade> findGradesByBatchId(Integer id) {
+		List<Assessment> assessmentList = as.findAssessmentsByBatchId(id);
+		List<Integer> assessmentIds = new ArrayList<>();
+		for(Assessment a : assessmentList) {
+			assessmentIds.add(a.getAssessmentId());
+		}
+		List<Grade> gradeList = gp.findGradesByAssessmentIdIn(assessmentIds);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			Integer tempTrainee = g.getTraineeId();
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(tempTrainee, true);
+				} else {
+					alreadyConnected.put(tempTrainee, false);
+				}
+			}
+			
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
+			
+		}
+		
+		return gradeList;
+	}
 
 	@Override
 	public Float findAvgAssessments(Integer id, Integer weekNum) {
