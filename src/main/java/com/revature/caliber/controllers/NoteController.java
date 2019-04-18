@@ -35,7 +35,7 @@ public class NoteController {
     private NoteService ns;
     
     @GetMapping("/all/note/all")
-    public ResponseEntity<List<Note>> findAllNotes(@RequestParam(name="week", required=false) Integer weekNum){
+    public ResponseEntity<List<Note>> findAllNotes(){
         log.debug("Inside getAllNotes");
         List<Note> temp = ns.findAllNotes();
      
