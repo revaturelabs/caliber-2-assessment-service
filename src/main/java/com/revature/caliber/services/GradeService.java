@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
-import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
-import com.revature.caliber.services.AssessmentService;
 
 @Service
 public class GradeService implements GradeServiceInterface{
@@ -42,17 +39,17 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			Integer tempGrade = g.getTraineeId();
+			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempGrade, true);
+					alreadyConnected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(tempGrade, false);
+					alreadyConnected.put(tempTrainee, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
 			
 		}
 		
@@ -105,6 +102,30 @@ public class GradeService implements GradeServiceInterface{
 			return false;
 		}
 	}
+	
+	@Override
+	public List<Grade> findGradesByBatchId(Integer id) {
+		List<Grade> gradeList = gp.findGradesByBatchId(id);
+		Map<Integer, Boolean> alreadyConnected = new HashMap<>();
+		
+		for(int i = 0; i < gradeList.size(); i++) {
+			Grade g = gradeList.get(i);
+			Integer tempTrainee = g.getTraineeId();
+			
+			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				if(contactTraineeService(g)) {
+					alreadyConnected.put(tempTrainee, true);
+				} else {
+					alreadyConnected.put(tempTrainee, false);
+				}
+			}
+			
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
+			
+		}
+		
+		return gradeList;
+	}
 
 	@Override
 	public List<Grade> findGradesByTraineeId(Integer id) {
@@ -113,17 +134,17 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			Integer tempGrade = g.getTraineeId();
+			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempGrade, true);
+					alreadyConnected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(tempGrade, false);
+					alreadyConnected.put(tempTrainee, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
 			
 		}
 		
@@ -137,17 +158,17 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			Integer tempGrade = g.getTraineeId();
+			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempGrade, true);
+					alreadyConnected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(tempGrade, false);
+					alreadyConnected.put(tempTrainee, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
 			
 		}
 		
@@ -167,17 +188,17 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			Integer tempGrade = g.getTraineeId();
+			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempGrade, true);
+					alreadyConnected.put(tempTrainee, true);
 				} else {
-					alreadyConnected.put(tempGrade, false);
+					alreadyConnected.put(tempTrainee, false);
 				}
 			}
 			
-			if(!alreadyConnected.get(tempGrade)) g.setTraineeId(-1);
+			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
 			
 		}
 		
