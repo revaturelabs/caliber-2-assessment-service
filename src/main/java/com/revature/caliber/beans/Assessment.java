@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,6 +20,7 @@ public class Assessment {
 	private Integer assessmentId;
 	
 	@NotNull
+	@Min(value = 1)
 	@Column(name="RAW_SCORE")
 	private Integer rawScore;
 	
@@ -30,6 +32,7 @@ public class Assessment {
 	private String assessmentType;
 	
 	@NotNull
+	@Min(value = 1)
 	@Column(name="WEEK_NUMBER")
 	private Integer weekNumber;
 	

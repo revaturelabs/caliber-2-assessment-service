@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +25,7 @@ public class Grade {
 	private Date dateReceived;
 	
 	@NotNull
+	@Min(value=0)
 	@Column(name="SCORE")
 	private float score;
 	
