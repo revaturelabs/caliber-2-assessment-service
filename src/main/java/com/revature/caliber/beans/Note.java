@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="NOTE")
@@ -16,12 +19,14 @@ public class Note {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer noteId;
 	
+	@Length(min=0, max=4000)
 	@Column(name="NOTE_CONTENT")
 	private String noteContent;
 	
 	@Column(name="NOTE_TYPE")
 	private String noteType;
 	
+	@Min(value=1)
 	@Column(name="WEEK_NUMBER")
 	private Integer weekNumber;
 	
