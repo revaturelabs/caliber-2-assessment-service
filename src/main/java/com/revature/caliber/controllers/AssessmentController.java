@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Assessment;
@@ -42,9 +43,12 @@ public class AssessmentController {
     }
     
     @GetMapping("/all/assessment/batch/{id}")
-    public ResponseEntity<List<Assessment>> findAssessmentsByBatch(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Assessment>> findAssessmentsByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNumber){
         log.debug("Inside findAssessmentsByBatch");
-        List<Assessment> temp = as.findAssessmentsByBatchId(id);
+        List<Assessment> temp = null;
+        if(weekNumber != null) temp = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
+        else temp = as.findAssessmentsByBatchId(id);
+        
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
@@ -82,7 +86,7 @@ public class AssessmentController {
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
 
-    @DeleteMapping(value="all/assessment/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="all/assessment/delete/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Assessment assessment) {
       Boolean temp = as.deleteAssessment(assessment);
