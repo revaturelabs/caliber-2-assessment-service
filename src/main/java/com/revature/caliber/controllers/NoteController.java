@@ -57,7 +57,7 @@ public class NoteController {
         List<Note> temp = null;
         
         if(weekNum != null) temp = ns.findNotesByBatchIdAndWeekNumber(id, weekNum);
-        else ns.findNotesByBatchId(id);
+        else temp = ns.findNotesByBatchId(id);
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
