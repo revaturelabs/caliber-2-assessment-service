@@ -1,7 +1,0 @@
-spring:
-  cloud:
-    config:
-      name: assessment-service
-      discovery:
-        service-id: config
-        enabled: true
