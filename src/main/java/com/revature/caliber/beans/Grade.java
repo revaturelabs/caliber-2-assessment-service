@@ -39,6 +39,10 @@ public class Grade {
 
 	public Grade() {
 		super();
+		this.dateReceived = new Date(0L);
+		this.score = 0;
+		this.assessmentId = -1;
+		this.traineeId = -1;
 	}
 
 	public Grade(Integer gradeId, Date dateReceived, float score, Integer assessmentId, Integer traineeId) {
