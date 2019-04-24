@@ -250,10 +250,13 @@ public class BatchEntity {
 	
 	@Override
 	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(this.getClass() != obj.getClass()) return false;
+		
 		BatchEntity other = (BatchEntity) obj;
 		
 		boolean result = true;
-		if(other != null && (obj.getClass() != BatchEntity.class || !this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
+		if((obj.getClass() != BatchEntity.class || !this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
 				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
 				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
 				|| !this.trainingType.equals(other.getTrainingType()) || this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
