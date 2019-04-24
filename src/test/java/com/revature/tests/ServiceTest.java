@@ -22,7 +22,7 @@ import com.revature.caliber.beans.Grade;
 import com.revature.caliber.services.AssessmentService;
 import com.revature.caliber.services.GradeService;
 
-public class ServiceTests {
+public class ServiceTest {
 	AssessmentService assessmentService = mock(AssessmentService.class);
 	GradeService gradeService = mock(GradeService.class);
 	
