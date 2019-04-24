@@ -217,27 +217,6 @@ public class BatchEntity {
 	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(obj.getClass() != BatchEntity.class) {
-			return false;
-		}
-		BatchEntity other = (BatchEntity) obj;
-		if(!this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
-				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
-				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
-				|| !this.trainingType.equals(other.getTrainingType()))
-		{
-			return false;
-		}
-		
-		if(this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime()) {
-			return false;
-		}
-		
-		return true;
-	}
 	
 	/**
 	 * Return a String to represent the BatchEntity.
@@ -248,6 +227,46 @@ public class BatchEntity {
 		return "BatchEntity [batchId=" + batchId + ", trainingName=" + trainingName + ", trainingType=" + trainingType
 				+ ", skillType=" + skillType + ", trainer=" + trainer + ", coTrainer=" + coTrainer + ", locationId=" + locationId + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", goodGrade=" + goodGrade + ", passingGrade=" + passingGrade + ", weeks=" + weeks + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
+		result = prime * result + ((coTrainer == null) ? 0 : coTrainer.hashCode());
+		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result + ((goodGrade == null) ? 0 : goodGrade.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		result = prime * result + ((passingGrade == null) ? 0 : passingGrade.hashCode());
+		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((trainer == null) ? 0 : trainer.hashCode());
+		result = prime * result + ((trainingName == null) ? 0 : trainingName.hashCode());
+		result = prime * result + ((trainingType == null) ? 0 : trainingType.hashCode());
+		result = prime * result + ((weeks == null) ? 0 : weeks.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj != null && obj.getClass() != BatchEntity.class) {
+			return false;
+		}
+		BatchEntity other = (BatchEntity) obj;
+		if(other != null && (!this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
+				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
+				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
+				|| !this.trainingType.equals(other.getTrainingType()) || this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
+			return false;
+		}
+		
+		if(other != null && (this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

@@ -46,6 +46,11 @@ public class Assessment {
 
 	public Assessment() {
 		super();
+		this.rawScore = 1;
+		this.assessmentType = "None";
+		this.weekNumber = -1;
+		this.batchId = -1;
+		this.assessmentCategory = -1;
 	}
 
 	public Assessment(Integer assessmentId, Integer rawScore, String assessmentTitle, String assessmentType,
