@@ -51,7 +51,6 @@ public class BatchEntity {
 	 */
 	public BatchEntity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -259,10 +258,6 @@ public class BatchEntity {
 				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
 				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
 				|| !this.trainingType.equals(other.getTrainingType()) || this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
-			return false;
-		}
-		
-		if(other != null && (this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
 			return false;
 		}
 		
