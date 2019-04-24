@@ -124,33 +124,27 @@ public class Note {
 		if (batchId == null) {
 			if (other.batchId != null)
 				return false;
-		} else if (!batchId.equals(other.batchId))
-			return false;
+		} else if (!batchId.equals(other.batchId)) return false;
 		if (noteContent == null) {
 			if (other.noteContent != null)
 				return false;
-		} else if (!noteContent.equals(other.noteContent))
-			return false;
+		} else if (!noteContent.equals(other.noteContent)) return false;
 		if (noteId == null) {
 			if (other.noteId != null)
 				return false;
-		} else if (!noteId.equals(other.noteId))
-			return false;
+		} else if (!noteId.equals(other.noteId)) return false;
 		if (noteType == null) {
 			if (other.noteType != null)
 				return false;
-		} else if (!noteType.equals(other.noteType))
-			return false;
+		} else if (!noteType.equals(other.noteType)) return false;
 		if (traineeId == null) {
 			if (other.traineeId != null)
 				return false;
-		} else if (!traineeId.equals(other.traineeId))
-			return false;
+		} else if (!traineeId.equals(other.traineeId)) return false;
 		if (weekNumber == null) {
 			if (other.weekNumber != null)
 				return false;
-		} else if (!weekNumber.equals(other.weekNumber))
-			return false;
+		} else if (!weekNumber.equals(other.weekNumber)) return false;
 		return true;
 	}
 

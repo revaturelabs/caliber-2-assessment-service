@@ -40,18 +40,18 @@ public class NoteService implements NoteServiceInterface{
 			Integer tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
+					result = true;
 				}
+				traineeConected.put(tempTrainee, result);
 			}
 			if(!batchConnected.containsKey(n.getBatchId())) {
+				boolean result = false;
 				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
+					result = true;
 				}
+				batchConnected.put(tempBatch, result);
 			}
 			
 			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
@@ -138,18 +138,18 @@ public class NoteService implements NoteServiceInterface{
 			Integer tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
+					result = true;
 				}
+				traineeConected.put(tempTrainee, result);
 			}
 			if(!batchConnected.containsKey(n.getBatchId())) {
+				boolean result = false;
 				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
+					result = true;
 				}
+				batchConnected.put(tempBatch, result);
 			}
 			
 			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
@@ -172,18 +172,18 @@ public class NoteService implements NoteServiceInterface{
 			Integer tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
+					result = true;
 				}
+				traineeConected.put(tempTrainee, result);
 			}
 			if(!batchConnected.containsKey(n.getBatchId())) {
+				boolean result = false;
 				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
+					result = true;
 				}
+				batchConnected.put(tempBatch, result);
 			}
 			
 			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
@@ -207,18 +207,18 @@ public class NoteService implements NoteServiceInterface{
 			Integer tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
+					result = true;
 				}
+				traineeConected.put(tempTrainee, result);
 			}
 			if(!batchConnected.containsKey(n.getBatchId())) {
+				boolean result = false;
 				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
+					result = true;
 				}
+				batchConnected.put(tempBatch, result);
 			}
 			
 			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);

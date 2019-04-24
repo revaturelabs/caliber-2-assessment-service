@@ -42,11 +42,11 @@ public class GradeService implements GradeServiceInterface{
 			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
+					result = true;
 				}
+				alreadyConnected.put(tempTrainee, result);
 			}
 			
 			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
@@ -115,11 +115,11 @@ public class GradeService implements GradeServiceInterface{
 			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
+					result = true;
 				}
+				alreadyConnected.put(tempTrainee, result);
 			}
 			
 			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
@@ -139,11 +139,11 @@ public class GradeService implements GradeServiceInterface{
 			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
+					result = true;
 				}
+				alreadyConnected.put(tempTrainee, result);
 			}
 			
 			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
@@ -168,11 +168,11 @@ public class GradeService implements GradeServiceInterface{
 			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
+					result = true;
 				}
+				alreadyConnected.put(tempTrainee, result);
 			}
 			
 			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
@@ -197,11 +197,11 @@ public class GradeService implements GradeServiceInterface{
 			Integer tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(g)) {
-					alreadyConnected.put(tempTrainee, true);
-				} else {
-					alreadyConnected.put(tempTrainee, false);
+					result = true;
 				}
+				alreadyConnected.put(tempTrainee, result);
 			}
 			
 			if(!alreadyConnected.get(tempTrainee)) g.setTraineeId(-1);
