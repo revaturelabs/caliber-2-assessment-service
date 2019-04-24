@@ -224,8 +224,8 @@ public class GradeService implements GradeServiceInterface{
 			temp += a.getRawScore()*grades.size();
 			
 		}
-
-		return (temp2/temp)*100;
+		if(temp != 0) return (temp2/temp)*100;
+		else return null;
 
 
 	}
