@@ -51,7 +51,6 @@ public class BatchEntity {
 	 */
 	public BatchEntity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -251,22 +250,20 @@ public class BatchEntity {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj != null && obj.getClass() != BatchEntity.class) {
-			return false;
-		}
+		if(obj == null) return false;
+		if(this.getClass() != obj.getClass()) return false;
+		
 		BatchEntity other = (BatchEntity) obj;
-		if(other != null && (!this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
+		
+		boolean result = true;
+		if((obj.getClass() != BatchEntity.class || !this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
 				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
 				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
 				|| !this.trainingType.equals(other.getTrainingType()) || this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
-			return false;
+			result = false;
 		}
 		
-		if(other != null && (this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
-			return false;
-		}
-		
-		return true;
+		return result;
 	}
 	
 }

@@ -8,9 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.beans.Note;
-import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.NoteRepository;
@@ -30,9 +28,7 @@ public class NoteService implements NoteServiceInterface{
 	@Autowired
 	private BatchClient bc;
 	
-	@Override
-	public List<Note> findAllNotes() {
-		List<Note> noteList = np.findAll();
+	private List<Note> checkTraineeAndBatch(List<Note> noteList){
 		Map<Integer, Boolean> traineeConected = new HashMap<>();
 		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
@@ -42,18 +38,18 @@ public class NoteService implements NoteServiceInterface{
 			Integer tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
+				boolean result = false;
 				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
+					result = true;
 				}
+				traineeConected.put(tempTrainee, result);
 			}
 			if(!batchConnected.containsKey(n.getBatchId())) {
+				boolean result = false;
 				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
+					result = true;
 				}
+				batchConnected.put(tempBatch, result);
 			}
 			
 			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
@@ -62,6 +58,13 @@ public class NoteService implements NoteServiceInterface{
 		}
 		
 		return noteList;
+	}
+	
+	@Override
+	public List<Note> findAllNotes() {
+		List<Note> noteList = np.findAll();
+		
+		return checkTraineeAndBatch(noteList);
 	}
 
 	@Override
@@ -131,69 +134,22 @@ public class NoteService implements NoteServiceInterface{
 	@Override
 	public List<Note> findNotesByTraineeId(Integer id) {
 		List<Note> noteList = np.findNotesByTraineeId(id);
-		Map<Integer, Boolean> traineeConected = new HashMap<>();
-		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
-		for(int i = 0; i < noteList.size(); i++) {
-			Note n = noteList.get(i);
-			Integer tempTrainee = n.getTraineeId();
-			Integer tempBatch = n.getBatchId();
-			
-			if(!traineeConected.containsKey(n.getTraineeId())) {
-				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
-				}
-			}
-			if(!batchConnected.containsKey(n.getBatchId())) {
-				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
-				}
-			}
-			
-			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
-			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
-			
-		}
-		
-		return noteList;
+		return checkTraineeAndBatch(noteList);
 	}
 
 	@Override
 	public List<Note> findNotesByBatchId(Integer id) {
 		List<Note> noteList = np.findNotesByBatchId(id);
-		Map<Integer, Boolean> traineeConected = new HashMap<>();
-		Map<Integer, Boolean> batchConnected = new HashMap<>();
 		
-		for(int i = 0; i < noteList.size(); i++) {
-			Note n = noteList.get(i);
-			Integer tempTrainee = n.getTraineeId();
-			Integer tempBatch = n.getBatchId();
-			
-			if(!traineeConected.containsKey(n.getTraineeId())) {
-				if(contactTraineeService(n)) {
-					traineeConected.put(tempTrainee, true);
-				} else {
-					traineeConected.put(tempTrainee, false);
-				}
-			}
-			if(!batchConnected.containsKey(n.getBatchId())) {
-				if(contactBatchService(n)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
-				}
-			}
-			
-			if(!traineeConected.get(tempTrainee)) n.setTraineeId(-1);
-			if(!batchConnected.get(tempBatch)) n.setBatchId(-1);
-			
-		}
+		return checkTraineeAndBatch(noteList);
+	}
+
+	@Override
+	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum) {
+		List<Note> noteList = np.findNotesByBatchIdAndWeekNumber(bid, weekNum);
 		
-		return noteList;
+		return checkTraineeAndBatch(noteList);
 	}
 	
 

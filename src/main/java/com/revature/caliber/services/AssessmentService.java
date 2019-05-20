@@ -29,37 +29,9 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 	@Override
 	public List<Assessment> findAllAssessments() {
-		List<Assessment> AssessmentList = ar.findAll();
-		Map<Integer, Boolean> batchConnected = new HashMap<>();
-		Map<Integer, Boolean> categoryConnected = new HashMap<>();
+		List<Assessment> assessmentList = ar.findAll();
 		
-		for(int i = 0; i < AssessmentList.size(); i++) {
-			Assessment a = AssessmentList.get(i);
-			Integer tempBatch = a.getBatchId();
-			Integer tempCategory = a.getAssessmentCategory();
-			
-			if(!batchConnected.containsKey(a.getBatchId())) {
-				
-				if(contactBatchService(a)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
-				}
-			}
-			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
-				
-				if(contactCategoryService(a)) {
-					categoryConnected.put(tempCategory, true);
-				} else {
-					categoryConnected.put(tempCategory, false);
-				}
-			}
-			
-			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
-			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
-		}
-		
-		return AssessmentList;
+		return checkBatchAndCategory(assessmentList);
 	}
  
 	@Override
@@ -112,77 +84,18 @@ public class AssessmentService implements AssessmentServiceInterface{
 
 	@Override
 	public List<Assessment> findAssessmentsByBatchId(Integer batchId) {
-		List<Assessment> AssessmentList = ar.findAssessmentsByBatchId(batchId);
-		Map<Integer, Boolean> batchConnected = new HashMap<>();
-		Map<Integer, Boolean> categoryConnected = new HashMap<>();
+		List<Assessment> assessmentList = ar.findAssessmentsByBatchId(batchId);
 		
-		for(int i = 0; i < AssessmentList.size(); i++) {
-			Assessment a = AssessmentList.get(i);
-			Integer tempBatch = a.getBatchId();
-			Integer tempCategory = a.getAssessmentCategory();
-			
-			if(!batchConnected.containsKey(a.getBatchId())) {
-				
-				if(contactBatchService(a)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
-				}
-			}
-			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
-				
-				if(contactCategoryService(a)) {
-					categoryConnected.put(tempCategory, true);
-				} else {
-					categoryConnected.put(tempCategory, false);
-				}
-			}
-			
-			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
-			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
-		}
-		
-		return AssessmentList;
+		return checkBatchAndCategory(assessmentList);
 	}
 
 	@Override
 	public List<Assessment> findAssessmentsByCategory(Integer categoryId) {
-		List<Assessment> AssessmentList = ar.findAssessmentsByAssessmentCategory(categoryId);
-		Map<Integer, Boolean> batchConnected = new HashMap<>();
-		Map<Integer, Boolean> categoryConnected = new HashMap<>();
+		List<Assessment> assessmentList = ar.findAssessmentsByAssessmentCategory(categoryId);
 		
-		for(int i = 0; i < AssessmentList.size(); i++) {
-			Assessment a = AssessmentList.get(i);
-			Integer tempBatch = a.getBatchId();
-			Integer tempCategory = a.getAssessmentCategory();
-			
-			if(!batchConnected.containsKey(a.getBatchId())) {
-				
-				if(contactBatchService(a)) {
-					batchConnected.put(tempBatch, true);
-				} else {
-					batchConnected.put(tempBatch, false);
-				}
-			}
-			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
-				
-				if(contactCategoryService(a)) {
-					categoryConnected.put(tempCategory, true);
-				} else {
-					categoryConnected.put(tempCategory, false);
-				}
-			}
-			
-			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
-			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
-		}
-	
-		return AssessmentList;
+		return checkBatchAndCategory(assessmentList);
 	}
-
-
 	
-
 	private boolean contactCategoryService(Assessment as) {
 		try {
 			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
@@ -196,5 +109,44 @@ public class AssessmentService implements AssessmentServiceInterface{
 		}
 	}
 
+	@Override
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
+		
+		return checkBatchAndCategory(assessmentList);
+	}
+	
+	private List<Assessment> checkBatchAndCategory(List<Assessment> assessmentList){
+		Map<Integer, Boolean> batchConnected = new HashMap<>();
+		Map<Integer, Boolean> categoryConnected = new HashMap<>();
+		
+		for(int i = 0; i < assessmentList.size(); i++) {
+			Assessment a = assessmentList.get(i);
+			Integer tempBatch = a.getBatchId();
+			Integer tempCategory = a.getAssessmentCategory();
+			
+			if(!batchConnected.containsKey(a.getBatchId())) {
+				boolean result = false;
+				
+				if(contactBatchService(a)) {
+					result = true;
+				}
+				batchConnected.put(tempBatch, result);
+			}
+			if(!categoryConnected.containsKey(a.getAssessmentCategory())) {
+				boolean result = false;
+				
+				if(contactCategoryService(a)) {
+					result = true;
+				}
+				categoryConnected.put(tempCategory, result);
+			}
+			
+			if(!batchConnected.get(tempBatch)) a.setBatchId(-1);
+			if(!categoryConnected.get(tempCategory)) a.setAssessmentCategory(-1);
+		}
+		
+		return assessmentList;
+	}
 
 }

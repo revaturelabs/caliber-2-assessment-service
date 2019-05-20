@@ -118,25 +118,21 @@ public class Grade {
 		if (assessmentId == null) {
 			if (other.assessmentId != null)
 				return false;
-		} else if (!assessmentId.equals(other.assessmentId))
-			return false;
+		} else if (!assessmentId.equals(other.assessmentId)) return false;
 		if (dateReceived == null) {
 			if (other.dateReceived != null)
 				return false;
-		} else if (!dateReceived.equals(other.dateReceived))
-			return false;
+		} else if (!dateReceived.equals(other.dateReceived)) return false;
 		if (gradeId == null) {
 			if (other.gradeId != null)
 				return false;
-		} else if (!gradeId.equals(other.gradeId))
-			return false;
+		} else if (!gradeId.equals(other.gradeId)) return false;
 		if (Float.floatToIntBits(score) != Float.floatToIntBits(other.score))
 			return false;
 		if (traineeId == null) {
 			if (other.traineeId != null)
 				return false;
-		} else if (!traineeId.equals(other.traineeId))
-			return false;
+		} else if (!traineeId.equals(other.traineeId)) return false;
 		return true;
 	}
 

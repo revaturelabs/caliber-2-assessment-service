@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Note;
@@ -37,6 +38,7 @@ public class NoteController {
     public ResponseEntity<List<Note>> findAllNotes(){
         log.debug("Inside getAllNotes");
         List<Note> temp = ns.findAllNotes();
+     
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
@@ -50,9 +52,13 @@ public class NoteController {
     }
     
     @GetMapping("/all/note/batch/{id}")
-    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNum){
         log.debug("Inside findNotesByBatch");
-        List<Note> temp = ns.findNotesByBatchId(id);
+        List<Note> temp = null;
+        
+        if(weekNum != null) temp = ns.findNotesByBatchIdAndWeekNumber(id, weekNum);
+        else temp = ns.findNotesByBatchId(id);
+        
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
