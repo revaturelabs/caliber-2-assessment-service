@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.revature.caliber.beans.BatchEntity;
 
-@FeignClient(name = "zuul", fallback=BatchClientFallback.class)
+@FeignClient(name = "batch-service", fallback=BatchClientFallback.class)
 public interface BatchClient {
 	
 	@GetMapping(value="all/batch/{id}")

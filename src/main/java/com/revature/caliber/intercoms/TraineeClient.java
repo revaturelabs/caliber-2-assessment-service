@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.revature.caliber.beans.Trainee;
 
 
-@FeignClient(name="zuul", fallback=TraineeClientFallback.class)
+@FeignClient(name="user-service", fallback=TraineeClientFallback.class)
 public interface TraineeClient {
 	@GetMapping(value="all/trainee/{id}")
 	public Trainee findTraineeById(@PathVariable("id") Integer id);
