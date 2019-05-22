@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.revature.caliber.beans.Category;
 
-@FeignClient(name="zuul", fallback=CategoryClientFallback.class)
+@FeignClient(name="category-service", fallback=CategoryClientFallback.class)
 public interface CategoryClient {
 	
 	@GetMapping(value="all/category/{id}")
