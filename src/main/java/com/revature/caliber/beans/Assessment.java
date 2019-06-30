@@ -49,7 +49,7 @@ public class Assessment {
 		this.rawScore = 1;
 		this.assessmentType = "None";
 		this.weekNumber = -1;
-		this.batchId = 1;
+		this.batchId = -1;
 		this.assessmentCategory = -1;
 	}
 
