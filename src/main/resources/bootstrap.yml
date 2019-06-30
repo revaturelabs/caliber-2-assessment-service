@@ -1,7 +1,26 @@
- spring: 
+spring:
   cloud:
     config:
       name: assessment-service
       discovery:
         service-id: config
         enabled: true
+        
+
+server:
+  servlet-path: /assessment/*
+---
+spring:
+  profiles: dev
+  
+ 
+---               
+spring:
+  profiles: prod
+
+eureka:
+ instance:
+    prefer-ip-address: true      
+ client:
+   service-url:
+     defaultZone: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/eureka
