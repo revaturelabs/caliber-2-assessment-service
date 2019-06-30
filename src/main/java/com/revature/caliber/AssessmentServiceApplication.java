@@ -24,14 +24,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableEurekaClient
 @EnableFeignClients
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+//@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@SpringBootApplication
 @EnableSwagger2
 public class AssessmentServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AssessmentServiceApplication.class, args);
 	}
-	
 	@Bean
     public Docket api() throws IOException, org.codehaus.plexus.util.xml.pull.XmlPullParserException {
         MavenXpp3Reader reader = new MavenXpp3Reader();
