@@ -115,10 +115,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
 		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
-		
-		for(Assessment ass : assessmentList) {
-			System.out.println(ass);
-		}
 //		return assessmentList;
 		return checkBatchAndCategory(assessmentList);
 	}
