@@ -48,7 +48,6 @@ public class AssessmentController {
         List<Assessment> temp = null;
         if(weekNumber != null) temp = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
         else temp = as.findAssessmentsByBatchId(id);
-        
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }

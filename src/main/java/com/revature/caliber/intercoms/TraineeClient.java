@@ -9,7 +9,7 @@ import com.revature.caliber.beans.Trainee;
 
 @FeignClient(name="user-service", fallback=TraineeClientFallback.class)
 public interface TraineeClient {
-	@GetMapping(value="all/trainee/{id}")
+	@GetMapping(value="user/all/trainee/{id}")
 	public Trainee findTraineeById(@PathVariable("id") Integer id);
 	
 }
