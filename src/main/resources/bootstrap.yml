@@ -1,4 +1,4 @@
-spring: 
+spring:
   cloud:
     config:
       name: assessment-service
