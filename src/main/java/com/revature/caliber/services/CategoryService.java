@@ -15,7 +15,6 @@ public class CategoryService implements CategoryServiceInterface{
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@Transactional
 	public Category createCategory(Category category) {
 		category = categoryRepository.findCategoryBySkillCategory(category.getSkillCategory());
 		if (category != null)
