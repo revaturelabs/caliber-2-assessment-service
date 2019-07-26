@@ -1,7 +1,5 @@
 package com.revature.caliber.services;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +19,5 @@ public class CategoryService implements CategoryServiceInterface{
 			throw new DuplicateException("Skill category already exists");
 		else 
 			return categoryRepository.save(category);
-
 	}
-
-	
 }
