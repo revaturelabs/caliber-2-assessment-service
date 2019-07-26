@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	public Category findCategoryById(Integer id);
 
 	Category findCategoryBySkillCategory(String skillCategory);
+	
+	Category updateCategory(Category category);
 }

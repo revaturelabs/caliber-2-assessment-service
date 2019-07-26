@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Category;
+import com.revature.caliber.exceptions.DoesNotExistException;
 import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.repositories.CategoryRepository;
 
@@ -15,7 +16,6 @@ public class CategoryService implements CategoryServiceInterface{
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@Transactional
 	public Category createCategory(Category category) {
 		category = categoryRepository.findCategoryBySkillCategory(category.getSkillCategory());
 		if (category != null)
@@ -26,5 +26,14 @@ public class CategoryService implements CategoryServiceInterface{
 		
 	}
 
+	public Category updateCategory(Category category) {
+		category = categoryRepository.findCategoryById(category.getCategoryId());
+		if(category == null) {
+			throw new DoesNotExistException("Category does not already exist");
+		}
+		else {
+			return categoryRepository.save(category);
+		}
+	}
 	
 }
