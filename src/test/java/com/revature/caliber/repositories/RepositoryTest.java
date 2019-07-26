@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Category;
 
 public class RepositoryTest {
@@ -61,7 +62,6 @@ public class RepositoryTest {
 		));
 	}
 	
-	
 	//Check for ID
 	@Test
 	public void testFindId() {
@@ -78,6 +78,18 @@ public class RepositoryTest {
 	@Test
 	public void testCreateCategoryNull() {
 		assertEquals(null, categoryRepository.save(new Category(5, "Java", true, "Josh")));
+	}
+
+	//Find category by id, using a good input
+	@Test
+	public void testFindCategoryByIdWithExpectedInput() {
+		assertEquals(new Category(3, "Servlets", true, "Ryan"), categoryRepository.findCategoryById(3));
+	}
+	
+	//Find category by id, using a bad input
+	@Test
+	public void testFindCategoryByIdWithBadInput() {
+		assertEquals(null, categoryRepository.findCategoryById(6));
 	}
 }
 
