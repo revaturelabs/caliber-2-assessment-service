@@ -13,7 +13,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Category;
 
 public class RepositoryTest {
