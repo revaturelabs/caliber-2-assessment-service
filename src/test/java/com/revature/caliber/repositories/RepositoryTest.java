@@ -22,7 +22,7 @@ public class RepositoryTest {
 
 	@Before
 	public void setup() {
-		// AssessmentService tests setup
+		// Category Repository tests setup
 		Category c1 = new Category(1, "Java", true, "Sara");
 		Category c2 = new Category(2, "SQL", true, "John");
 		Category c3 = new Category(3, "Servlets", true, "Ryan");
@@ -60,7 +60,6 @@ public class RepositoryTest {
 				new Category(6, "Spring", false, "Naresh")
 		));
 	}
-	
 	
 	//Check for ID
 	@Test
