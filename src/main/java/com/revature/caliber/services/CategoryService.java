@@ -22,8 +22,7 @@ public class CategoryService implements CategoryServiceInterface{
 			throw new DuplicateException("Skill category already exists");
 		else 
 			return categoryRepository.save(category);
-		
-		
+
 	}
 
 	
