@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Category;
 
 public class CategoryServiceTests {
@@ -28,6 +29,7 @@ public class CategoryServiceTests {
 //		categoryList.add(c4);
 		
 		when(categoryService.createCategory(c1)).thenReturn(c1);
+		when(categoryService.createCategory(c1)).thenReturn(null);
 	}
 	
 	@Test
@@ -37,4 +39,8 @@ public class CategoryServiceTests {
 		
 	}
 
+	@Test
+	public void testCreateAssessmentWithAlreadyExistingCategory() {
+		assertEquals(null, categoryService.createCategory(new Category(1, "Java", true, "Sara")));
+	}
 }
