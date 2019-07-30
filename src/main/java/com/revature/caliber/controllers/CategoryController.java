@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Category;
+import com.revature.caliber.converter.CategoryConverter;
+import com.revature.caliber.dto.CategoryDTO;
 import com.revature.caliber.services.CategoryService;
 
 @RestController
@@ -32,9 +34,9 @@ public class CategoryController {
      */
     @PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> createCategory(@RequestBody CategoryDTO categoryDTO) {
     	
-    	Category cat = categoryService.createCategory(category);
+    	Category cat = categoryService.createCategory(categoryDTO);
     	return new ResponseEntity<>(cat, HttpStatus.CREATED);
     }
 }
