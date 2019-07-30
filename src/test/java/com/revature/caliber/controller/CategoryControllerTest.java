@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.caliber.beans.Category;
 import com.revature.caliber.controllers.CategoryController;
+import com.revature.caliber.converter.CategoryConverter;
+import com.revature.caliber.dto.CategoryDTO;
 import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.services.CategoryService;
 
@@ -47,11 +49,12 @@ public class CategoryControllerTest {
 
 	@Test
 	public void testCreateCategory() throws Exception {
-		Category catObj = new Category();
+		CategoryDTO catObj = new CategoryDTO();
 		catObj.setCategoryOwner("Sara");
 		catObj.setSkillCategory("Test123");
 		catObj.setActive(true);
-		when(categoryServiceMock.createCategory(any(Category.class))).thenReturn(catObj);
+		Category catObj1 = CategoryConverter.convert(catObj);
+		when(categoryServiceMock.createCategory(any(CategoryDTO.class))).thenReturn(catObj1);
 
 		String catJson = new ObjectMapper().writeValueAsString(catObj);
 		mockMvc.perform(post("/categories").contentType(MediaType.APPLICATION_JSON).content(catJson))
@@ -66,7 +69,7 @@ public class CategoryControllerTest {
 		catObj.setCategoryOwner("Sara");
 		catObj.setSkillCategory("Test123");
 		catObj.setActive(true);
-		when(categoryServiceMock.createCategory(any(Category.class)))
+		when(categoryServiceMock.createCategory(any(CategoryDTO.class)))
 				.thenThrow(new DuplicateException("Skill type already exists"));
 
 		String catJson = new ObjectMapper().writeValueAsString(catObj);

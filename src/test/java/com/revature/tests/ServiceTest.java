@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.dto.AssessmentDTO;
 import com.revature.caliber.services.AssessmentService;
 import com.revature.caliber.services.GradeService;
 
@@ -36,8 +37,10 @@ public class ServiceTest {
 	public void setup() {
 		//AssessmentService tests setup 
 		Assessment a1 = new Assessment(12, 74, "a1", "java", 2, 84, 1);
+		AssessmentDTO a1DTO = new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1);
 		Assessment a2 = new Assessment(17, 20, "a2", "sales force", 7, 31, 2);
 		Assessment a3 = new Assessment(20, 97, "a3", "big data", 5, 9, 3);
+		AssessmentDTO a3DTO = new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3);
 		Assessment a4 = new Assessment(22, 87, "a4", "java", 2, 84, 9);
 		
 		assessmentsList.add(a1);
@@ -56,8 +59,8 @@ public class ServiceTest {
 		when(assessmentService.findAllAssessments()).thenReturn(assessmentsList);
 		when(assessmentService.findAssessmentById(17)).thenReturn(a2);
 		when(assessmentService.deleteAssessment(a3)).thenReturn(true);
-		when(assessmentService.createAssessment(a1)).thenReturn(a1);
-		when(assessmentService.createAssessment(a3)).thenReturn(null);
+		when(assessmentService.createAssessment(a1DTO)).thenReturn(a1);
+		when(assessmentService.createAssessment(a3DTO)).thenReturn(null);
 		when(assessmentService.updateAssessment(a2)).thenReturn(a2);
 		when(assessmentService.findAssessmentsByBatchId(84)).thenReturn(batchAssessmentsList);
 		when(assessmentService.findAssessmentsByCategory(9)).thenReturn(categoryAssessmentsList);
@@ -127,12 +130,12 @@ public class ServiceTest {
 	//test AssessmentService.createAssessment method
 	@Test
 	public void testCreateAssessmentWithNewAssessment() {
-		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new Assessment(12, 74, "a1", "java", 2, 84, 1)));
+		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1)));
 	}
 	
 	@Test
 	public void testCreateAssessmentWithAlreadyExistingAssessment() {
-		assertEquals(null, assessmentService.createAssessment(new Assessment(20, 97, "a3", "big data", 5, 9, 3)));
+		assertEquals(null, assessmentService.createAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
 	//test AssessmentService.updateAssessment

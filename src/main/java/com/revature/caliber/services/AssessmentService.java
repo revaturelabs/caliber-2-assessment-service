@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
+import com.revature.caliber.converter.AssessmentConverter;
+import com.revature.caliber.dto.AssessmentDTO;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.CategoryClient;
 import com.revature.caliber.repositories.AssessmentRepository;
@@ -60,9 +62,10 @@ public class AssessmentService implements AssessmentServiceInterface{
 		}
 	}
 	
-	public Assessment createAssessment(Assessment as) {
-		if(ar.findOne(as.getAssessmentId()) != null) return null;
-		return ar.save(as);
+	public Assessment createAssessment(AssessmentDTO assessmentDTO) {
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		if(ar.findOne(assessment.getAssessmentId()) != null) return null;
+		return ar.save(assessment);
 	}
   
 	@Override
