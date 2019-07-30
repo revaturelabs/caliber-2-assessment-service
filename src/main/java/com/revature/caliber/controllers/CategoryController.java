@@ -1,6 +1,5 @@
 package com.revature.caliber.controllers;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,8 +20,7 @@ import com.revature.caliber.services.CategoryService;
 @RequestMapping("categories")
 @CrossOrigin("*")
 public class CategoryController {
-	
-private static Logger LOG = Logger.getLogger("CategoryController.class");
+
     
     @Autowired
     private CategoryService categoryService;
