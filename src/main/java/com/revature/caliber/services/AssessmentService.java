@@ -51,11 +51,12 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	@Override
-	public Boolean deleteAssessment(Assessment as) {
+	public Boolean deleteAssessment(AssessmentDTO assessmentDTO) {
 		Boolean exists = false;
-		if(ar.findOne(as.getAssessmentId()) != null) exists = true;
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		if(ar.findOne(assessment.getAssessmentId()) != null) exists = true;
 		if(exists) {
-			ar.delete(as);
+			ar.delete(assessment);
 			return true;
 		} else {
 			return false;
@@ -69,10 +70,11 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
   
 	@Override
-	public Assessment updateAssessment(Assessment as) {
-		log.debug("Updating Assessment: " + as);
-		if(ar.findOne(as.getAssessmentId()) == null) return null;
-		return ar.save(as);
+	public Assessment updateAssessment(AssessmentDTO assessmentDTO) {
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		log.debug("Updating Assessment: " + assessment);
+		if(ar.findOne(assessment.getAssessmentId()) == null) return null;
+		return ar.save(assessment);
 	}
 	
 	private boolean contactBatchService(Assessment as) {

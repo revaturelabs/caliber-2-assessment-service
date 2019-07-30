@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.intercoms.TraineeClient;
-import com.revature.caliber.repositories.AssessmentRepository;
 import com.revature.caliber.repositories.GradeRepository;
 
 @Service

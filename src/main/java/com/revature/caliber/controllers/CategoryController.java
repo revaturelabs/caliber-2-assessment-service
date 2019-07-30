@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Category;
-import com.revature.caliber.converter.CategoryConverter;
 import com.revature.caliber.dto.CategoryDTO;
 import com.revature.caliber.services.CategoryService;
 

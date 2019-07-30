@@ -11,9 +11,9 @@ import com.revature.caliber.dto.AssessmentDTO;
 public interface AssessmentServiceInterface {
 	public List<Assessment> findAllAssessments();
 	public Assessment findAssessmentById(Integer id);
-	public Boolean deleteAssessment(Assessment as);
+	public Boolean deleteAssessment(AssessmentDTO as);
 	public Assessment createAssessment(AssessmentDTO as);
-	public Assessment updateAssessment(Assessment as);
+	public Assessment updateAssessment(AssessmentDTO as);
 	public List<Assessment> findAssessmentsByBatchId(Integer batchId);
 	public List<Assessment> findAssessmentsByCategory(Integer categoryId);
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber);

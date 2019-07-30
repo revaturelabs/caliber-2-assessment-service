@@ -39,6 +39,7 @@ public class ServiceTest {
 		Assessment a1 = new Assessment(12, 74, "a1", "java", 2, 84, 1);
 		AssessmentDTO a1DTO = new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1);
 		Assessment a2 = new Assessment(17, 20, "a2", "sales force", 7, 31, 2);
+		AssessmentDTO a2DTO = new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2);
 		Assessment a3 = new Assessment(20, 97, "a3", "big data", 5, 9, 3);
 		AssessmentDTO a3DTO = new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3);
 		Assessment a4 = new Assessment(22, 87, "a4", "java", 2, 84, 9);
@@ -58,10 +59,10 @@ public class ServiceTest {
 		
 		when(assessmentService.findAllAssessments()).thenReturn(assessmentsList);
 		when(assessmentService.findAssessmentById(17)).thenReturn(a2);
-		when(assessmentService.deleteAssessment(a3)).thenReturn(true);
+		when(assessmentService.deleteAssessment(a3DTO)).thenReturn(true);
 		when(assessmentService.createAssessment(a1DTO)).thenReturn(a1);
 		when(assessmentService.createAssessment(a3DTO)).thenReturn(null);
-		when(assessmentService.updateAssessment(a2)).thenReturn(a2);
+		when(assessmentService.updateAssessment(a2DTO)).thenReturn(a2);
 		when(assessmentService.findAssessmentsByBatchId(84)).thenReturn(batchAssessmentsList);
 		when(assessmentService.findAssessmentsByCategory(9)).thenReturn(categoryAssessmentsList);
 		when(assessmentService.findAssessmentsByBatchIdAndWeekNumber(84, 2)).thenReturn(batchAndWeekNumAssessmentsList);
@@ -119,12 +120,12 @@ public class ServiceTest {
 	//test AssessmentService.deleteAssessment method
 	@Test
 	public void testDeleteAssessmentWithExistingAssessment() {
-		assertTrue(assessmentService.deleteAssessment(new Assessment(20, 97, "a3", "big data", 5, 9, 3)));
+		assertTrue(assessmentService.deleteAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
 	@Test
 	public void testDeleteAssessmentWithNonExistantInput() {
-		assertFalse(assessmentService.deleteAssessment(new Assessment(0, 0, "", "", 0, 0, 0)));
+		assertFalse(assessmentService.deleteAssessment(new AssessmentDTO(0, 0, "", "", 0, 0, 0)));
 	}
 	
 	//test AssessmentService.createAssessment method
@@ -141,12 +142,12 @@ public class ServiceTest {
 	//test AssessmentService.updateAssessment
 	@Test
 	public void testUpdateAssessmentWithExistingAssessment() {
-		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new Assessment(17, 20, "a2", "sales force", 7, 31, 2)));
+		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2)));
 	}
 	
 	@Test
 	public void testUpdateAssessmentWithNonExistantAssessment() {
-		assertEquals(null, assessmentService.updateAssessment(new Assessment(32, 84, "boo", "none", 4, 16, 8)));
+		assertEquals(null, assessmentService.updateAssessment(new AssessmentDTO(32, 84, "boo", "none", 4, 16, 8)));
 	}
 	
 	//test AssessmentService.findAssessmentsByBatchId method
