@@ -28,13 +28,13 @@ private Logger log = Logger.getLogger("CategoryController.class");
     private CategoryService categoryService;
 
     //Get create request, send to service layer
-    @PostMapping(value="/create", consumes=MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
     	System.out.println("Create Category" + category);
     	
     	Category cat = categoryService.createCategory(category);
-    	if(cat == null) return new ResponseEntity<>(cat, HttpStatus.BAD_REQUEST);
+    	//if(cat == null) return new ResponseEntity<>(cat, HttpStatus.BAD_REQUEST);
     	return new ResponseEntity<>(cat, HttpStatus.CREATED);
     }
 }

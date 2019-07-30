@@ -11,7 +11,6 @@ import com.revature.caliber.repositories.CategoryRepository;
 @Service
 public class CategoryService implements CategoryServiceInterface{
 
-	
 	Logger log = Logger.getLogger("CategoryService.class"); 
 	
 	@Autowired

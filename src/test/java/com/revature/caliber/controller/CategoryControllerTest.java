@@ -1,18 +1,15 @@
 package com.revature.caliber.controller;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.CoreMatchers.any;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,13 +22,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.caliber.beans.Category;
 import com.revature.caliber.controllers.CategoryController;
+import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.services.CategoryService;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
 public class CategoryControllerTest {
-	
+
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -46,18 +44,34 @@ public class CategoryControllerTest {
 
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void testCreateCategory() throws Exception {
 		Category catObj = new Category();
 		catObj.setCategoryOwner("Sara");
-		catObj.setSkillCategory("Test");
+		catObj.setSkillCategory("Test123");
 		catObj.setActive(true);
-		when(categoryServiceMock.createCategory((Category) any(Category.class))).thenReturn(catObj);
+		when(categoryServiceMock.createCategory(any(Category.class))).thenReturn(catObj);
 
 		String catJson = new ObjectMapper().writeValueAsString(catObj);
-		mockMvc.perform(post("/create").contentType(MediaType.APPLICATION_JSON).content(catJson))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.email").value("nareshkumarh@live.com"));
+		mockMvc.perform(post("/categories").contentType(MediaType.APPLICATION_JSON).content(catJson))
+				.andExpect(status().isCreated()).andExpect(jsonPath("$.categoryOwner").value("Sara"))
+				.andExpect(jsonPath("$.skillCategory").value("Test123"))
+				.andExpect(jsonPath("$.active").value(true));
+	}
 
+	@Test
+	public void testCreateCategoryFail() throws Exception {
+		Category catObj = new Category();
+		catObj.setCategoryOwner("Sara");
+		catObj.setSkillCategory("Test123");
+		catObj.setActive(true);
+		when(categoryServiceMock.createCategory(any(Category.class)))
+				.thenThrow(new DuplicateException("Skill type already exists"));
+
+		String catJson = new ObjectMapper().writeValueAsString(catObj);
+		mockMvc.perform(post("/categories").contentType(MediaType.APPLICATION_JSON).content(catJson))
+				.andExpect(status().isInternalServerError())
+				.andExpect(jsonPath("$.message").value("Skill type already exists"));
 	}
 }
