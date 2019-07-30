@@ -16,8 +16,7 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler(DuplicateException.class)
 	public ResponseEntity<?> handleException(DuplicateException e) {
-		System.out.println("Exception"  + e.getMessage());
-		ErrorMessage errorMessage = new ErrorMessage(duplicateError);
+		ErrorMessage errorMessage = new ErrorMessage(DUPLICATE_ERROR);
 		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

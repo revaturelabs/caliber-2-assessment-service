@@ -22,7 +22,7 @@ import com.revature.caliber.services.CategoryService;
 @CrossOrigin("*")
 public class CategoryController {
 	
-private Logger log = Logger.getLogger("CategoryController.class");
+private static Logger LOG = Logger.getLogger("CategoryController.class");
     
     @Autowired
     private CategoryService categoryService;
@@ -35,7 +35,6 @@ private Logger log = Logger.getLogger("CategoryController.class");
     @PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-    	System.out.println("Create Category" + category);
     	
     	Category cat = categoryService.createCategory(category);
     	return new ResponseEntity<>(cat, HttpStatus.CREATED);
