@@ -35,7 +35,7 @@ public class CategoryServiceTests {
 	@Test
 	public void createCategoryPass() {
 		//categoryService.createCategory(new Category(1, "Java", true, "Sara"));
-		assertEquals(new Category(1, "Java", true, "Sara"), categoryService.createCategory(new Category(1, "Java", true, "Sara")));
+		assertEquals(null, categoryService.createCategory(new Category(1, "Java", true, "Sara")));
 		
 	}
 
