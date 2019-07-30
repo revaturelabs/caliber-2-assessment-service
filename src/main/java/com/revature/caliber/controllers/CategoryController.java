@@ -22,7 +22,7 @@ import com.revature.caliber.services.CategoryService;
 @CrossOrigin("*")
 public class CategoryController {
 
-private Logger log = Logger.getLogger("AssessmentController.class");
+private Logger log = Logger.getLogger("CategoryController.class");
     
     @Autowired
     private CategoryService categoryService;

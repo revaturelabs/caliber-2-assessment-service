@@ -8,11 +8,6 @@ import com.revature.caliber.beans.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	
-//	public List<Category> findAllCategories();
-
 	public Category findByCategoryId(Integer id);
-
 	Category findCategoryBySkillCategory(String skillCategory);
-	
-//	Category updateCategory(Category category);
 }
