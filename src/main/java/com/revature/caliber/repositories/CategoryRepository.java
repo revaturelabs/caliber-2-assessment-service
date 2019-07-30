@@ -7,14 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.revature.caliber.beans.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
-
-	Category save(Category category);
 	
-	public List<Category> findAllCategories();
+//	public List<Category> findAllCategories();
 
-	public Category findCategoryById(Integer id);
+	public Category findByCategoryId(Integer id);
 
 	Category findCategoryBySkillCategory(String skillCategory);
 	
-	Category updateCategory(Category category);
+//	Category updateCategory(Category category);
 }

@@ -27,8 +27,8 @@ public class CategoryService implements CategoryServiceInterface{
 	}
 
 	public Category updateCategory(Category category) {
-		category = categoryRepository.findCategoryById(category.getCategoryId());
-		if(category == null) {
+		Category categoryObj = categoryRepository.findByCategoryId(category.getCategoryId());
+		if(categoryObj == null) {
 			throw new DoesNotExistException("Category does not already exist");
 		}
 		else {

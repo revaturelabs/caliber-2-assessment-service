@@ -27,7 +27,7 @@ private Logger log = Logger.getLogger("AssessmentController.class");
     @Autowired
     private CategoryService categoryService;
 	
-	@PutMapping(value="-----------", consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value="/update", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Category> updateCategory(@Valid @RequestBody Category category) {
       log.debug("Updating Category: " + category);
