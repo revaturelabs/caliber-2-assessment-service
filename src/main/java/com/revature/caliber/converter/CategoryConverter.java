@@ -5,6 +5,9 @@ import com.revature.caliber.dto.CategoryDTO;
 
 public class CategoryConverter {
 
+	private CategoryConverter() {
+		
+	}
 	public static CategoryDTO convert(Category c)
 	{
 		CategoryDTO category = new CategoryDTO();

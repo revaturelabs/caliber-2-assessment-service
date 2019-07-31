@@ -5,6 +5,9 @@ import com.revature.caliber.dto.NoteDTO;
 
 public class NoteConverter {
 
+	private NoteConverter() {
+		
+	}
 	public static NoteDTO convert(Note note) {
 		
 		NoteDTO n = new NoteDTO();
