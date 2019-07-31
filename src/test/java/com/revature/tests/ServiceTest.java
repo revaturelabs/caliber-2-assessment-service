@@ -19,6 +19,8 @@ import org.junit.Test;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.dto.AssessmentDTO;
+import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.services.AssessmentService;
 import com.revature.caliber.services.GradeService;
 
@@ -36,8 +38,11 @@ public class ServiceTest {
 	public void setup() {
 		//AssessmentService tests setup 
 		Assessment a1 = new Assessment(12, 74, "a1", "java", 2, 84, 1);
+		AssessmentDTO a1DTO = new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1);
 		Assessment a2 = new Assessment(17, 20, "a2", "sales force", 7, 31, 2);
+		AssessmentDTO a2DTO = new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2);
 		Assessment a3 = new Assessment(20, 97, "a3", "big data", 5, 9, 3);
+		AssessmentDTO a3DTO = new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3);
 		Assessment a4 = new Assessment(22, 87, "a4", "java", 2, 84, 9);
 		
 		assessmentsList.add(a1);
@@ -55,10 +60,10 @@ public class ServiceTest {
 		
 		when(assessmentService.findAllAssessments()).thenReturn(assessmentsList);
 		when(assessmentService.findAssessmentById(17)).thenReturn(a2);
-		when(assessmentService.deleteAssessment(a3)).thenReturn(true);
-		when(assessmentService.createAssessment(a1)).thenReturn(a1);
-		when(assessmentService.createAssessment(a3)).thenReturn(null);
-		when(assessmentService.updateAssessment(a2)).thenReturn(a2);
+		when(assessmentService.deleteAssessment(a3DTO)).thenReturn(true);
+		when(assessmentService.createAssessment(a1DTO)).thenReturn(a1);
+		when(assessmentService.createAssessment(a3DTO)).thenReturn(null);
+		when(assessmentService.updateAssessment(a2DTO)).thenReturn(a2);
 		when(assessmentService.findAssessmentsByBatchId(84)).thenReturn(batchAssessmentsList);
 		when(assessmentService.findAssessmentsByCategory(9)).thenReturn(categoryAssessmentsList);
 		when(assessmentService.findAssessmentsByBatchIdAndWeekNumber(84, 2)).thenReturn(batchAndWeekNumAssessmentsList);
@@ -80,7 +85,7 @@ public class ServiceTest {
 			
 			when(gradeService.findAllGrades()).thenReturn(gradesList);
 			when(gradeService.findGradeById(3)).thenReturn(g2);
-			when(gradeService.createGrade(new Grade(7, date, 74.4f, 19, 73))).thenReturn(new Grade(7, date, 74.4f, 19, 73));
+			when(gradeService.createGrade(new GradeDTO(7, date, 74.4f, 19, 73))).thenReturn(new Grade(7, date, 74.4f, 19, 73));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -116,34 +121,34 @@ public class ServiceTest {
 	//test AssessmentService.deleteAssessment method
 	@Test
 	public void testDeleteAssessmentWithExistingAssessment() {
-		assertTrue(assessmentService.deleteAssessment(new Assessment(20, 97, "a3", "big data", 5, 9, 3)));
+		assertTrue(assessmentService.deleteAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
 	@Test
 	public void testDeleteAssessmentWithNonExistantInput() {
-		assertFalse(assessmentService.deleteAssessment(new Assessment(0, 0, "", "", 0, 0, 0)));
+		assertFalse(assessmentService.deleteAssessment(new AssessmentDTO(0, 0, "", "", 0, 0, 0)));
 	}
 	
 	//test AssessmentService.createAssessment method
 	@Test
 	public void testCreateAssessmentWithNewAssessment() {
-		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new Assessment(12, 74, "a1", "java", 2, 84, 1)));
+		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1)));
 	}
 	
 	@Test
 	public void testCreateAssessmentWithAlreadyExistingAssessment() {
-		assertEquals(null, assessmentService.createAssessment(new Assessment(20, 97, "a3", "big data", 5, 9, 3)));
+		assertEquals(null, assessmentService.createAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
 	//test AssessmentService.updateAssessment
 	@Test
 	public void testUpdateAssessmentWithExistingAssessment() {
-		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new Assessment(17, 20, "a2", "sales force", 7, 31, 2)));
+		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2)));
 	}
 	
 	@Test
 	public void testUpdateAssessmentWithNonExistantAssessment() {
-		assertEquals(null, assessmentService.updateAssessment(new Assessment(32, 84, "boo", "none", 4, 16, 8)));
+		assertEquals(null, assessmentService.updateAssessment(new AssessmentDTO(32, 84, "boo", "none", 4, 16, 8)));
 	}
 	
 	//test AssessmentService.findAssessmentsByBatchId method
@@ -235,7 +240,7 @@ public class ServiceTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			Date date = dateFormat.parse("17/03/2018");
-			assertEquals(new Grade(7, date, 74.4f, 19, 73), gradeService.createGrade(new Grade(7, date, 74.4f, 19, 73)));
+			assertEquals(new Grade(7, date, 74.4f, 19, 73), gradeService.createGrade(new GradeDTO(7, date, 74.4f, 19, 73)));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Assessment;
+import com.revature.caliber.dto.AssessmentDTO;
 import com.revature.caliber.services.AssessmentService;
 
 @RestController
@@ -70,25 +71,25 @@ public class AssessmentController {
     
     @PostMapping(value="/all/assessment/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Assessment> createAssessment(@RequestBody Assessment assessment) {
-    	Assessment temp = as.createAssessment(assessment);
+    public ResponseEntity<Assessment> createAssessment(@RequestBody AssessmentDTO assessmentDTO) {
+    	Assessment temp = as.createAssessment(assessmentDTO);
     	if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
     	return new ResponseEntity<>(temp, HttpStatus.CREATED);
     }
   
     @PutMapping(value="all/assessment/update", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
-      log.debug("Updating Assessment: " + assessment);
-      Assessment temp = as.updateAssessment(assessment);
+    public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody AssessmentDTO assessmentDTO) {
+      log.debug("Updating Assessment: " + assessmentDTO);
+      Assessment temp = as.updateAssessment(assessmentDTO);
       if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
 
     @DeleteMapping(value="all/assessment/delete/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Assessment assessment) {
-      Boolean temp = as.deleteAssessment(assessment);
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody AssessmentDTO assessmentDTO) {
+      Boolean temp = as.deleteAssessment(assessmentDTO);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }

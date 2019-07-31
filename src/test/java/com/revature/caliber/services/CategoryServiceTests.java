@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.revature.caliber.beans.Category;
+import com.revature.caliber.dto.CategoryDTO;
 
 public class CategoryServiceTests {
 	
@@ -15,26 +16,21 @@ public class CategoryServiceTests {
 	
 	@Before
 	public void setup() {
-		// Category Service tests setup
-		Category c1 = new Category(1, "Java", true, "Sara");
-		Category c2 = new Category(2, "SQL", true, "John");
-		Category c3 = new Category(3, "Servlets", true, "Ryan");
-		Category c4 = new Category(4, "Mockito", false, "Jacob");
-		Category c5 = new Category(5, "Java", true, "Josh");
+		CategoryDTO c1 = new CategoryDTO(1, "Java", true, "Sara");
+		Category c11 = new Category(1, "Java", true, "Sara");
 		
-//		categoryList.add(c1);
-//		categoryList.add(c2);
-//		categoryList.add(c3);
-//		categoryList.add(c4);
-		
-		when(categoryService.createCategory(c1)).thenReturn(c1);
+		when(categoryService.createCategory(c1)).thenReturn(c11);
+		when(categoryService.createCategory(c1)).thenReturn(null);
 	}
 	
 	@Test
 	public void createCategoryPass() {
-		//categoryService.createCategory(new Category(1, "Java", true, "Sara"));
-		assertEquals(new Category(1, "Java", true, "Sara"), categoryService.createCategory(new Category(1, "Java", true, "Sara")));
+		assertEquals(null, categoryService.createCategory(new CategoryDTO(1, "Java", true, "Sara")));
 		
 	}
 
+	@Test
+	public void testCreateAssessmentWithAlreadyExistingCategory() {
+		assertEquals(null, categoryService.createCategory(new CategoryDTO(1, "Java", true, "Sara")));
+	}
 }
