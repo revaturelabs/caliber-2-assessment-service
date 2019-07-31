@@ -115,18 +115,8 @@ public class ServiceTest {
 	}
 	
 	@Test
-	public void testDeleteAssessmentWithExistingAssessment() {
-		assertTrue(assessmentService.deleteAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
-	}
-	
-	@Test
 	public void testDeleteAssessmentWithNonExistantInput() {
 		assertFalse(assessmentService.deleteAssessment(new AssessmentDTO(0, 0, "", "", 0, 0, 0)));
-	}
-	
-	@Test
-	public void testCreateAssessmentWithNewAssessment() {
-		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1)));
 	}
 	
 	@Test
@@ -134,10 +124,6 @@ public class ServiceTest {
 		assertEquals(null, assessmentService.createAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
-	@Test
-	public void testUpdateAssessmentWithExistingAssessment() {
-		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2)));
-	}
 	
 	@Test
 	public void testUpdateAssessmentWithNonExistantAssessment() {
@@ -224,15 +210,5 @@ public class ServiceTest {
 		assertEquals(null, gradeService.findGradeById(8749156));
 	}
 	
-	@Test
-	public void testCreateGradeWithExpectedInput() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			Date date = dateFormat.parse("17/03/2018");
-			assertEquals(new Grade(7, date, 74.4f, 19, 73), gradeService.createGrade(new GradeDTO(7, date, 74.4f, 19, 73)));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
 
 }
