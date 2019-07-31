@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.services.GradeService;
 
 @RestController
@@ -80,14 +81,14 @@ public class GradeController {
     
     @PostMapping(value="/all/grade/create", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Grade> createGrade(@RequestBody Grade grade) {
-    	gs.createGrade(grade);
-    	return new ResponseEntity<>(grade, HttpStatus.CREATED);
+    public ResponseEntity<Grade> createGrade(@RequestBody GradeDTO grade) {
+    	Grade temp = gs.createGrade(grade);
+    	return new ResponseEntity<>(temp, HttpStatus.CREATED);
     }
   
     @PutMapping(value="all/grade/update", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Grade> updateGrade(@Valid @RequestBody Grade grade) {
+    public ResponseEntity<Grade> updateGrade(@Valid @RequestBody GradeDTO grade) {
       log.debug("Updating Grade: " + grade);
       Grade temp = gs.updateGrade(grade);
       if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
@@ -96,7 +97,7 @@ public class GradeController {
 
     @DeleteMapping(value="all/grade/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Grade grade) {
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody GradeDTO grade) {
       Boolean temp = gs.deleteGrade(grade);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);

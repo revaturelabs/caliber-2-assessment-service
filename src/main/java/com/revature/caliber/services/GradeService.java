@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.converter.GradeConverter;
+import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.GradeRepository;
 
@@ -44,21 +46,24 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public Grade createGrade(Grade g) {
+	public Grade createGrade(GradeDTO grade) {
+		Grade g = GradeConverter.convert(grade);
 		log.debug("Creating Grade: " + g);
 		if(gp.findOne(g.getGradeId()) != null) return null;
 		return gp.save(g);
 	}
 
 	@Override
-	public Grade updateGrade(Grade g) {
+	public Grade updateGrade(GradeDTO grade) {
+		Grade g = GradeConverter.convert(grade);
 		log.debug("Updating Grade: " + g);
 		if(gp.findOne(g.getGradeId()) == null) return null;
 		return gp.save(g);
 	}
 
 	@Override
-	public Boolean deleteGrade(Grade g) {
+	public Boolean deleteGrade(GradeDTO grade) {
+		Grade g = GradeConverter.convert(grade);
 		log.debug("Deleting Grade: " + g);
 		Boolean exists = false;
 		if(gp.findOne(g.getGradeId()) != null) exists = true;

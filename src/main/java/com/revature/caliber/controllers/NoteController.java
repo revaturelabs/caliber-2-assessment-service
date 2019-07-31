@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.beans.Note;
+import com.revature.caliber.dto.NoteDTO;
 import com.revature.caliber.services.NoteService;
 
 @RestController
@@ -73,16 +74,16 @@ public class NoteController {
     
     @PostMapping(value = "/all/note/create", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public ResponseEntity<Note> createNote(@Valid @RequestBody Note n) {
+	public ResponseEntity<Note> createNote(@Valid @RequestBody NoteDTO n) {
 		log.debug("Saving new note:" + n);
 		Note temp = ns.createNote(n);
-		if(temp == null) return new ResponseEntity<>(n, HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<>(n, HttpStatus.CREATED);
+		if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(temp, HttpStatus.CREATED);
 	}
     
     @PutMapping(value="all/note/update", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Note> updateNote(@Valid @RequestBody Note note) {
+    public ResponseEntity<Note> updateNote(@Valid @RequestBody NoteDTO note) {
       log.debug("Updating Note: " + note);
       Note temp = ns.updateNote(note);
       if(temp == null) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
@@ -91,7 +92,7 @@ public class NoteController {
 
     @DeleteMapping(value="all/note/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
-    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody Note note) {
+    public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody NoteDTO note) {
       Boolean temp = ns.deleteNote(note);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);

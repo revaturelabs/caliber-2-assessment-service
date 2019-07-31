@@ -20,6 +20,7 @@ import org.junit.Test;
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.dto.AssessmentDTO;
+import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.services.AssessmentService;
 import com.revature.caliber.services.GradeService;
 
@@ -84,7 +85,7 @@ public class ServiceTest {
 			
 			when(gradeService.findAllGrades()).thenReturn(gradesList);
 			when(gradeService.findGradeById(3)).thenReturn(g2);
-			when(gradeService.createGrade(new Grade(7, date, 74.4f, 19, 73))).thenReturn(new Grade(7, date, 74.4f, 19, 73));
+			when(gradeService.createGrade(new GradeDTO(7, date, 74.4f, 19, 73))).thenReturn(new Grade(7, date, 74.4f, 19, 73));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -239,7 +240,7 @@ public class ServiceTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			Date date = dateFormat.parse("17/03/2018");
-			assertEquals(new Grade(7, date, 74.4f, 19, 73), gradeService.createGrade(new Grade(7, date, 74.4f, 19, 73)));
+			assertEquals(new Grade(7, date, 74.4f, 19, 73), gradeService.createGrade(new GradeDTO(7, date, 74.4f, 19, 73)));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
