@@ -68,7 +68,6 @@ public class ServiceTest {
 		when(assessmentService.findAssessmentsByCategory(9)).thenReturn(categoryAssessmentsList);
 		when(assessmentService.findAssessmentsByBatchIdAndWeekNumber(84, 2)).thenReturn(batchAndWeekNumAssessmentsList);
 		
-		//GradeService tests setup
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			Date date1 = dateFormat.parse("13/02/2018");
@@ -90,8 +89,6 @@ public class ServiceTest {
 			e.printStackTrace();
 		}
 	}
-	
-	//test AssessmentService.findAllAssessments method returns correct list
 	@Test
 	public void testFindAllAssessmentsMethod() {
 		assertThat(assessmentService.findAllAssessments(), hasItems(
@@ -102,7 +99,6 @@ public class ServiceTest {
 		));
 	}
 	
-	//test AssessmentService.findAssessmentById method
 	@Test
 	public void testFindAssessmentByIdMethodWithExpectedInput() {
 		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2) ,assessmentService.findAssessmentById(17));
@@ -118,7 +114,6 @@ public class ServiceTest {
 		assertEquals(null, assessmentService.findAssessmentById((int) 'd'));
 	}
 	
-	//test AssessmentService.deleteAssessment method
 	@Test
 	public void testDeleteAssessmentWithExistingAssessment() {
 		assertTrue(assessmentService.deleteAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
@@ -129,7 +124,6 @@ public class ServiceTest {
 		assertFalse(assessmentService.deleteAssessment(new AssessmentDTO(0, 0, "", "", 0, 0, 0)));
 	}
 	
-	//test AssessmentService.createAssessment method
 	@Test
 	public void testCreateAssessmentWithNewAssessment() {
 		assertEquals(new Assessment(12, 74, "a1", "java", 2, 84, 1), assessmentService.createAssessment(new AssessmentDTO(12, 74, "a1", "java", 2, 84, 1)));
@@ -140,7 +134,6 @@ public class ServiceTest {
 		assertEquals(null, assessmentService.createAssessment(new AssessmentDTO(20, 97, "a3", "big data", 5, 9, 3)));
 	}
 	
-	//test AssessmentService.updateAssessment
 	@Test
 	public void testUpdateAssessmentWithExistingAssessment() {
 		assertEquals(new Assessment(17, 20, "a2", "sales force", 7, 31, 2), assessmentService.updateAssessment(new AssessmentDTO(17, 20, "a2", "sales force", 7, 31, 2)));
@@ -151,7 +144,6 @@ public class ServiceTest {
 		assertEquals(null, assessmentService.updateAssessment(new AssessmentDTO(32, 84, "boo", "none", 4, 16, 8)));
 	}
 	
-	//test AssessmentService.findAssessmentsByBatchId method
 	@Test
 	public void testFindAssessmentsByBatchIdWithExpectedInput() {
 		assertThat(assessmentService.findAssessmentsByBatchId(84), hasItems(
@@ -199,7 +191,6 @@ public class ServiceTest {
 		assertEquals(emptyList, assessmentService.findAssessmentsByBatchIdAndWeekNumber(3471023, 89745816));
 	}
 	
-	//test GradeService.findAllGrades() returns List<Grade>
 	@Test
 	public void testFindAllGrades() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -217,7 +208,6 @@ public class ServiceTest {
 		}
 	}
 	
-	//test GradeService.findGradeById(Integer) returns Grade
 	@Test
 	public void testFindGradeByIdWithExpectedInput() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -234,7 +224,6 @@ public class ServiceTest {
 		assertEquals(null, gradeService.findGradeById(8749156));
 	}
 	
-	//test GradeService.createGrade(Grade) returns Grade
 	@Test
 	public void testCreateGradeWithExpectedInput() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -245,17 +234,5 @@ public class ServiceTest {
 			e.printStackTrace();
 		}
 	}
-	//test GradeService.updateGrade(Grade) returns Grade
-	
-	//test GradeService.deleteGrade(Grade) Returns Boolean
-	
-	//test GradeService.findGradesByTraineeId(Integer) returns List<Grade>
-	
-	//test GradeService.findGradesByAssessmentId(Integer) returns List<Grade>
-	
-	//test GradeService.findAvgAssessments(Integer, Integer) returns Float
-	
-	//test GradeService.findAverageAssessment(Integer) returns Float
-	
-	//test GradeService.findGradesByBatchIdAndWeekNumber(Integer, Integer) returns List<Grade>
+
 }
