@@ -6,8 +6,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.revature.caliber.beans.Grade;
-
 public class GradeDTOTest {
 
 	@Test

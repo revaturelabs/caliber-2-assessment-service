@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.revature.caliber.beans.Note;
 
 public class NoteDTOTest {
 
