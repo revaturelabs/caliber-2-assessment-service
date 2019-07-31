@@ -63,6 +63,62 @@ public class GradeDTO {
 		this.traineeId = traineeId;
 	}
 
+	@Override
+	public String toString() {
+		return "GradeDTO [gradeId=" + gradeId + ", dateReceived=" + dateReceived + ", score=" + score
+				+ ", assessmentId=" + assessmentId + ", traineeId=" + traineeId + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((assessmentId == null) ? 0 : assessmentId.hashCode());
+		result = prime * result + ((dateReceived == null) ? 0 : dateReceived.hashCode());
+		result = prime * result + ((gradeId == null) ? 0 : gradeId.hashCode());
+		result = prime * result + Float.floatToIntBits(score);
+		result = prime * result + ((traineeId == null) ? 0 : traineeId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GradeDTO other = (GradeDTO) obj;
+		if (assessmentId == null) {
+			if (other.assessmentId != null)
+				return false;
+		} 
+		else if (!assessmentId.equals(other.assessmentId))
+			return false;
+		if (dateReceived == null) {
+			if (other.dateReceived != null)
+				return false;
+		} 
+		else if (!dateReceived.equals(other.dateReceived))
+			return false;
+		if (gradeId == null) {
+			if (other.gradeId != null)
+				return false;
+		} 
+		else if (!gradeId.equals(other.gradeId))
+			return false;
+		if (Float.floatToIntBits(score) != Float.floatToIntBits(other.score))
+			return false;
+		if (traineeId == null) {
+			if (other.traineeId != null)
+				return false;
+		} 
+		else if (!traineeId.equals(other.traineeId))
+			return false;
+		return true;
+	}
+
 	
 
 }
