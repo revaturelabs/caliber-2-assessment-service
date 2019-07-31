@@ -114,37 +114,44 @@ public class AssessmentDTO {
 		if (assessmentCategory == null) {
 			if (other.assessmentCategory != null)
 				return false;
-		} else if (!assessmentCategory.equals(other.assessmentCategory))
+		} 
+		else if (!assessmentCategory.equals(other.assessmentCategory))
 			return false;
 		if (assessmentId == null) {
 			if (other.assessmentId != null)
 				return false;
-		} else if (!assessmentId.equals(other.assessmentId))
+		} 
+		else if (!assessmentId.equals(other.assessmentId))
 			return false;
 		if (assessmentTitle == null) {
 			if (other.assessmentTitle != null)
 				return false;
-		} else if (!assessmentTitle.equals(other.assessmentTitle))
+		} 
+		else if (!assessmentTitle.equals(other.assessmentTitle))
 			return false;
 		if (assessmentType == null) {
 			if (other.assessmentType != null)
 				return false;
-		} else if (!assessmentType.equals(other.assessmentType))
+		} 
+		else if (!assessmentType.equals(other.assessmentType))
 			return false;
 		if (batchId == null) {
 			if (other.batchId != null)
 				return false;
-		} else if (!batchId.equals(other.batchId))
+		} 
+		else if (!batchId.equals(other.batchId))
 			return false;
 		if (rawScore == null) {
 			if (other.rawScore != null)
 				return false;
-		} else if (!rawScore.equals(other.rawScore))
+		} 
+		else if (!rawScore.equals(other.rawScore))
 			return false;
 		if (weekNumber == null) {
 			if (other.weekNumber != null)
 				return false;
-		} else if (!weekNumber.equals(other.weekNumber))
+		} 
+		else if (!weekNumber.equals(other.weekNumber))
 			return false;
 		return true;
 	}
