@@ -13,8 +13,6 @@ public class CategoryDTO {
 	public CategoryDTO() {
 		super();
 	}
-	
-	
 
 	public CategoryDTO(int categoryId, String skillCategory, boolean isActive, String categoryOwner) {
 		super();
@@ -70,36 +68,6 @@ public class CategoryDTO {
 		result = prime * result + ((skillCategory == null) ? 0 : skillCategory.hashCode());
 		return result;
 	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CategoryDTO other = (CategoryDTO) obj;
-		if (categoryId != other.categoryId)
-			return false;
-		if (categoryOwner == null) {
-			if (other.categoryOwner != null)
-				return false;
-		} else if (!categoryOwner.equals(other.categoryOwner))
-			return false;
-		if (isActive != other.isActive)
-			return false;
-		if (skillCategory == null) {
-			if (other.skillCategory != null)
-				return false;
-		} else if (!skillCategory.equals(other.skillCategory))
-			return false;
-		return true;
-	}
-
-
 
 	@Override
 	public String toString() {
