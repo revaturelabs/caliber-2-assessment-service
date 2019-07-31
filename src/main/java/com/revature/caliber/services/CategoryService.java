@@ -1,5 +1,7 @@
 package com.revature.caliber.services;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,16 @@ public class CategoryService implements CategoryServiceInterface{
 		}
 		else {
 			return categoryRepository.save(category);
+		}
+	}
+	
+	public List<Category> listAllCategories(){
+		List <Category> cList = categoryRepository.findAll();
+		if(cList == null) {
+			throw new DoesNotExistException("No categories exist");
+		}
+		else {
+			return cList;
 		}
 	}
 }

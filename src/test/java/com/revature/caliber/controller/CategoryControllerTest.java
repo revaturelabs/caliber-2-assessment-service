@@ -3,6 +3,7 @@ package com.revature.caliber.controller;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,6 +25,7 @@ import com.revature.caliber.beans.Category;
 import com.revature.caliber.controllers.CategoryController;
 import com.revature.caliber.converter.CategoryConverter;
 import com.revature.caliber.dto.CategoryDTO;
+import com.revature.caliber.exceptions.DoesNotExistException;
 import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.services.CategoryService;
 
@@ -76,5 +78,38 @@ public class CategoryControllerTest {
 		mockMvc.perform(post("/categories").contentType(MediaType.APPLICATION_JSON).content(catJson))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.message").value("Skill type already exists"));
+	}
+	
+	@Test
+	public void testEditCategory()throws Exception{
+		CategoryDTO cDTO = new CategoryDTO();
+		cDTO.setCategoryOwner("Ryan");
+		cDTO.setSkillCategory("Testing");
+		cDTO.setActive(true);
+		Category c = CategoryConverter.convert(cDTO);
+		when(categoryServiceMock.updateCategory(any(CategoryDTO.class))).thenReturn(c);
+		
+		String catJson = new ObjectMapper().writeValueAsString(c);
+		mockMvc.perform(put("/categories/update").contentType(MediaType.APPLICATION_JSON).content(catJson))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.categoryOwner").value("Ryan"))
+				.andExpect(jsonPath("$.skillCategory").value("Testing"))
+				.andExpect(jsonPath("$.active").value(true));
+	}
+	
+	@Test
+	public void testEditCategoryFail()throws Exception{
+		CategoryDTO cDTO = new CategoryDTO();
+		cDTO.setCategoryOwner("Ryan");
+		cDTO.setSkillCategory("Testing");
+		cDTO.setActive(true);
+		Category c = CategoryConverter.convert(cDTO);
+		when(categoryServiceMock.updateCategory(any(CategoryDTO.class)))
+				.thenThrow(new DoesNotExistException("Category does not already exist"));
+		
+		String catJson = new ObjectMapper().writeValueAsString(c);
+		mockMvc.perform(put("/categories/update").contentType(MediaType.APPLICATION_JSON).content(catJson))
+				.andExpect(status().isInternalServerError())
+				.andExpect(jsonPath("$.message").value("Category does not already exist"));
 	}
 }

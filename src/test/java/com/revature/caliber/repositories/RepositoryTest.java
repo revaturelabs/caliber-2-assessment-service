@@ -1,6 +1,7 @@
 package com.revature.caliber.repositories;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +33,8 @@ public class RepositoryTest {
 		
 		when(categoryRepository.save(c1)).thenReturn(c1);
 		when(categoryRepository.save(c5)).thenReturn(null);
+		when(categoryRepository.findByCategoryId(c3.getCategoryId())).thenReturn(c3);
+		when(categoryRepository.findAll()).thenReturn(categoryList);
 	}
 	
 	@Test
@@ -57,6 +60,16 @@ public class RepositoryTest {
 	@Test
 	public void testFindCategoryByIdWithBadInput() {
 		assertEquals(null, categoryRepository.findByCategoryId(6));
+	}
+	
+	@Test
+	public void testFindAllCategories() {
+		assertEquals(categoryList, categoryRepository.findAll());
+	}
+	
+	@Test
+	public void testFindAllCategoriesFail() {
+		assertNotEquals(null, categoryRepository.findAll());
 	}
 }
 
