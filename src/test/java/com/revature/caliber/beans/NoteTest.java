@@ -31,7 +31,7 @@ public class NoteTest {
 		Note n = new Note(4,"Terrible","QC", 4,100,6);
 		
 		assertEquals(Integer.valueOf(4), n.getNoteId());
-		assertEquals("Great", n.getNoteContent());
+		assertEquals("Terrible", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
 		assertEquals(Integer.valueOf(4), n.getWeekNumber());
 		assertEquals(Integer.valueOf(100), n.getBatchId());
