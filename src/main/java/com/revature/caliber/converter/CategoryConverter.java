@@ -5,7 +5,6 @@ import com.revature.caliber.dto.CategoryDTO;
 
 public class CategoryConverter {
 	
-	private CategoryConverter() {}
 
 	private CategoryConverter() {
 		
