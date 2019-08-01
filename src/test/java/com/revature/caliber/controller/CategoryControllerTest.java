@@ -112,4 +112,6 @@ public class CategoryControllerTest {
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.message").value("Category does not already exist"));
 	}
+	
+	
 }
