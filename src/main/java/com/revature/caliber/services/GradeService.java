@@ -50,9 +50,8 @@ public class GradeService implements GradeServiceInterface{
 		Grade g = GradeConverter.convert(grade);
 		log.debug("Creating Grade: " + g);
 		if(gp.findOne(g.getGradeId()) != null) return null;
-		Grade save = gp.save(g);
-		
-		return save;
+
+		return  gp.save(g);
 	}
 
 	@Override

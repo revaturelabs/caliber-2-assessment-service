@@ -28,9 +28,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 		
 	@Autowired
 	private CategoryClient cc;
-	
-//	@Autowired
-//	private ZuulProxy gc;
 
 	@Override
 	public List<Assessment> findAllAssessments() {
