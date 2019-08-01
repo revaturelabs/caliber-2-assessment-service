@@ -198,8 +198,6 @@ public class NoteControllerTest {
 				.andExpect(jsonPath("$.traineeId").value(1));
 	}
 	
-	
-	
 	@Test
 	public void testUpdateNoteFail() throws Exception {
 		NoteDTO noteDTOObj = new NoteDTO();
@@ -267,6 +265,52 @@ public class NoteControllerTest {
 	}
 	
 	@Test
+	public void testFindNotesById() throws Exception{
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		int noteId = 1;
+		noteDTOObj.setNoteId(noteId);
+		
+		noteDTOObj.setBatchId(1);
+		noteDTOObj.setTraineeId(1);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		when(noteServiceMock.findNoteById(noteId)).thenReturn(noteObj);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(noteObj);
+		mockMvc.perform(get("/all/note/" + noteId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.noteContent").value("testContent"))
+				.andExpect(jsonPath("$.noteType").value("testType"))
+				.andExpect(jsonPath("$.weekNumber").value(1))
+				.andExpect(jsonPath("$.noteId").value(noteId))
+				.andExpect(jsonPath("$.batchId").value(1))
+				.andExpect(jsonPath("$.traineeId").value(1));
+	}
+	
+	@Test
+	public void testFindNotesByIdFail() throws Exception{
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		int noteId = 1;
+		noteDTOObj.setNoteId(noteId);
+		
+		noteDTOObj.setBatchId(1);
+		noteDTOObj.setTraineeId(1);
+		
+		when(noteServiceMock.findNoteById(noteId)).thenReturn(null);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(null);
+		mockMvc.perform(get("/all/note/" + noteId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	public void testDeleteNote() throws Exception {
 		NoteDTO noteDTOObj = new NoteDTO();
 		noteDTOObj.setNoteContent("testContent");
@@ -291,7 +335,7 @@ public class NoteControllerTest {
 		noteDTOObj.setWeekNumber(1);
 		noteDTOObj.setBatchId(1);
 		noteDTOObj.setTraineeId(1);
-		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
 		when(noteServiceMock.deleteNote(any(NoteDTO.class))).thenReturn(false);
 		
 		String noteJson = new ObjectMapper().writeValueAsString(null);
