@@ -4,6 +4,8 @@ import com.revature.caliber.beans.Note;
 import com.revature.caliber.dto.NoteDTO;
 
 public class NoteConverter {
+	
+	private NoteConverter() {}
 
 	public static NoteDTO convert(Note note) {
 		

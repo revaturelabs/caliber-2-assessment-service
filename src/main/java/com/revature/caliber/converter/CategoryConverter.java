@@ -4,6 +4,8 @@ import com.revature.caliber.beans.Category;
 import com.revature.caliber.dto.CategoryDTO;
 
 public class CategoryConverter {
+	
+	private CategoryConverter() {}
 
 	public static CategoryDTO convert(Category c)
 	{
