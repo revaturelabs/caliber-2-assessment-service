@@ -26,7 +26,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.hamcrest.Matchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.caliber.beans.BatchEntity;
@@ -186,6 +185,7 @@ public class GradeControllerTest {
 				.andExpect(jsonPath("$.assessmentId").value(1))
 				.andExpect(jsonPath("$.traineeId").value(5));
 	}
+
 	
 	@Test
 	public void findGradeById() throws Exception {
@@ -386,6 +386,4 @@ public class GradeControllerTest {
 		mockMvc.perform(delete("/all/grade/delete").contentType(MediaType.APPLICATION_JSON).content(gradeJson))
 		.andExpect(status().isBadRequest());
 	}
-	
-	
 }
