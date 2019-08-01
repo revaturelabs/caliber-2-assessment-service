@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="GRADE")
 public class Grade {
@@ -22,6 +24,7 @@ public class Grade {
 	
 	@NotNull
 	@Column(name="DATE_RECEIVED")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dateReceived;
 	
 	@NotNull
