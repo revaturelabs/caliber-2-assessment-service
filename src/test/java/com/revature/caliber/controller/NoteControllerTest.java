@@ -3,10 +3,14 @@ package com.revature.caliber.controller;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -89,6 +93,91 @@ public class NoteControllerTest {
 	}
 	
 	@Test
+	public void testFindAllNotes() throws Exception{
+		List<Note> noteList = new ArrayList<>();
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		noteDTOObj.setBatchId(1);
+		noteDTOObj.setTraineeId(1);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		noteList.add(noteObj);
+		when(noteServiceMock.findAllNotes()).thenReturn(noteList);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(noteList);
+		mockMvc.perform(get("/all/note/all").contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].noteContent").value("testContent"))
+				.andExpect(jsonPath("$[0].noteType").value("testType"))
+				.andExpect(jsonPath("$[0].weekNumber").value(1))
+				.andExpect(jsonPath("$[0].batchId").value(1))
+				.andExpect(jsonPath("$[0].traineeId").value(1));
+	}
+	
+	@Test
+	public void testFindAllNotesNull() throws Exception{
+		
+		when(noteServiceMock.findAllNotes()).thenReturn(null);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(null);
+		mockMvc.perform(get("/all/note/all").contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void testFindNotesByTrainee() throws Exception{
+		List<Note> noteList = new ArrayList<>();
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		noteDTOObj.setBatchId(1);
+		
+		int traineeId = 1;
+		noteDTOObj.setTraineeId(traineeId);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		noteList.add(noteObj);
+		when(noteServiceMock.findNotesByTraineeId(traineeId)).thenReturn(noteList);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(noteList);
+		mockMvc.perform(get("/all/note/trainee/" + traineeId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].noteContent").value("testContent"))
+				.andExpect(jsonPath("$[0].noteType").value("testType"))
+				.andExpect(jsonPath("$[0].weekNumber").value(1))
+				.andExpect(jsonPath("$[0].batchId").value(1))
+				.andExpect(jsonPath("$[0].traineeId").value(traineeId));
+	}
+	
+	@Test
+	public void testFindNotesByTraineeNull() throws Exception{
+		List<Note> noteList = new ArrayList<>();
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		noteDTOObj.setBatchId(1);
+		
+		int traineeId = 1;
+		noteDTOObj.setTraineeId(traineeId);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		noteList.add(noteObj);
+		when(noteServiceMock.findNotesByTraineeId(traineeId)).thenReturn(null);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(noteList);
+		mockMvc.perform(get("/all/note/trainee/" + traineeId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isNotFound());
+	}
+	
+	
+	@Test
 	public void testUpdateNote() throws Exception{
 		NoteDTO noteDTOObj = new NoteDTO();
 		noteDTOObj.setNoteContent("testContent");
@@ -109,6 +198,8 @@ public class NoteControllerTest {
 				.andExpect(jsonPath("$.traineeId").value(1));
 	}
 	
+	
+	
 	@Test
 	public void testUpdateNoteFail() throws Exception {
 		NoteDTO noteDTOObj = new NoteDTO();
@@ -124,6 +215,55 @@ public class NoteControllerTest {
 		mockMvc.perform(put("/all/note/update").contentType(MediaType.APPLICATION_JSON).content(noteJson))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.message").value("Category does not already exist"));
+	}
+	
+	@Test
+	public void testFindNotesByBatch() throws Exception{
+		List<Note> noteList = new ArrayList<>();
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		
+		int batchId = 1;
+		noteDTOObj.setBatchId(batchId);
+		noteDTOObj.setTraineeId(1);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		noteList.add(noteObj);
+		when(noteServiceMock.findNotesByBatchId(batchId)).thenReturn(noteList);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(noteList);
+		mockMvc.perform(get("/all/note/batch/" + batchId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].noteContent").value("testContent"))
+				.andExpect(jsonPath("$[0].noteType").value("testType"))
+				.andExpect(jsonPath("$[0].weekNumber").value(1))
+				.andExpect(jsonPath("$[0].batchId").value(batchId))
+				.andExpect(jsonPath("$[0].traineeId").value(1));
+	}
+	
+	@Test
+	public void testFindNotesByBatchNull() throws Exception{
+		List<Note> noteList = new ArrayList<>();
+		NoteDTO noteDTOObj = new NoteDTO();
+		noteDTOObj.setNoteContent("testContent");
+		noteDTOObj.setNoteType("testType");
+		noteDTOObj.setWeekNumber(1);
+		
+		int batchId = 1;
+		noteDTOObj.setBatchId(batchId);
+		noteDTOObj.setTraineeId(1);
+		
+		Note noteObj = NoteConverter.convert(noteDTOObj);
+		
+		noteList.add(noteObj);
+		when(noteServiceMock.findNotesByBatchId(batchId)).thenReturn(null);
+		
+		String noteJson = new ObjectMapper().writeValueAsString(null);
+		mockMvc.perform(get("/all/note/batch/" + batchId).contentType(MediaType.APPLICATION_JSON).content(noteJson))
+				.andExpect(status().isNotFound());
 	}
 	
 	@Test
