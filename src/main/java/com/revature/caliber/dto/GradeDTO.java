@@ -2,9 +2,13 @@ package com.revature.caliber.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class GradeDTO {
 
 	private Integer gradeId;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dateReceived;
 	private float score;
 	private Integer assessmentId;
