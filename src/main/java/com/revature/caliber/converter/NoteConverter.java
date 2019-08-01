@@ -7,6 +7,9 @@ public class NoteConverter {
 	
 	private NoteConverter() {}
 
+	private NoteConverter() {
+		
+	}
 	public static NoteDTO convert(Note note) {
 		
 		NoteDTO n = new NoteDTO();

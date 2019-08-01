@@ -5,6 +5,9 @@ import com.revature.caliber.dto.GradeDTO;
 
 public class GradeConverter {
 
+	private GradeConverter() {
+		
+	}
 	public static GradeDTO convert(Grade grade) {
 		
 		GradeDTO g = new GradeDTO();

@@ -4,6 +4,10 @@ import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.dto.AssessmentDTO;
 
 public class AssessmentConverter {
+	
+	private AssessmentConverter() {
+		
+	}
 
 	public static AssessmentDTO convert(Assessment a) {
 		

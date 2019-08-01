@@ -7,6 +7,9 @@ public class CategoryConverter {
 	
 	private CategoryConverter() {}
 
+	private CategoryConverter() {
+		
+	}
 	public static CategoryDTO convert(Category c)
 	{
 		CategoryDTO category = new CategoryDTO();
