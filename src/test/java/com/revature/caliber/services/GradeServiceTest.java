@@ -154,7 +154,6 @@ public class GradeServiceTest {
 		assertEquals(null, assessmentService.findAssessmentById((int) 'c'));
 	}
 	
-	//test AssessmentService.findAssessmentsByCategory method
 	@Test
 	public void testFindAssessmentsByCategoryWithExpectedInput() {
 		assertThat(assessmentService.findAssessmentsByCategory(9), hasItems(
@@ -168,7 +167,6 @@ public class GradeServiceTest {
 		assertEquals(emptyList, assessmentService.findAssessmentsByBatchId(29384));
 	}
 	
-	//test AssessmentService.findAssessmentsByBatchIdAndWeekNumber method
 	@Test
 	public void testFindAssessmentsByBatchIdAndWeekNumberWithExpectedInputs() {
 		assertThat(assessmentService.findAssessmentsByBatchIdAndWeekNumber(84, 2), hasItems(

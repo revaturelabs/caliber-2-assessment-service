@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.controllers.GradeController;
 import com.revature.caliber.converter.GradeConverter;
@@ -103,14 +104,12 @@ public class GradeControllerTest {
 	
 	@Test
 	public void testFindAllGradesNull() throws Exception {
-		List<Grade> gradesList = new ArrayList<>();
 
-		when( gradeServiceMock.findAllGrades()).thenReturn(gradesList);
+		when( gradeServiceMock.findAllGrades()).thenReturn(null);
 
-		String gradeJson = new ObjectMapper().writeValueAsString(gradesList);
+		String gradeJson = new ObjectMapper().writeValueAsString(null);
 		mockMvc.perform(get("/all/grade/all").contentType(MediaType.APPLICATION_JSON).content(gradeJson))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(0)));
+				.andExpect(status().isNotFound());
 	}
 	
 	@Test
@@ -139,6 +138,32 @@ public class GradeControllerTest {
 	}
 	
 	@Test
+	public void findGradesByAssessment() throws Exception {
+		List<Grade> gradesList = new ArrayList<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		Grade gradeObj = new Grade();
+		int assessmentId = 5;
+		gradeObj.setAssessmentId(assessmentId);
+		gradeObj.setDateReceived(date1);
+		gradeObj.setGradeId(7);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		gradesList.add(gradeObj);
+		when( gradeServiceMock.findGradesByAssessmentId(assessmentId)).thenReturn(gradesList);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(gradeObj);
+		mockMvc.perform(get("/all/grade/assessment/"+ assessmentId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isOk()).andExpect(jsonPath("$[0].gradeId").value(7))
+				.andExpect(jsonPath("$[0].dateReceived").value("2018-02-13"))
+				.andExpect(jsonPath("$[0].score").value(80))
+				.andExpect(jsonPath("$[0].assessmentId").value(assessmentId))
+				.andExpect(jsonPath("$[0].traineeId").value(1));
+	}
+	
+	@Test
 	public void testUpdateGrade() throws Exception {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date1 = dateFormat.parse("13/02/2018");
@@ -163,6 +188,52 @@ public class GradeControllerTest {
 	}
 	
 	@Test
+	public void findGradeById() throws Exception {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		Grade gradeObj = new Grade();
+		
+		gradeObj.setAssessmentId(5);
+		gradeObj.setDateReceived(date1);
+		Integer gradeId = 7;
+		gradeObj.setGradeId(gradeId);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		when( gradeServiceMock.findGradeById(gradeId)).thenReturn(gradeObj);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(gradeObj);
+		mockMvc.perform(get("/all/grade/"+ gradeId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.gradeId").value(gradeId))
+				.andExpect(jsonPath("$.dateReceived").value("2018-02-13"))
+				.andExpect(jsonPath("$.score").value(80))
+				.andExpect(jsonPath("$.assessmentId").value(5))
+				.andExpect(jsonPath("$.traineeId").value(1));
+	}
+	
+	@Test
+	public void findGradeByIdNull() throws Exception {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		Grade gradeObj = new Grade();
+		
+		gradeObj.setAssessmentId(5);
+		gradeObj.setDateReceived(date1);
+		Integer gradeId = 7;
+		gradeObj.setGradeId(gradeId);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		when( gradeServiceMock.findGradeById(gradeId)).thenReturn(null);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(gradeObj);
+		mockMvc.perform(get("/all/grade/"+ gradeId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	public void testFindGradesByTraineeNull() throws Exception {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -183,6 +254,28 @@ public class GradeControllerTest {
 	}
 	
 	@Test
+	public void findGradesByAssessmentNull() throws Exception {
+		List<Grade> gradesList = new ArrayList<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		Grade gradeObj = new Grade();
+		int assessmentId = 5;
+		gradeObj.setAssessmentId(assessmentId);
+		gradeObj.setDateReceived(date1);
+		gradeObj.setGradeId(7);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		gradesList.add(gradeObj);
+		when( gradeServiceMock.findGradesByAssessmentId(assessmentId)).thenReturn(null);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(null);
+		mockMvc.perform(get("/all/grade/assessment/"+ assessmentId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	public void testUpdateGradeFail() throws Exception {
 		
 		when( gradeServiceMock.updateGrade(any(GradeDTO.class))).thenReturn(null);
@@ -190,6 +283,68 @@ public class GradeControllerTest {
 		String gradeJson = new ObjectMapper().writeValueAsString(null);
 		mockMvc.perform(put("/all/grade/update").contentType(MediaType.APPLICATION_JSON).content(gradeJson))
 		.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void findGradesByBatch() throws Exception {
+		List<Grade> gradesList = new ArrayList<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		
+		BatchEntity batch = new BatchEntity();
+		
+		Integer batchId = 100;
+		batch.setBatchId(batchId);
+		Integer weeks = 5;
+		batch.setWeeks(weeks);		
+		
+		Grade gradeObj = new Grade();
+		gradeObj.setAssessmentId(5);
+		gradeObj.setDateReceived(date1);
+		gradeObj.setGradeId(7);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		gradesList.add(gradeObj);
+		when( gradeServiceMock.findGradesByBatchId(batchId)).thenReturn(gradesList);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(gradeObj);
+		mockMvc.perform(get("/all/grade/batch/"+ batchId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isOk()).andExpect(jsonPath("$[0].gradeId").value(7))
+				.andExpect(jsonPath("$[0].dateReceived").value("2018-02-13"))
+				.andExpect(jsonPath("$[0].score").value(80))
+				.andExpect(jsonPath("$[0].assessmentId").value(5))
+				.andExpect(jsonPath("$[0].traineeId").value(1));
+	}
+	
+	@Test
+	public void findGradesByBatchNull() throws Exception {
+		List<Grade> gradesList = new ArrayList<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateFormat.parse("13/02/2018");
+		
+		BatchEntity batch = new BatchEntity();
+		
+		Integer batchId = 100;
+		batch.setBatchId(batchId);
+		Integer weeks = 5;
+		batch.setWeeks(weeks);	
+		
+		Grade gradeObj = new Grade();
+		gradeObj.setAssessmentId(5);
+		gradeObj.setDateReceived(date1);
+		gradeObj.setGradeId(7);
+		gradeObj.setScore(80);
+		
+		gradeObj.setTraineeId(1);
+		
+		gradesList.add(gradeObj);
+		when( gradeServiceMock.findGradesByBatchId(batchId)).thenReturn(null);
+
+		String gradeJson = new ObjectMapper().writeValueAsString(null);
+		mockMvc.perform(get("/all/grade/batch/"+ batchId).contentType(MediaType.APPLICATION_JSON).content(gradeJson))
+				.andExpect(status().isNotFound());
 	}
 	
 	@Test
