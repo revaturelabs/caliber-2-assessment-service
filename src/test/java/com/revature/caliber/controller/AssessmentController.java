@@ -362,7 +362,6 @@ public class AssessmentController {
 		assessObj.setRawScore(75);
 		assessObj.setWeekNumber(5);
 		
-		Assessment a = AssessmentConverter.convert(assessObj);
 		when(assessmentServiceMock.deleteAssessment(any(AssessmentDTO.class))).thenReturn(false);
 
 		String assessJson = new ObjectMapper().writeValueAsString(null);
