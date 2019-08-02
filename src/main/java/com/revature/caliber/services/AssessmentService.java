@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Assessment;
+import com.revature.caliber.converter.AssessmentConverter;
+import com.revature.caliber.dto.AssessmentDTO;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.CategoryClient;
 import com.revature.caliber.repositories.AssessmentRepository;
@@ -26,9 +28,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 		
 	@Autowired
 	private CategoryClient cc;
-	
-//	@Autowired
-//	private ZuulProxy gc;
 
 	@Override
 	public List<Assessment> findAllAssessments() {
@@ -49,27 +48,30 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	@Override
-	public Boolean deleteAssessment(Assessment as) {
+	public Boolean deleteAssessment(AssessmentDTO assessmentDTO) {
 		Boolean exists = false;
-		if(ar.findOne(as.getAssessmentId()) != null) exists = true;
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		if(ar.findOne(assessment.getAssessmentId()) != null) exists = true;
 		if(exists) {
-			ar.delete(as);
+			ar.delete(assessment);
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public Assessment createAssessment(Assessment as) {
-		if(ar.findOne(as.getAssessmentId()) != null) return null;
-		return ar.save(as);
+	public Assessment createAssessment(AssessmentDTO assessmentDTO) {
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		if(ar.findOne(assessment.getAssessmentId()) != null) return null;
+		return ar.save(assessment);
 	}
   
 	@Override
-	public Assessment updateAssessment(Assessment as) {
-		log.debug("Updating Assessment: " + as);
-		if(ar.findOne(as.getAssessmentId()) == null) return null;
-		return ar.save(as);
+	public Assessment updateAssessment(AssessmentDTO assessmentDTO) {
+		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		log.debug("Updating Assessment: " + assessment);
+		if(ar.findOne(assessment.getAssessmentId()) == null) return null;
+		return ar.save(assessment);
 	}
 	
 	private boolean contactBatchService(Assessment as) {
@@ -115,7 +117,6 @@ public class AssessmentService implements AssessmentServiceInterface{
 	@Override
 	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
 		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
-//		return assessmentList;
 		return checkBatchAndCategory(assessmentList);
 	}
 	

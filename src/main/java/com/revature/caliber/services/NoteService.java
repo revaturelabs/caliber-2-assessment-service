@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Note;
+import com.revature.caliber.converter.NoteConverter;
+import com.revature.caliber.dto.NoteDTO;
 import com.revature.caliber.intercoms.BatchClient;
 import com.revature.caliber.intercoms.TraineeClient;
 import com.revature.caliber.repositories.NoteRepository;
@@ -79,21 +81,24 @@ public class NoteService implements NoteServiceInterface{
 	}
 	
 	@Override
-	public Note createNote(Note n) {
+	public Note createNote(NoteDTO noteDTO) {
+		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Creating Note: " + n);
 		if(np.findOne(n.getNoteId()) != null) return null;
 		return np.save(n);
 	}
 	
 	@Override
-	public Note updateNote(Note n) {
+	public Note updateNote(NoteDTO noteDTO) {
+		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Updating Note: " + n);
 		if(np.findOne(n.getNoteId()) == null) return null;
 		return np.save(n);
 	}
 
 	@Override
-	public Boolean deleteNote(Note n) {
+	public Boolean deleteNote(NoteDTO noteDTO) {
+		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Deleing Note: " + n);
 		Boolean exists = false;
 		if(np.findOne(n.getNoteId()) != null) exists = true;
