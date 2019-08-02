@@ -26,7 +26,7 @@ import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.services.AssessmentService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(value = "*")
 public class AssessmentController {
     
     private Logger log = Logger.getLogger("AssessmentController.class");
