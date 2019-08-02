@@ -26,6 +26,7 @@ public class CategoryService implements CategoryServiceInterface{
 
 	public Category createCategory(CategoryDTO categoryDTO) {
 		Category category = CategoryConverter.convert(categoryDTO);
+		category.setSkillCategory(category.getSkillCategory().trim());
 		if(category.getSkillCategory() == null || category.getSkillCategory().trim().equals("")) 
 		{
 			throw new CategoryNullException(NULLCATEGORY_ERROR);
