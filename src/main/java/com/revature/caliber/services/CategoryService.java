@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Category;
+import com.revature.caliber.exceptions.CategoryNullException;
 import com.revature.caliber.exceptions.DoesNotExistException;
 import com.revature.caliber.converter.CategoryConverter;
 import com.revature.caliber.dto.CategoryDTO;
 import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.repositories.CategoryRepository;
+import static com.revature.caliber.services.ErrorConstants.*;
 
 @Service
 public class CategoryService implements CategoryServiceInterface{
@@ -24,9 +26,13 @@ public class CategoryService implements CategoryServiceInterface{
 
 	public Category createCategory(CategoryDTO categoryDTO) {
 		Category category = CategoryConverter.convert(categoryDTO);
+		if(category.getSkillCategory() == null)
+		{
+			throw new CategoryNullException(NULLCATEGORY_ERROR);
+		}
 		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory());
 		if (categoryObj != null)
-			throw new DuplicateException("Skill category already exists");
+			throw new DuplicateException(DUPLICATE_ERROR);
 		else 
 			return categoryRepository.save(category);
 	}
