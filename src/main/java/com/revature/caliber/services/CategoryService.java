@@ -12,6 +12,7 @@ import com.revature.caliber.exceptions.DoesNotExistException;
 import com.revature.caliber.converter.CategoryConverter;
 import com.revature.caliber.dto.CategoryDTO;
 import com.revature.caliber.exceptions.DuplicateException;
+import com.revature.caliber.exceptions.OwnerNullException;
 import com.revature.caliber.repositories.CategoryRepository;
 import static com.revature.caliber.services.ErrorConstants.*;
 
@@ -40,9 +41,19 @@ public class CategoryService implements CategoryServiceInterface{
 
 	public Category updateCategory(CategoryDTO categoryDTO) {
 		Category category = CategoryConverter.convert(categoryDTO);
+		category.setSkillCategory(category.getSkillCategory().trim());
+		if(category.getSkillCategory() == null || category.getSkillCategory().trim().equals("")) 
+		{
+			throw new CategoryNullException(NULLCATEGORY_ERROR);
+		}
+		category.setCategoryOwner(category.getCategoryOwner().trim());
+		if(category.getCategoryOwner() == null || category.getCategoryOwner().trim().equals("")) 
+		{
+			throw new OwnerNullException(NULLOWNER_ERROR);
+		}
 		Category categoryObj = categoryRepository.findByCategoryId(category.getCategoryId());
 		if(categoryObj == null) {
-			throw new DoesNotExistException("Category does not already exist");
+			throw new DoesNotExistException(DOESNOTEXIST_ERROR);
 		}
 		else {
 			return categoryRepository.save(category);
