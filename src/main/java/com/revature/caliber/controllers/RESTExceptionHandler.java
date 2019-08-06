@@ -10,6 +10,7 @@ import com.revature.caliber.exceptions.CategoryNullException;
 import com.revature.caliber.exceptions.DoesNotExistException;
 import com.revature.caliber.exceptions.DuplicateException;
 import com.revature.caliber.exceptions.ErrorMessage;
+import com.revature.caliber.exceptions.OwnerNullException;
 
 import static com.revature.caliber.services.ErrorConstants.*;
 
@@ -31,6 +32,13 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(DoesNotExistException.class)
 	public ResponseEntity<?> handleException(DoesNotExistException e){
 		ErrorMessage errorMessage = new ErrorMessage(DOESNOTEXIST_ERROR);
+		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
+	
+	@ExceptionHandler(OwnerNullException.class)
+	public ResponseEntity<?> handleException(OwnerNullException e){
+		ErrorMessage errorMessage = new ErrorMessage(NULLOWNER_ERROR);
 		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
