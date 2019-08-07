@@ -35,7 +35,6 @@ public class CategoryService implements CategoryServiceInterface{
 		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory().toUpperCase());
 
 		if (categoryObj != null)
-
 			throw new DuplicateException(SKILL_TYPE_ALREADY_EXISTS);
 		else 
 			return categoryRepository.save(category);
