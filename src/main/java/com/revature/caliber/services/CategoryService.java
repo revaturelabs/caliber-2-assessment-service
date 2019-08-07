@@ -19,7 +19,7 @@ import static com.revature.caliber.services.ErrorConstants.*;
 public class CategoryService implements CategoryServiceInterface{
 
 	Logger log = Logger.getLogger("CategoryService.class"); 
-	
+	 
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
