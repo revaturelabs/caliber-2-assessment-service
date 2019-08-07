@@ -26,14 +26,14 @@ public class CategoryService implements CategoryServiceInterface{
 
 	public Category createCategory(CategoryDTO categoryDTO) {
 		Category category = CategoryConverter.convert(categoryDTO);
-		category.setSkillCategory(category.getSkillCategory().trim().toUpperCase());
+		category.setSkillCategory(category.getSkillCategory().trim());
 		if(category.getSkillCategory() == null || category.getSkillCategory().trim().equals("")) 
 		{
 			throw new CategoryNullException(NULLCATEGORY_ERROR);
 		}
-		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory());
-		if (categoryObj != null)
-			throw new DuplicateException(DUPLICATE_ERROR);
+		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory().toUpperCase());
+		if (categoryObj.getSkillCategory() != null)
+			throw new DuplicateException(SKILL_TYPE_ALREADY_EXISTS);
 		else 
 			return categoryRepository.save(category);
 	}

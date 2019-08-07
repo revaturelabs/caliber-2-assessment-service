@@ -18,7 +18,7 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler(DuplicateException.class)
 	public ResponseEntity<?> handleException(DuplicateException e) {
-		ErrorMessage errorMessage = new ErrorMessage(DUPLICATE_ERROR);
+		ErrorMessage errorMessage = new ErrorMessage(SKILL_TYPE_ALREADY_EXISTS);
 		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
