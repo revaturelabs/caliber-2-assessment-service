@@ -30,11 +30,11 @@ public class CategoryService implements CategoryServiceInterface{
 		category.setSkillCategory(category.getSkillCategory().trim());
 		if(category.getSkillCategory() == null || category.getSkillCategory().trim().equals("")) 
 		{
-			throw new CategoryNullException(NULLCATEGORY_ERROR);
+			throw new CategoryNullException(CATEGORY_CANNOT_BE_NULL);
 		}
-		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory());
+		Category categoryObj = categoryRepository.findBySkillCategory(category.getSkillCategory().toUpperCase());
 		if (categoryObj != null)
-			throw new DuplicateException(DUPLICATE_ERROR);
+			throw new DuplicateException(SKILL_TYPE_ALREADY_EXISTS);
 		else 
 			return categoryRepository.save(category);
 	}
@@ -44,16 +44,16 @@ public class CategoryService implements CategoryServiceInterface{
 		category.setSkillCategory(category.getSkillCategory().trim());
 		if(category.getSkillCategory() == null || category.getSkillCategory().trim().equals("")) 
 		{
-			throw new CategoryNullException(NULLCATEGORY_ERROR);
+			throw new CategoryNullException(CATEGORY_CANNOT_BE_NULL);
 		}
 		category.setCategoryOwner(category.getCategoryOwner().trim());
 		if(category.getCategoryOwner() == null || category.getCategoryOwner().trim().equals("")) 
 		{
-			throw new OwnerNullException(NULLOWNER_ERROR);
+			throw new OwnerNullException(OWNER_CANNOT_BE_NULL);
 		}
 		Category categoryObj = categoryRepository.findByCategoryId(category.getCategoryId());
 		if(categoryObj == null) {
-			throw new DoesNotExistException(DOESNOTEXIST_ERROR);
+			throw new DoesNotExistException(CATEGORY_DOES_NOT_EXIST);
 		}
 		else {
 			return categoryRepository.save(category);
