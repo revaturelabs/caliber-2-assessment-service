@@ -11,16 +11,17 @@ server:
   servlet-path: /assessment/*
 ---
 spring:
-  profiles: dev
-  
- 
----               
+  profiles: local
+
+
+---
 spring:
-  profiles: prod
+  profiles: dev
 
 eureka:
- instance:
-    prefer-ip-address: true      
- client:
-   service-url:
-     defaultZone: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/eureka
+  client:
+    service-url:
+      defaultZone: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/eureka
+---
+spring:
+  profiles: prod

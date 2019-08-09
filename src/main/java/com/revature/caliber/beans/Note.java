@@ -1,11 +1,6 @@
 package com.revature.caliber.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.Length;
@@ -16,7 +11,8 @@ public class Note {
 	
 	@Id
 	@Column(name="NOTE_ID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "NOTE_ID_SEQUENCE")
+	@SequenceGenerator(name="NOTE_ID_SEQUENCE", sequenceName = "NOTE_ID_SEQUENCE")
 	private Integer noteId;
 	
 	@Length(min=0, max=4000)

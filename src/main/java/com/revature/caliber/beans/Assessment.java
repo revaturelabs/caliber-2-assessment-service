@@ -1,11 +1,6 @@
 package com.revature.caliber.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +11,8 @@ public class Assessment {
 	
 	@Id
 	@Column(name="ASSESSMENT_ID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "ASSESSMENT_ID_SEQUENCE")
+	@SequenceGenerator(name = "ASSESSMENT_ID_SEQUENCE", sequenceName = "ASSESSMENT_ID_SEQUENCE")
 	private Integer assessmentId;
 	
 	@NotNull
