@@ -6,7 +6,7 @@ public class ErrorMessage {
 	public String getMessage() {
 		return message;
 	}
-	
+
 	public ErrorMessage(String message) {
 		super();
 		this.message = message;

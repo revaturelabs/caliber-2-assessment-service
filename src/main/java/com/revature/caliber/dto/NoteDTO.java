@@ -72,5 +72,4 @@ public class NoteDTO {
 		this.traineeId = traineeId;
 	}
 
-
 }

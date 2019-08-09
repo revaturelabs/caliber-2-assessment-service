@@ -3,13 +3,13 @@ package com.revature.caliber.dto;
 public class CategoryDTO {
 
 	private int categoryId;
-	
+
 	private String skillCategory;
-	
+
 	private boolean isActive;
-	
+
 	private String categoryOwner;
-	
+
 	public CategoryDTO() {
 		super();
 	}
@@ -21,8 +21,6 @@ public class CategoryDTO {
 		this.isActive = isActive;
 		this.categoryOwner = categoryOwner;
 	}
-
-
 
 	public int getCategoryId() {
 		return categoryId;
@@ -56,6 +54,4 @@ public class CategoryDTO {
 		this.categoryOwner = categoryOwner;
 	}
 
-	
-	
 }

@@ -61,8 +61,7 @@ public class CategoryControllerTest {
 		String catJson = new ObjectMapper().writeValueAsString(catObj);
 		mockMvc.perform(post("/categories").contentType(MediaType.APPLICATION_JSON).content(catJson))
 				.andExpect(status().isCreated()).andExpect(jsonPath("$.categoryOwner").value("Sara"))
-				.andExpect(jsonPath("$.skillCategory").value("Test123"))
-				.andExpect(jsonPath("$.active").value(true));
+				.andExpect(jsonPath("$.skillCategory").value("Test123")).andExpect(jsonPath("$.active").value(true));
 	}
 
 	@Test
@@ -79,26 +78,24 @@ public class CategoryControllerTest {
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.message").value("Skill type already exists"));
 	}
-	
+
 	@Test
-	public void testEditCategory()throws Exception{
+	public void testEditCategory() throws Exception {
 		CategoryDTO cDTO = new CategoryDTO();
 		cDTO.setCategoryOwner("Ryan");
 		cDTO.setSkillCategory("Testing");
 		cDTO.setActive(true);
 		Category c = CategoryConverter.convert(cDTO);
 		when(categoryServiceMock.updateCategory(any(CategoryDTO.class))).thenReturn(c);
-		
+
 		String catJson = new ObjectMapper().writeValueAsString(c);
 		mockMvc.perform(put("/categories/update").contentType(MediaType.APPLICATION_JSON).content(catJson))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.categoryOwner").value("Ryan"))
-				.andExpect(jsonPath("$.skillCategory").value("Testing"))
-				.andExpect(jsonPath("$.active").value(true));
+				.andExpect(status().isOk()).andExpect(jsonPath("$.categoryOwner").value("Ryan"))
+				.andExpect(jsonPath("$.skillCategory").value("Testing")).andExpect(jsonPath("$.active").value(true));
 	}
-	
+
 	@Test
-	public void testEditCategoryFail()throws Exception{
+	public void testEditCategoryFail() throws Exception {
 		CategoryDTO cDTO = new CategoryDTO();
 		cDTO.setCategoryOwner("Ryan");
 		cDTO.setSkillCategory("Testing");
@@ -106,12 +103,11 @@ public class CategoryControllerTest {
 		Category c = CategoryConverter.convert(cDTO);
 		when(categoryServiceMock.updateCategory(any(CategoryDTO.class)))
 				.thenThrow(new DoesNotExistException("Category does not already exist"));
-		
+
 		String catJson = new ObjectMapper().writeValueAsString(c);
 		mockMvc.perform(put("/categories/update").contentType(MediaType.APPLICATION_JSON).content(catJson))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.message").value("Category does not already exist"));
 	}
-	
-	
+
 }

@@ -7,8 +7,8 @@ import org.junit.Test;
 public class NoteTest {
 
 	@Test
-	public void testNote()  {
-		
+	public void testNote() {
+
 		Note n = new Note();
 		n.setNoteId(1);
 		n.setNoteContent("Great");
@@ -16,7 +16,7 @@ public class NoteTest {
 		n.setWeekNumber(4);
 		n.setBatchId(100);
 		n.setTraineeId(6);
-		
+
 		assertEquals(Integer.valueOf(1), n.getNoteId());
 		assertEquals("Great", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
@@ -24,12 +24,12 @@ public class NoteTest {
 		assertEquals(Integer.valueOf(100), n.getBatchId());
 		assertEquals(Integer.valueOf(6), n.getTraineeId());
 	}
-	
+
 	@Test
-	public void testNoteConstructor()  {
-		
-		Note n = new Note(4,"Terrible","QC", 4,100,6);
-		
+	public void testNoteConstructor() {
+
+		Note n = new Note(4, "Terrible", "QC", 4, 100, 6);
+
 		assertEquals(Integer.valueOf(4), n.getNoteId());
 		assertEquals("Terrible", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
