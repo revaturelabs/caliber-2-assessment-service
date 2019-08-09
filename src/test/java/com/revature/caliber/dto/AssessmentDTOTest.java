@@ -1,4 +1,4 @@
-fpackage com.revature.caliber.dto;
+package com.revature.caliber.dto;
 
 import static org.junit.Assert.assertEquals;
 
