@@ -27,7 +27,7 @@ import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.services.GradeService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(value="*")
 public class GradeController {
     
     private Logger log = Logger.getLogger("GradeController.class");

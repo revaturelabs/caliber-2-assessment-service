@@ -27,7 +27,7 @@ import com.revature.caliber.dto.NoteDTO;
 import com.revature.caliber.services.NoteService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(value="*")
 public class NoteController {
     
     private Logger log = Logger.getLogger("NoteController.class");
