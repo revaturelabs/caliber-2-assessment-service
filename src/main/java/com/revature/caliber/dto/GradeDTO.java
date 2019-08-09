@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class GradeDTO {
 
 	private Integer gradeId;
-	
-	@JsonFormat(pattern="yyyy-MM-dd")
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateReceived;
 	private float score;
 	private Integer assessmentId;
 	private Integer traineeId;
-	
+
 	public GradeDTO(Integer gradeId, Date dateReceived, float score, Integer assessmentId, Integer traineeId) {
 		super();
 		this.gradeId = gradeId;

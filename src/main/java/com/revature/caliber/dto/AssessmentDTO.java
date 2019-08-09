@@ -3,17 +3,17 @@ package com.revature.caliber.dto;
 public class AssessmentDTO {
 
 	private Integer assessmentId;
-	
+
 	private Integer rawScore;
-	
+
 	private String assessmentTitle;
-	
+
 	private String assessmentType;
-	
+
 	private Integer weekNumber;
-	
+
 	private Integer batchId;
-	
+
 	private Integer assessmentCategory;
 
 	public AssessmentDTO() {
@@ -88,5 +88,4 @@ public class AssessmentDTO {
 		this.assessmentCategory = assessmentCategory;
 	}
 
-	
 }

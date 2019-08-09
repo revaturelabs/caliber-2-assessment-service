@@ -1,12 +1,8 @@
 package com.revature.caliber.services;
 
-
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,12 +33,11 @@ public class GradeServiceTest {
 
 	@InjectMocks
 	GradeService gradeServiceMock;
-	
-	
+
 	GradeRepository gradeRepository = mock(GradeRepository.class);
 	List<Grade> gradesList = new ArrayList<Grade>();
 	List<Grade> gradesList2 = new ArrayList<Grade>();
-	
+
 //	@Before
 //	public void setup() {
 //
@@ -57,82 +52,80 @@ public class GradeServiceTest {
 //
 //			Grade g4 = new Grade(5, date1, 83.9f, 12, 36);
 //
-//			
+//
 //			gradesList2.add(g1);
 //			gradesList2.add(g4);
-//			
+//
 //			gradesList.add(g1);
 //			gradesList.add(g2);
 //			gradesList.add(g3);
-//			
+//
 //			when(gradeRepository.findGradesByTraineeId(36)).thenReturn(gradesList2);
-//			
+//
 //			when(gradeRepository.findGradesByAssessmentId(12)).thenReturn(gradesList2);
-//			
+//
 //			when(gradeRepository.findGradesByTraineeId(8765)).thenReturn(null);
-//			
+//
 //			when(gradeRepository.findGradesByAssessmentId(6666)).thenReturn(null);
-//			
+//
 //		} catch (ParseException e) {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	@Before
 	public void setUp() {
 
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void testFindAllGrades() throws ParseException {
-		
+
 		List<Grade> gradeList = new ArrayList<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date1 = dateFormat.parse("13/02/2018");
 		Grade gradeObj = new Grade();
-		
+
 		gradeObj.setAssessmentId(1);
 		gradeObj.setDateReceived(date1);
 		gradeObj.setGradeId(1);
 		gradeObj.setScore(80);
 		gradeObj.setTraineeId(1);
-		
+
 		gradeList.add(gradeObj);
-		
+
 		when(gradeServiceMock.findAllGrades()).thenReturn(gradeList);
-		
+
 		List<Grade> findAllGrades = gradeServiceMock.findAllGrades();
 		assertEquals(gradeList.size(), findAllGrades.size());
 		Grade grade = findAllGrades.get(0);
 		assertEquals(gradeObj.getAssessmentId(), grade.getAssessmentId());
-		
+
 	}
-	
+
 	@Test
 	public void testFindGradeById() throws ParseException {
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date1 = dateFormat.parse("13/02/2018");
 		Grade gradeObj = new Grade();
-		
+
 		gradeObj.setAssessmentId(1);
 		gradeObj.setDateReceived(date1);
 		int gradeId = 1;
 		gradeObj.setGradeId(gradeId);
 		gradeObj.setScore(80);
 		gradeObj.setTraineeId(1);
-		
-		
+
 		when(gradeServiceMock.findGradeById(gradeId)).thenReturn(gradeObj);
 		when(gradeRepositoryMock.findOne(gradeId)).thenReturn(gradeObj);
-		
+
 		Grade findGradeId = gradeServiceMock.findGradeById(gradeId);
 		Grade g = gradeRepositoryMock.findOne(gradeId);
-	
+
 		assertEquals(g.getAssessmentId(), findGradeId.getAssessmentId());
-		
+
 	}
-	
 
 }

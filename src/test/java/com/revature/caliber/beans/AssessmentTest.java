@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
 public class AssessmentTest {
 
 	@Test
-	public void testAssessment()  {
-		
+	public void testAssessment() {
+
 		Assessment a = new Assessment();
 		a.setAssessmentCategory(2);
 		a.setAssessmentId(4);
@@ -18,7 +17,7 @@ public class AssessmentTest {
 		a.setBatchId(5);
 		a.setRawScore(80);
 		a.setWeekNumber(3);
-		
+
 		assertEquals(Integer.valueOf(2), a.getAssessmentCategory());
 		assertEquals(Integer.valueOf(4), a.getAssessmentId());
 		assertEquals("Exam", a.getAssessmentType());
@@ -27,12 +26,12 @@ public class AssessmentTest {
 		assertEquals(Integer.valueOf(80), a.getRawScore());
 		assertEquals(Integer.valueOf(3), a.getWeekNumber());
 	}
-	
+
 	@Test
-	public void testAssessmentConstructor()  {
-		
-		Assessment as = new Assessment(2,60,"Spring","Verbal",8,7,8);
-		
+	public void testAssessmentConstructor() {
+
+		Assessment as = new Assessment(2, 60, "Spring", "Verbal", 8, 7, 8);
+
 		assertEquals(Integer.valueOf(2), as.getAssessmentId());
 		assertEquals(Integer.valueOf(60), as.getRawScore());
 		assertEquals("Spring", as.getAssessmentTitle());

@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
 public class NoteDTOTest {
 
 	@Test
-	public void testNote()  {
-		
+	public void testNote() {
+
 		NoteDTO n = new NoteDTO();
 		n.setNoteId(1);
 		n.setNoteContent("Great");
@@ -17,7 +16,7 @@ public class NoteDTOTest {
 		n.setWeekNumber(4);
 		n.setBatchId(100);
 		n.setTraineeId(6);
-		
+
 		assertEquals(Integer.valueOf(1), n.getNoteId());
 		assertEquals("Great", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
@@ -25,12 +24,12 @@ public class NoteDTOTest {
 		assertEquals(Integer.valueOf(100), n.getBatchId());
 		assertEquals(Integer.valueOf(6), n.getTraineeId());
 	}
-	
+
 	@Test
-	public void testNoteConstructor()  {
-		
-		NoteDTO n = new NoteDTO(4,"Terrible","QC", 4,100,6);
-		
+	public void testNoteConstructor() {
+
+		NoteDTO n = new NoteDTO(4, "Terrible", "QC", 4, 100, 6);
+
 		assertEquals(Integer.valueOf(4), n.getNoteId());
 		assertEquals("Terrible", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
