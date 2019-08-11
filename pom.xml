@@ -23,6 +23,25 @@
 	</properties>
 
 	<dependencies>
+
+
+
+
+
+
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.14.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -38,10 +57,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-			<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -108,11 +127,8 @@
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-model</artifactId>
 			<version>3.3.9</version>
-		</dependency><!-- 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency> -->
+		</dependency><!-- <dependency> <groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-data-mongodb</artifactId> </dependency> -->
 	</dependencies>
 
 	<dependencyManagement>
@@ -140,55 +156,19 @@
 			</plugin>
 
 			<!-- Sonar Scanner -->
-<!-- 			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.6.0.1398</version>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>sonar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
- -->
+			<!-- <plugin> <groupId>org.sonarsource.scanner.maven</groupId> <artifactId>sonar-maven-plugin</artifactId> 
+				<version>3.6.0.1398</version> <executions> <execution> <phase>verify</phase> 
+				<goals> <goal>sonar</goal> </goals> </execution> </executions> </plugin> -->
 			<!-- JaCoCo -->
-<!-- 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-							<propertyName>surefireArgLine</propertyName>
-						</configuration>
-					</execution>
-					<execution>
-						<id>post-unit-test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
+				<version>0.7.9</version> <executions> <execution> <goals> <goal>prepare-agent</goal> 
+				</goals> </execution> <execution> <id>report</id> <phase>prepare-package</phase> 
+				<goals> <goal>report</goal> </goals> <configuration> <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile> 
+				<propertyName>surefireArgLine</propertyName> </configuration> </execution> 
+				<execution> <id>post-unit-test</id> <phase>test</phase> <goals> <goal>report</goal> 
+				</goals> <configuration> <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile> 
+				<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory> 
+				</configuration> </execution> </executions> </plugin> -->
 		</plugins>
 	</build>
 </project>
