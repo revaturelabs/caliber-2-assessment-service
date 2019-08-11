@@ -28,10 +28,11 @@ private String URL = System.getenv("CALIBER_BASE_URL") + "/caliber/vp/assess";
 		OS = System.getProperty("os.name");
 		if (OS.startsWith("Windows")) {
 			System.setProperty("webdriver.chrome.driver", "src/test/drivers/chromedriver.exe");
-		} if(OS.startsWith("Mac"))
+		}else { if(OS.startsWith("Mac"))
 			System.setProperty("webdriver.chrome.driver", "src/test/drivers/chromedriver");
 		else {
 			System.setProperty("webdriver.chrome.driver","src/test/drivers/chromedriverLinux");
+		}
 		}
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
