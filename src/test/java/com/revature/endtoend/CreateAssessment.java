@@ -35,7 +35,7 @@ public class CreateAssessment {
 		WebDriver	 driver = new ChromeDriver( options );
 
 		
-		String baseUrl = "http://localhost:4200/caliber/vp/assess";
+		String baseUrl = System.getenv("CALIBER_BASE_URL") + "/caliber/vp/assess";
 
 		String actualTitle = "";
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);

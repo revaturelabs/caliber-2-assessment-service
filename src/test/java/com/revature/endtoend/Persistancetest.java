@@ -32,9 +32,9 @@ public class Persistancetest {
 		}
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
-		//options.addArguments("headless");
+		options.addArguments("headless");
 		WebDriver driver = new ChromeDriver(options);
-		String baseUrl = "http://localhost:4200/caliber/vp/assess";
+		String baseUrl = System.getenv("CALIBER_BASE_URL") + "/caliber/vp/assess";
 		WebDriverWait wait = new WebDriverWait(driver,30);
 		
 		
