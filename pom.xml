@@ -127,8 +127,28 @@
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-model</artifactId>
 			<version>3.3.9</version>
+<<<<<<< HEAD
 		</dependency><!-- <dependency> <groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-starter-data-mongodb</artifactId> </dependency> -->
+=======
+		</dependency><!-- 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.14.3</version>
+			<scope>test</scope>
+		</dependency>
+>>>>>>> 4d490ee71690d4a4ea2230669cc9899e800898a3
 	</dependencies>
 
 	<dependencyManagement>

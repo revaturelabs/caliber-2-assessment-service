@@ -143,6 +143,7 @@ public class Category {
 		return "Category [categoryId=" + categoryId + ", skillCategory=" + skillCategory + ", isActive=" + isActive
 				+ ", categoryOwner=" + categoryOwner + "]";
 	}
+
 	
 	
 	
