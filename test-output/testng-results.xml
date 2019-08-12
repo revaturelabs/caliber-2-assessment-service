@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="27228" started-at="2019-08-12T15:19:42Z" finished-at="2019-08-12T15:20:09Z">
+  <suite name="Default suite" duration-ms="9330" started-at="2019-08-12T15:29:23Z" finished-at="2019-08-12T15:29:32Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="27228" started-at="2019-08-12T15:19:42Z" finished-at="2019-08-12T15:20:09Z">
+    <test name="Default test" duration-ms="9330" started-at="2019-08-12T15:29:23Z" finished-at="2019-08-12T15:29:32Z">
       <class name="com.revature.endtoend.NavigationAtoQ">
-        <test-method status="PASS" signature="assessBatch()[pri:0, instance:com.revature.endtoend.NavigationAtoQ@34c4973]" name="assessBatch" duration-ms="10252" started-at="2019-08-12T15:19:42Z" finished-at="2019-08-12T15:19:52Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- assessBatch -->
-        <test-method status="PASS" signature="assessBatchNav()[pri:0, instance:com.revature.endtoend.NavigationAtoQ@34c4973]" name="assessBatchNav" duration-ms="16927" started-at="2019-08-12T15:19:52Z" finished-at="2019-08-12T15:20:09Z">
+        <test-method status="PASS" signature="assessBatchNav()[pri:0, instance:com.revature.endtoend.NavigationAtoQ@34c4973]" name="assessBatchNav" duration-ms="9290" started-at="2019-08-12T15:29:23Z" finished-at="2019-08-12T15:29:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- assessBatchNav -->
