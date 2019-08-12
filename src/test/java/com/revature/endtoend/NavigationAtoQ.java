@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /*
@@ -16,18 +18,24 @@ import org.testng.annotations.Test;
  */
 
 public class NavigationAtoQ {
-    
-	protected WebDriver driver; 
-	
+
+	protected WebDriver driver;
+
 	@Test
 	public void assessBatch() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\doaak\\Desktop\\Project3\\caliber-2-meta\\quality-audit-service\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
+				"C:\\Users\\doaak\\Desktop\\Project3\\caliber-2-meta\\assessment-service\\src\\test\\drivers\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("headless");
+		options.addArguments("window-size=1200x600");
+		WebDriver driver = new ChromeDriver(options);
+		driver.get("http://localhost:4200/caliber/vp/assess");
+
+		System.out.println("title is: " + driver.getTitle());
+		AssessBatchPOM assessBatchPOM = new AssessBatchPOM(driver);
 		driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
 		String url = "http://localhost:4200/caliber/vp/assess";
 		String url1 = "";
-		driver.get("http://localhost:4200/caliber/vp/assess");
 
 		url1 = driver.getCurrentUrl();
 
@@ -38,24 +46,22 @@ public class NavigationAtoQ {
 		}
 
 	}
-	
+
 	@Test
 	public void assessBatchNav() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\doaak\\Desktop\\Project3\\caliber-2-meta\\quality-audit-service\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
+				"C:\\Users\\doaak\\Desktop\\Project3\\caliber-2-meta\\assessment-service\\src\\test\\drivers\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("headless");
+		options.addArguments("window-size=1200x600");
+		WebDriver driver = new ChromeDriver(options);
 		driver.get("http://localhost:4200/caliber/vp/assess");
+		// driver.get("https://www.google.co.in/");
+		System.out.println("title is: " + driver.getTitle());
+		AssessBatchPOM assessBatchPOM = new AssessBatchPOM(driver);
 		String url = "http://localhost:4200/caliber/vp/assess";
-		String url1 = "";
-		driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
 		driver.findElement(By.id("quality-link")).click();
 		assertEquals(driver.getCurrentUrl(), url);
 
-		if (url1.equals(url)) {
-			System.out.println("Failed");
-		} else {
-			System.out.println("Right");
-		}
 	}
-    
 }
