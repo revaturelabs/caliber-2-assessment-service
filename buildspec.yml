@@ -14,7 +14,7 @@ phases:
       - mvn install
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $SERVICE_NAME:$BUILD_ID --build-arg JAR_FILE=AssessmentService-0.0.1-SNAPSHOT.jar  --build-arg SPRING_ENV=prod --build-arg DB_USER=$DB_USER --build-arg DB_PASS=$DB_PASS --build-arg DB_URL=$DB_URL .
+      - docker build -t $SERVICE_NAME:$BUILD_ID --build-arg JAR_FILE=AssessmentService-0.0.1-SNAPSHOT.jar  --build-arg SPRING_ENV=$SPRING_ENV --build-arg DB_USER=$DB_USER --build-arg DB_PASS=$DB_PASS --build-arg DB_URL=$DB_URL .
       - docker tag $SERVICE_NAME:$BUILD_ID $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$SERVICE_NAME:$BUILD_ID
   post_build:
     commands:
