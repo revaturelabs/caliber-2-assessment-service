@@ -44,7 +44,7 @@ public class NavigationAtoQ {
 //		driver.get(URL);
 //	}
 	
-	@Test (enabled=false)
+	@Test 
 	public void assessBatch() throws InterruptedException {
 		//System.setProperty("webdriver.chrome.driver",
 				//"C:\\Users\\doaak\\Desktop\\Project3\\caliber-2-meta\\quality-audit-service\\Drivers\\chromedriver.exe");
