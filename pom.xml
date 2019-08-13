@@ -23,13 +23,11 @@
 	</properties>
 
 	<dependencies>
-
-
-
-
-
-
-
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
