@@ -10,11 +10,10 @@ import com.revature.caliber.dto.AssessmentDTO;
 public class AssessmentConverterTest {
 
 	@Test
-	public void testCovertToDTO()  {
-		
+	public void testCovertToDTO() {
+
 		Assessment a = new Assessment();
-		
-		
+
 		a.setAssessmentCategory(2);
 		a.setAssessmentId(4);
 		a.setAssessmentTitle("Java");
@@ -22,9 +21,9 @@ public class AssessmentConverterTest {
 		a.setBatchId(5);
 		a.setRawScore(80);
 		a.setWeekNumber(3);
-		
+
 		AssessmentConverter.convert(a);
-		
+
 		assertEquals(Integer.valueOf(2), a.getAssessmentCategory());
 		assertEquals(Integer.valueOf(4), a.getAssessmentId());
 		assertEquals("Exam", a.getAssessmentType());
@@ -33,14 +32,14 @@ public class AssessmentConverterTest {
 		assertEquals(Integer.valueOf(80), a.getRawScore());
 		assertEquals(Integer.valueOf(3), a.getWeekNumber());
 	}
-	
+
 	@Test
-	public void testConvertFromDTO()  {
-		
-		AssessmentDTO as = new AssessmentDTO(2,60,"Spring","Verbal",8,7,8);
-		
+	public void testConvertFromDTO() {
+
+		AssessmentDTO as = new AssessmentDTO(2, 60, "Spring", "Verbal", 8, 7, 8);
+
 		AssessmentConverter.convert(as);
-		
+
 		assertEquals(Integer.valueOf(2), as.getAssessmentId());
 		assertEquals(Integer.valueOf(60), as.getRawScore());
 		assertEquals("Spring", as.getAssessmentTitle());

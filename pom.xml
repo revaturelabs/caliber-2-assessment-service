@@ -131,6 +131,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency> -->
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -142,6 +143,14 @@
 			<artifactId>testng</artifactId>
 			<version>6.14.3</version>
 			<scope>test</scope>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0</version>
 		</dependency>
 
 	</dependencies>

@@ -1,5 +1,5 @@
-buildspec.yml    @revaturelabs/cloud-ops
+# Any change to CI-critical code must be approved by cloud-ops
 
+buildspec.yml @revaturelabs/cloud-ops
 Dockerfile	@revaturelabs/cloud-ops
-
 .travis.yml	@revaturelabs/cloud-ops
