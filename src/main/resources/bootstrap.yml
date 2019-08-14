@@ -15,7 +15,10 @@ spring:
   datasource:
     initialization-mode: never
     platform: h2
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 ---
 spring:
@@ -23,10 +26,6 @@ spring:
   datasource:
     initialization-mode: never
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/eureka
 ---
 spring:
   profiles: prod
