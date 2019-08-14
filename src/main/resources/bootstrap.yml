@@ -12,11 +12,16 @@ server:
 ---
 spring:
   profiles: local
+  datasource:
+    initialization-mode: never
+    platform: h2
 
 
 ---
 spring:
   profiles: dev
+  datasource:
+    initialization-mode: never
 
 eureka:
   client:
