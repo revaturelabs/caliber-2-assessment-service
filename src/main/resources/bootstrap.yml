@@ -12,9 +12,6 @@ server:
 ---
 spring:
   profiles: local
-  datasource:
-    initialization-mode: never
-    platform: h2
 eureka:
   client:
     service-url:
@@ -23,8 +20,9 @@ eureka:
 ---
 spring:
   profiles: dev
-  datasource:
-    initialization-mode: never
+  cloud:
+    config:
+      uri: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/config
 
 ---
 spring:
