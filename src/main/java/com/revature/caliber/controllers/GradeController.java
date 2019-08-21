@@ -131,7 +131,7 @@ public class GradeController {
     /**
      * 
      * @param activeBatches
-     * @return JSON description of batches and weeks that are missing grades
+     * @return Response entity with JSON description of batches and weeks that are missing grades
      */
     @PostMapping(value="/all/grade/missingGrades", consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MissingGrade>> retrieveMissingGradesFromBatches(@Valid @RequestBody List<BatchEntity> activeBatches) {
