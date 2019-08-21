@@ -1,4 +1,4 @@
-package com.revature.caliber.intercoms;
+package com.revature.caliber.intercoms.local;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.revature.caliber.beans.Category;
 
 @Component
-public class CategoryClientFallback implements CategoryClient {
+public class CategoryClientLocalFallback implements CategoryClientLocal {
 
 	@Override
 	public ResponseEntity<Category> getCategoryById(Integer categoryId) {

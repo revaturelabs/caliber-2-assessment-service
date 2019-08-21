@@ -1,19 +1,18 @@
 package com.revature.caliber.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.revature.caliber.beans.Assessment;
+import com.revature.caliber.converter.AssessmentConverter;
+import com.revature.caliber.dto.AssessmentDTO;
+import com.revature.caliber.intercoms.base.BatchClient;
+import com.revature.caliber.intercoms.base.CategoryClient;
+import com.revature.caliber.repositories.AssessmentRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.caliber.beans.Assessment;
-import com.revature.caliber.converter.AssessmentConverter;
-import com.revature.caliber.dto.AssessmentDTO;
-import com.revature.caliber.intercoms.BatchClient;
-import com.revature.caliber.intercoms.CategoryClient;
-import com.revature.caliber.repositories.AssessmentRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AssessmentService implements AssessmentServiceInterface{

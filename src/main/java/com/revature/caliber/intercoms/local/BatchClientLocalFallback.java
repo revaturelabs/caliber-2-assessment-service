@@ -1,11 +1,11 @@
-package com.revature.caliber.intercoms;
+package com.revature.caliber.intercoms.local;
 
 import org.springframework.stereotype.Component;
 
 import com.revature.caliber.beans.BatchEntity;
 
 @Component
-public class BatchClientFallback implements BatchClient {
+public class BatchClientLocalFallback implements BatchClientLocal {
 
 	@Override
 	public BatchEntity getBatchById(Integer batchId) {
