@@ -149,7 +149,7 @@ public class GradeController {
     		if(currentWeek > lastWeek)
     			currentWeek = lastWeek;
     		// Checks each week for at least one grade
-    		for(int i = 0; i < currentWeek; i++)
+    		for(int i = 1; i <= currentWeek; i++)
     		{
     			List<Grade> weeklyGrades = gs.findGradesByBatchIdAndWeekNumber(batch.getBatchId(), i);
     			if(weeklyGrades.size() < 1) {
