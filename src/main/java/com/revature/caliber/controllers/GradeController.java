@@ -1,5 +1,9 @@
 package com.revature.caliber.controllers;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.caliber.beans.BatchEntity;
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.beans.MissingGrade;
 import com.revature.caliber.dto.GradeDTO;
 import com.revature.caliber.services.GradeService;
 
@@ -120,5 +126,45 @@ public class GradeController {
         	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     	
+    }
+    
+    /**
+     * 
+     * @param activeBatches
+     * @return JSON description of batches and weeks that are missing grades
+     */
+    @PostMapping(value="/all/grade/missingGrades", consumes=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MissingGrade>> retrieveMissingGradesFromBatches(@Valid @RequestBody List<BatchEntity> activeBatches) {
+    	List<MissingGrade> missingGrades = new ArrayList<>();
+    	
+    	for(BatchEntity batch : activeBatches) {
+    		List<Integer> missingWeeks = new ArrayList<Integer>(); // List holding any and all weeks of missing grades
+    		int lastWeek = batch.getWeeks() - 3;	// Last week with grades
+    		//Returns current week
+    		int currentWeek = Period.between(
+    				batch.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
+    				LocalDate.now())
+    				.getDays() / 7;
+    		//Sets current week to be no further than last week (acts as endpoint for which weeks to search for)
+    		if(currentWeek > lastWeek)
+    			currentWeek = lastWeek;
+    		// Checks each week for at least one grade
+    		for(int i = 0; i < currentWeek; i++)
+    		{
+    			List<Grade> weeklyGrades = gs.findGradesByBatchIdAndWeekNumber(batch.getBatchId(), i);
+    			if(weeklyGrades.size() < 1) {
+    				missingWeeks.add(i);
+    			}
+    		}
+    		// Adds a missingGrade entry for any batch with missing weeks.
+    		if(missingWeeks.size() > 0) {
+    			String missedWeekString = "";
+    			for(Integer week: missingWeeks) {
+    				missedWeekString += week.toString();
+    			}
+    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getLocation(), missedWeekString, batch.getTrainer()));
+    		}
+    	}
+    	return new ResponseEntity<>(missingGrades, HttpStatus.OK);
     }
 }
