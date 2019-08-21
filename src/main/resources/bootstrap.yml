@@ -12,17 +12,27 @@ server:
 ---
 spring:
   profiles: local
+  cloud:
+    config:
+      uri: http://localhost:8888/config
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+
 ---
+server:
+  port: 80
+
 spring:
   profiles: dev
   cloud:
     config:
-      uri: http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/config
+      uri: http://config.caliber-2-dev
+eureka:
+  client:
+    enabled: false
 
 ---
 spring:
