@@ -9,6 +9,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -140,17 +141,22 @@ public class GradeController {
     	for(BatchEntity batch : activeBatches) {
     		List<Integer> missingWeeks = new ArrayList<Integer>(); // List holding any and all weeks of missing grades
     		int lastWeek = batch.getWeeks() - 3;	// Last week with grades
+    		
+    		long days = java.time.temporal.ChronoUnit.DAYS.between(
+    				batch.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+    				LocalDate.now());
+    		
     		//Returns current week
-    		int currentWeek = Period.between(
-    				batch.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
-    				LocalDate.now())
-    				.getDays() / 7;
+    		int currentWeek =  (int)days / 7;
+
     		//Sets current week to be no further than last week (acts as endpoint for which weeks to search for)
     		if(currentWeek > lastWeek)
     			currentWeek = lastWeek;
+    		
     		// Checks each week for at least one grade
     		for(int i = 1; i <= currentWeek; i++)
     		{
+    			
     			List<Grade> weeklyGrades = gs.findGradesByBatchIdAndWeekNumber(batch.getBatchId(), i);
     			if(weeklyGrades.size() < 1) {
     				missingWeeks.add(i);
@@ -160,9 +166,9 @@ public class GradeController {
     		if(missingWeeks.size() > 0) {
     			String missedWeekString = "";
     			for(Integer week: missingWeeks) {
-    				missedWeekString += week.toString();
+    				missedWeekString += " " + week.toString();
     			}
-    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getLocation(), missedWeekString, batch.getTrainer()));
+    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missedWeekString));
     		}
     	}
     	return new ResponseEntity<>(missingGrades, HttpStatus.OK);
