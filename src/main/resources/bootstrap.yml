@@ -29,6 +29,8 @@ spring:
   profiles: dev
   cloud:
     config:
+      discovery:
+        enabled: false
       uri: http://config.caliber-2-dev
 eureka:
   client:
