@@ -16,16 +16,20 @@ public class MissingGrade {
 	private String location;
 	
 	private List<Integer> missingWeeks;
+	
+	private String skillType;	
 
-	public MissingGrade(Integer batchId, String trainer, String location, List<Integer> missingWeeks) {
+	public MissingGrade(Integer batchId, String trainer, String location, List<Integer> missingWeeks,
+			String skillType) {
 		super();
 		this.batchId = batchId;
 		this.trainer = trainer;
 		this.location = location;
 		this.missingWeeks = missingWeeks;
+		this.skillType = skillType;
 	}
-	
-	
+
+
 
 	public MissingGrade() {
 		super();
@@ -63,6 +67,18 @@ public class MissingGrade {
 
 	public void setMissingWeeks(List<Integer> missingWeeks) {
 		this.missingWeeks = missingWeeks;
+	}
+
+
+
+	public String getSkillType() {
+		return skillType;
+	}
+
+
+
+	public void setSkillType(String skillType) {
+		this.skillType = skillType;
 	}
 	
 	

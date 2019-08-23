@@ -165,11 +165,7 @@ public class GradeController {
     		}
     		// Adds a missingGrade entry for any batch with missing weeks.
     		if(missingWeeks.size() > 0) {
-//    			String missedWeekString = "";
-//    			for(Integer week: missingWeeks) {
-//    				missedWeekString += " " + week.toString();
-//    			}
-    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missingWeeks));
+    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missingWeeks, batch.getSkillType()));
     		}
     	}
     	return new ResponseEntity<>(missingGrades, HttpStatus.OK);
