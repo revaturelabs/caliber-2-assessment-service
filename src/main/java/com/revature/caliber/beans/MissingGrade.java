@@ -1,5 +1,7 @@
 package com.revature.caliber.beans;
 
+import java.util.List;
+
 /**
  * 
  * @author Jace Dembski
@@ -13,9 +15,9 @@ public class MissingGrade {
 	
 	private String location;
 	
-	private String missingWeeks;
+	private List<Integer> missingWeeks;
 
-	public MissingGrade(Integer batchId, String trainer, String location, String missingWeeks) {
+	public MissingGrade(Integer batchId, String trainer, String location, List<Integer> missingWeeks) {
 		super();
 		this.batchId = batchId;
 		this.trainer = trainer;
@@ -55,11 +57,11 @@ public class MissingGrade {
 		this.location = location;
 	}
 
-	public String getMissingWeeks() {
+	public List<Integer> getMissingWeeks() {
 		return missingWeeks;
 	}
 
-	public void setMissingWeeks(String missingWeeks) {
+	public void setMissingWeeks(List<Integer> missingWeeks) {
 		this.missingWeeks = missingWeeks;
 	}
 	

@@ -142,6 +142,7 @@ public class GradeController {
     		List<Integer> missingWeeks = new ArrayList<Integer>(); // List holding any and all weeks of missing grades
     		int lastWeek = batch.getWeeks() - 3;	// Last week with grades
     		
+    		// The number of calendar days since the start of batch to now
     		long days = java.time.temporal.ChronoUnit.DAYS.between(
     				batch.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
     				LocalDate.now());
@@ -149,7 +150,7 @@ public class GradeController {
     		//Returns current week
     		int currentWeek =  (int)days / 7;
 
-    		//Sets current week to be no further than last week (acts as endpoint for which weeks to search for)
+    		//Sets current week to be no further than last week (acts as endpoint for which weeks to check on)
     		if(currentWeek > lastWeek)
     			currentWeek = lastWeek;
     		
@@ -164,11 +165,11 @@ public class GradeController {
     		}
     		// Adds a missingGrade entry for any batch with missing weeks.
     		if(missingWeeks.size() > 0) {
-    			String missedWeekString = "";
-    			for(Integer week: missingWeeks) {
-    				missedWeekString += " " + week.toString();
-    			}
-    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missedWeekString));
+//    			String missedWeekString = "";
+//    			for(Integer week: missingWeeks) {
+//    				missedWeekString += " " + week.toString();
+//    			}
+    			missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missingWeeks));
     		}
     	}
     	return new ResponseEntity<>(missingGrades, HttpStatus.OK);
