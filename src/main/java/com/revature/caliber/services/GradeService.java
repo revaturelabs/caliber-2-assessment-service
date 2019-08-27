@@ -1,20 +1,19 @@
 package com.revature.caliber.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.revature.caliber.beans.Assessment;
 import com.revature.caliber.beans.Grade;
 import com.revature.caliber.converter.GradeConverter;
 import com.revature.caliber.dto.GradeDTO;
-import com.revature.caliber.intercoms.TraineeClient;
+import com.revature.caliber.intercoms.base.TraineeClient;
 import com.revature.caliber.repositories.GradeRepository;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class GradeService implements GradeServiceInterface{

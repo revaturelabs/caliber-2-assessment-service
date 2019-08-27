@@ -1,19 +1,18 @@
 package com.revature.caliber.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.revature.caliber.beans.Note;
+import com.revature.caliber.converter.NoteConverter;
+import com.revature.caliber.dto.NoteDTO;
+import com.revature.caliber.intercoms.base.BatchClient;
+import com.revature.caliber.intercoms.base.TraineeClient;
+import com.revature.caliber.repositories.NoteRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.caliber.beans.Note;
-import com.revature.caliber.converter.NoteConverter;
-import com.revature.caliber.dto.NoteDTO;
-import com.revature.caliber.intercoms.BatchClient;
-import com.revature.caliber.intercoms.TraineeClient;
-import com.revature.caliber.repositories.NoteRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoteService implements NoteServiceInterface{
@@ -101,7 +100,7 @@ public class NoteService implements NoteServiceInterface{
 		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Deleing Note: " + n);
 		Boolean exists = false;
-		if(np.findOne(n.getNoteId()) != null) exists = true;
+		if(np.findOne(n.getNoteId()) != null) exists = true;  
 		if(exists) {
 			np.delete(n);
 			return true;
