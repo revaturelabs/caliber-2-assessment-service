@@ -1,6 +1,7 @@
 package com.revature.caliber.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -62,6 +63,15 @@ public class NoteController {
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+
+    @GetMapping("all/note/batch/{batchId}/{week}")
+    public ResponseEntity<Map<Integer, List<Note>>> findNoteMapByBatchIdAndWeekNumber(@PathVariable("batchId") Integer batchId, @PathVariable("week") Integer week) {
+        Map<Integer, List<Note>> noteMap = ns.findNotesByBatchAndWeek(batchId, week);
+        if (noteMap != null) {
+            return ResponseEntity.ok(noteMap);
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
     @GetMapping("/all/note/{id}")

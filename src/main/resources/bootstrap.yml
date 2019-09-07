@@ -16,7 +16,9 @@ spring:
   profiles: local
   cloud:
     config:
-      uri: http://localhost:8888/config
+      uri: http://localhost:8888
+  datasource:
+    platform: h2
 eureka:
   client:
     service-url:

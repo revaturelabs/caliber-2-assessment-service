@@ -1,6 +1,7 @@
 package com.revature.caliber.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,4 +18,5 @@ public interface NoteServiceInterface {
 	public List<Note> findNotesByTraineeId(Integer id);
 	public List<Note> findNotesByBatchId(Integer id);
 	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum);
+	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week);
 }

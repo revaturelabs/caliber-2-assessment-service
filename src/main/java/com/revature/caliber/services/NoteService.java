@@ -10,9 +10,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class NoteService implements NoteServiceInterface{
@@ -155,6 +158,14 @@ public class NoteService implements NoteServiceInterface{
 		
 		return checkTraineeAndBatch(noteList);
 	}
-	
 
+	@Override
+	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week) {
+		Map<Integer, List<Note>> noteMap = new HashMap<>();
+		Stream<Note> notes = np.findNotesByBatchIdAndWeekNumber(batchId, week).stream();
+		notes.peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
+			noteMap.get(note.getTraineeId()).add(note);
+		});
+		return noteMap;
+	}
 }
