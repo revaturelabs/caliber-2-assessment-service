@@ -20,5 +20,4 @@ public interface GradeServiceInterface {
 	public List<Grade> findGradesByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
 	public Float findAvgAssessments(Integer id, Integer weekNum);
 	public Float findAverageAssessment(Integer id);
-
 }
