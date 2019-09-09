@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -167,5 +164,10 @@ public class NoteService implements NoteServiceInterface{
 			noteMap.get(note.getTraineeId()).add(note);
 		});
 		return noteMap;
+	}
+
+	@Override
+	public Optional<Note> findBatchNoteByBatchAndWeek(Integer batchId, Integer week) {
+		return np.findBatchNoteByBatchIdAndWeekNumber(batchId, week);
 	}
 }
