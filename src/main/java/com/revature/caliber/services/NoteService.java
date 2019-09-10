@@ -83,7 +83,7 @@ public class NoteService implements NoteServiceInterface{
 	public Note createNote(NoteDTO noteDTO) {
 		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Creating Note: " + n);
-		if(np.findOne(n.getNoteId()) != null) return null;
+//		if(np.findOne(n.getNoteId()) != null) return null;
 		return np.save(n);
 	}
 	
