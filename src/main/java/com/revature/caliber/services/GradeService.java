@@ -48,7 +48,7 @@ public class GradeService implements GradeServiceInterface{
 	public Grade createGrade(GradeDTO grade) {
 		Grade g = GradeConverter.convert(grade);
 		log.debug("Creating Grade: " + g);
-		if(gp.findOne(g.getGradeId()) != null) return null;
+//		if(gp.findOne(g.getGradeId()) != null) return null;
 
 		return  gp.save(g);
 	}
