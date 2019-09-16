@@ -1,6 +1,8 @@
 package com.revature.caliber.controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -62,6 +64,24 @@ public class NoteController {
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
+    }
+
+    @GetMapping("all/note/batch/{batchId}/{week}")
+    public ResponseEntity<Map<Integer, List<Note>>> findNoteMapByBatchIdAndWeekNumber(@PathVariable("batchId") Integer batchId, @PathVariable("week") Integer week) {
+        Map<Integer, List<Note>> noteMap = ns.findNotesByBatchAndWeek(batchId, week);
+        if (noteMap != null) {
+            return ResponseEntity.ok(noteMap);
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("batch/{batchId}/{week}/note")
+    public ResponseEntity<Note> findBatchNoteByBatchIdAndWeekNumber(@PathVariable("batchId") Integer batchId, @PathVariable("week") Integer week) {
+        Optional<Note> note = ns.findBatchNoteByBatchAndWeek(batchId, week);
+        if (note.isPresent()) {
+            return ResponseEntity.ok(note.get());
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
     @GetMapping("/all/note/{id}")

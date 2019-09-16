@@ -10,9 +10,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class NoteService implements NoteServiceInterface{
@@ -83,7 +83,7 @@ public class NoteService implements NoteServiceInterface{
 	public Note createNote(NoteDTO noteDTO) {
 		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Creating Note: " + n);
-		if(np.findOne(n.getNoteId()) != null) return null;
+//		if(np.findOne(n.getNoteId()) != null) return null;
 		return np.save(n);
 	}
 	
@@ -155,6 +155,19 @@ public class NoteService implements NoteServiceInterface{
 		
 		return checkTraineeAndBatch(noteList);
 	}
-	
 
+	@Override
+	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week) {
+		Map<Integer, List<Note>> noteMap = new HashMap<>();
+		Stream<Note> notes = np.findNotesByBatchIdAndWeekNumber(batchId, week).stream();
+		notes.peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
+			noteMap.get(note.getTraineeId()).add(note);
+		});
+		return noteMap;
+	}
+
+	@Override
+	public Optional<Note> findBatchNoteByBatchAndWeek(Integer batchId, Integer week) {
+		return np.findBatchNoteByBatchIdAndWeekNumber(batchId, week);
+	}
 }

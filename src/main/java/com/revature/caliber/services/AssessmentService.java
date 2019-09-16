@@ -61,7 +61,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	public Assessment createAssessment(AssessmentDTO assessmentDTO) {
 		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
-		if(ar.findOne(assessment.getAssessmentId()) != null) return null;
+//		if(ar.findOne(assessment.getAssessmentId()) != null) return null;
 		return ar.save(assessment);
 	}
   

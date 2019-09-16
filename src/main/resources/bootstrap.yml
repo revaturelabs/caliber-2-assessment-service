@@ -1,10 +1,12 @@
 spring:
-  cloud:
-    config:
-      name: assessment-service
-      discovery:
-        service-id: config
-        enabled: true
+  application:
+    name: assessment-service
+#  cloud:
+#    config:
+#      name: assessment-service
+#      discovery:
+#        service-id: config
+#        enabled: true
         
 
 server:
@@ -14,11 +16,15 @@ spring:
   profiles: local
   cloud:
     config:
-      uri: http://localhost:8888/config
+      uri: http://localhost:8888
+  datasource:
+    platform: h2
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
 
 
 ---
