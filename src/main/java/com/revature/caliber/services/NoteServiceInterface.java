@@ -21,4 +21,5 @@ public interface NoteServiceInterface {
 	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum);
 	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week);
 	Optional<Note> findBatchNoteByBatchAndWeek(Integer batchId, Integer week);
+	Note upsertNote(NoteDTO noteDTO);
 }

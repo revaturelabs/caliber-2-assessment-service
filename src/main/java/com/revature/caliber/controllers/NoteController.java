@@ -117,5 +117,13 @@ public class NoteController {
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
-    
+
+    @PutMapping("/note")
+    public ResponseEntity<Note> upsertNote(@RequestBody NoteDTO noteDTO) {
+        Note note = ns.upsertNote(noteDTO);
+        if (note == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok(note);
+    }
 }

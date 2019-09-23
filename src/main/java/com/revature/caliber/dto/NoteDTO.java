@@ -2,19 +2,18 @@ package com.revature.caliber.dto;
 
 public class NoteDTO {
 
-	private Integer noteId;
+	private int noteId;
 	private String noteContent;
 	private String noteType;
-	private Integer weekNumber;
-	private Integer batchId;
-	private Integer traineeId;
+	private int weekNumber;
+	private int batchId;
+	private int traineeId;
 
 	public NoteDTO() {
 		super();
 	}
 
-	public NoteDTO(Integer noteId, String noteContent, String noteType, Integer weekNumber, Integer batchId,
-			Integer traineeId) {
+	public NoteDTO(int noteId, String noteContent, String noteType, int weekNumber, int batchId, int traineeId) {
 		super();
 		this.noteId = noteId;
 		this.noteContent = noteContent;
@@ -24,7 +23,7 @@ public class NoteDTO {
 		this.traineeId = traineeId;
 	}
 
-	public Integer getNoteId() {
+	public int getNoteId() {
 		return noteId;
 	}
 
@@ -48,7 +47,7 @@ public class NoteDTO {
 		this.noteType = noteType;
 	}
 
-	public Integer getWeekNumber() {
+	public int getWeekNumber() {
 		return weekNumber;
 	}
 
@@ -56,7 +55,7 @@ public class NoteDTO {
 		this.weekNumber = weekNumber;
 	}
 
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 
@@ -64,7 +63,7 @@ public class NoteDTO {
 		this.batchId = batchId;
 	}
 
-	public Integer getTraineeId() {
+	public int getTraineeId() {
 		return traineeId;
 	}
 

@@ -170,4 +170,16 @@ public class NoteService implements NoteServiceInterface{
 	public Optional<Note> findBatchNoteByBatchAndWeek(Integer batchId, Integer week) {
 		return np.findBatchNoteByBatchIdAndWeekNumber(batchId, week);
 	}
+
+	@Override
+	public Note upsertNote(NoteDTO noteDTO) {
+		Note note = np.findOne(noteDTO.getNoteId());
+		if (note != null) {
+			note.setNoteContent(noteDTO.getNoteContent());
+			note = np.save(note);
+		} else {
+			note = np.save(NoteConverter.convert(noteDTO));
+		}
+		return note;
+	}
 }
