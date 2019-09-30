@@ -170,4 +170,10 @@ public class GradeController {
     	}
     	return new ResponseEntity<>(missingGrades, HttpStatus.OK);
     }
+
+    @PutMapping("/grade")
+		public ResponseEntity<Grade> upsertGrade(@RequestBody GradeDTO gradeDto) {
+    	Grade grade = gs.upsertGrade(gradeDto);
+    	return ResponseEntity.ok(grade);
+    }
 }

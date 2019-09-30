@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class GradeDTO {
 
-	private Integer gradeId;
+	private int gradeId;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateReceived;
 	private float score;
-	private Integer assessmentId;
-	private Integer traineeId;
+	private int assessmentId;
+	private int traineeId;
 
-	public GradeDTO(Integer gradeId, Date dateReceived, float score, Integer assessmentId, Integer traineeId) {
+	public GradeDTO(int gradeId, Date dateReceived, float score, int assessmentId, int traineeId) {
 		super();
 		this.gradeId = gradeId;
 		this.dateReceived = dateReceived;
@@ -27,11 +27,11 @@ public class GradeDTO {
 		super();
 	}
 
-	public Integer getGradeId() {
+	public int getGradeId() {
 		return gradeId;
 	}
 
-	public void setGradeId(Integer gradeId) {
+	public void setGradeId(int gradeId) {
 		this.gradeId = gradeId;
 	}
 
@@ -51,19 +51,19 @@ public class GradeDTO {
 		this.score = score;
 	}
 
-	public Integer getAssessmentId() {
+	public int getAssessmentId() {
 		return assessmentId;
 	}
 
-	public void setAssessmentId(Integer assessmentId) {
+	public void setAssessmentId(int assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
-	public Integer getTraineeId() {
+	public int getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(Integer traineeId) {
+	public void setTraineeId(int traineeId) {
 		this.traineeId = traineeId;
 	}
 
