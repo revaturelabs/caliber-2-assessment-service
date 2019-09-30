@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class GradeService implements GradeServiceInterface{
@@ -179,4 +176,15 @@ public class GradeService implements GradeServiceInterface{
 		return gradeList;
 	}
 
+	@Override
+	public Grade upsertGrade(GradeDTO g) {
+		Grade grade = gp.findOne(g.getGradeId());
+		if (grade != null) {
+			grade.setScore(g.getScore());
+			grade = gp.save(grade);
+		} else {
+			grade = gp.save(GradeConverter.convert(g));
+		}
+		return grade;
+	}
 }
