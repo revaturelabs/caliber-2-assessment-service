@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 
 import com.revature.caliber.beans.Trainee;
 
+import java.util.Collections;
+import java.util.List;
+
 @Component
 public class TraineeClientFallback implements TraineeClientLocal {
 
@@ -12,4 +15,8 @@ public class TraineeClientFallback implements TraineeClientLocal {
 		return null;
 	}
 
+	@Override
+	public List<Trainee> getAllTraineesByBatchId(Integer batchId) {
+		return null;
+	}
 }

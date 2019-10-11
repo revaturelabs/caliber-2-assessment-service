@@ -1,15 +1,14 @@
 package com.revature.caliber.controllers;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
-
+import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.Grade;
+import com.revature.caliber.beans.MissingGrade;
+import com.revature.caliber.dto.BatchGradeDto;
+import com.revature.caliber.dto.GradeComparisonDto;
+import com.revature.caliber.dto.GradeDTO;
+import com.revature.caliber.dto.SpiderGraphDto;
+import com.revature.caliber.services.GradeService;
 import org.apache.log4j.Logger;
-import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,21 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.revature.caliber.beans.BatchEntity;
-import com.revature.caliber.beans.Grade;
-import com.revature.caliber.beans.MissingGrade;
-import com.revature.caliber.dto.GradeDTO;
-import com.revature.caliber.services.GradeService;
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -176,4 +167,67 @@ public class GradeController {
     	Grade grade = gs.upsertGrade(gradeDto);
     	return ResponseEntity.ok(grade);
     }
+
+    @GetMapping("/grade/reports/{batchId}/overall")
+		public ResponseEntity<List<BatchGradeDto>> getGradeReportForBatch(@PathVariable("batchId") int batchId) {
+    	List<BatchGradeDto> grades = gs.getOverallGradeReportByBatchId(batchId);
+    	if (grades != null) {
+    		return ResponseEntity.ok(grades);
+	    }
+    	return ResponseEntity.noContent().build();
+    }
+
+	@GetMapping("/grade/reports/{batchId}/spider")
+	public ResponseEntity<List<SpiderGraphDto>> getSpiderGraphDataForBatch(@PathVariable("batchId") int batchId) {
+		List<SpiderGraphDto> data = this.gs.getSpiderGraphData(batchId);
+		if (data != null && !data.isEmpty()) {
+			return ResponseEntity.ok(data);
+		}
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/grade/reports/{batchId}/spider/{traineeId}")
+	public ResponseEntity<List<SpiderGraphDto>> getSpiderGraphDataForTraineeAndBatch(@PathVariable("batchId") int batchId, @PathVariable("traineeId") int traineeId) {
+    	List<SpiderGraphDto> data = this.gs.getSpiderGraphData(batchId, traineeId);
+    	if (data != null && !data.isEmpty()) {
+    		return ResponseEntity.ok(data);
+	    }
+    	return ResponseEntity.noContent().build();
+	}
+
+    @GetMapping("/grade/reports/{batchId}/overall/{week}")
+		public ResponseEntity<List<BatchGradeDto>> getWeeklyGradeReportForBatch(@PathVariable("batchId") int batchId, @PathVariable("week") int week) {
+			List<BatchGradeDto> grades = gs.getWeeklyGradeReportByBatchId(batchId, week);
+			if (grades != null) {
+				return ResponseEntity.ok(grades);
+			}
+	    return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/grade/reports/individual/{traineeId}")
+		public ResponseEntity<GradeComparisonDto> getTraineeGradesComparedToBatch(@PathVariable(name = "traineeId") int traineeId) {
+      GradeComparisonDto gradeComparisonDto = gs.compareTraineeToRestOfBatch(traineeId);
+      if (gradeComparisonDto != null) {
+        return ResponseEntity.ok(gradeComparisonDto);
+	    }
+    	return ResponseEntity.noContent().build();
+    }
+
+	@GetMapping("/grade/reports/individual/{traineeId}/{week}")
+	public ResponseEntity<GradeComparisonDto> getTraineeGradesComparedToBatchOnWeek(@PathVariable(name = "traineeId") int traineeId, @PathVariable("week") int week) {
+		GradeComparisonDto gradeComparisonDto = gs.compareTraineeToRestOfBatchOnWeek(traineeId, week);
+		if (gradeComparisonDto != null) {
+			return ResponseEntity.ok(gradeComparisonDto);
+		}
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/grade/reports/batch/{batchId}/{week}")
+	public ResponseEntity<GradeComparisonDto> getGradeComparisonForBatchOnWeek(@PathVariable("batchId") int batchId, @PathVariable("week") int week) {
+    	GradeComparisonDto dto = gs.compareGradesOfBatchForWeek(batchId, week);
+    	if (dto != null) {
+    		return ResponseEntity.ok(dto);
+	    }
+    	return ResponseEntity.noContent().build();
+	}
 }
