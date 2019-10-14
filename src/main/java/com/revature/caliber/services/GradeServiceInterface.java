@@ -1,7 +1,11 @@
 package com.revature.caliber.services;
 
 import java.util.List;
+import java.util.Set;
 
+import com.revature.caliber.dto.BatchGradeDto;
+import com.revature.caliber.dto.GradeComparisonDto;
+import com.revature.caliber.dto.SpiderGraphDto;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.beans.Grade;
@@ -21,4 +25,11 @@ public interface GradeServiceInterface {
 	public Float findAvgAssessments(Integer id, Integer weekNum);
 	public Float findAverageAssessment(Integer id);
 	Grade upsertGrade(GradeDTO g);
+	List<BatchGradeDto> getOverallGradeReportByBatchId(int batchId);
+	List<BatchGradeDto> getWeeklyGradeReportByBatchId(int batchId, int week);
+	GradeComparisonDto compareTraineeToRestOfBatch(int traineeId);
+	GradeComparisonDto compareTraineeToRestOfBatchOnWeek(int traineeId, int week);
+	GradeComparisonDto compareGradesOfBatchForWeek(int batchId, int week);
+	List<SpiderGraphDto> getSpiderGraphData(int batchId);
+	List<SpiderGraphDto> getSpiderGraphData(int batchId, int traineeId);
 }

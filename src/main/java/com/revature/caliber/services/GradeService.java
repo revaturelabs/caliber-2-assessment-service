@@ -1,16 +1,25 @@
 package com.revature.caliber.services;
 
 import com.revature.caliber.beans.Assessment;
+import com.revature.caliber.beans.Category;
 import com.revature.caliber.beans.Grade;
+import com.revature.caliber.beans.Trainee;
 import com.revature.caliber.converter.GradeConverter;
-import com.revature.caliber.dto.GradeDTO;
+import com.revature.caliber.dto.*;
+import com.revature.caliber.intercoms.base.CategoryClient;
 import com.revature.caliber.intercoms.base.TraineeClient;
 import com.revature.caliber.repositories.GradeRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class GradeService implements GradeServiceInterface{
@@ -25,6 +34,9 @@ public class GradeService implements GradeServiceInterface{
 	
 	@Autowired
 	private AssessmentService as;
+
+	@Autowired
+	private CategoryClient categoryClient;
 
 	@Override
 	public List<Grade> findAllGrades() {
@@ -186,5 +198,89 @@ public class GradeService implements GradeServiceInterface{
 			grade = gp.save(GradeConverter.convert(g));
 		}
 		return grade;
+	}
+
+	@Override
+	public List<BatchGradeDto> getOverallGradeReportByBatchId(int batchId) {
+		List<Assessment> assessments = this.as.findAssessmentsByBatchId(batchId);
+		List<Grade> grades = new ArrayList<>();
+		for (Assessment assessment : assessments) {
+			grades.addAll(this.gp.findGradesByAssessmentId(assessment.getAssessmentId()));
+		}
+		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(Integer.valueOf(batchId));
+		return GradeReportFactory.getOverallGradeReport(grades, trainees);
+	}
+
+	@Override
+	public List<BatchGradeDto> getWeeklyGradeReportByBatchId(int batchId, int week) {
+		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(batchId, week);
+		List<Grade> grades = new ArrayList<>();
+		for (Assessment assessment : assessments) {
+			grades.addAll(gp.findGradesByAssessmentId(assessment.getAssessmentId()));
+		}
+		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(Integer.valueOf(batchId));
+		return GradeReportFactory.getOverallGradeReport(grades, trainees);
+	}
+
+	@Override
+	public GradeComparisonDto compareTraineeToRestOfBatch(int traineeId) {
+		Trainee trainee = tc.findTraineeById(traineeId);
+		if (trainee != null) {
+			List<Grade> grades = new ArrayList<>();
+			List<Assessment> assessments = as.findAssessmentsByBatchId(trainee.getBatchId());
+			assessments.forEach(assessment -> grades.addAll(gp.findGradesByAssessmentId(assessment.getAssessmentId())));
+			return GradeReportFactory.getGradeComparisonReport(grades, assessments, traineeId);
+		}
+		return null;
+	}
+
+	@Override
+	public GradeComparisonDto compareTraineeToRestOfBatchOnWeek(int traineeId, int week) {
+		Trainee trainee = tc.findTraineeById(traineeId);
+		if (trainee != null) {
+			List<Grade> grades = new ArrayList<>();
+			List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(trainee.getBatchId(), week);
+			assessments.forEach(assessment -> grades.addAll(gp.findGradesByAssessmentId(assessment.getAssessmentId())));
+			return GradeReportFactory.getGradeComparisonReport(grades, assessments, traineeId);
+		}
+		return null;
+	}
+
+	@Override
+	public List<SpiderGraphDto> getSpiderGraphData(int batchId) {
+		Stream<Assessment> assessments = this.as.findAssessmentsByBatchId(batchId).parallelStream();
+		return assessments.map(assessment ->  {
+			Category category = categoryClient.getCategoryById(assessment.getAssessmentCategory()).getBody();
+			if (category != null && StringUtils.hasText(category.getSkillCategory())) {
+				Stream<Grade> grades = this.gp.findGradesByAssessmentId(assessment.getAssessmentId()).parallelStream();
+				return new SpiderGraphDto(-1, category.getSkillCategory(), grades.mapToDouble(Grade::getScore).summaryStatistics().getAverage(), assessment.getWeekNumber());
+			} else {
+				return new SpiderGraphDto();
+			}
+		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public GradeComparisonDto compareGradesOfBatchForWeek(int batchId, int week) {
+		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(batchId, week);
+		List<Grade> grades = new ArrayList<>();
+		assessments.forEach(assessment -> grades.addAll(gp.findGradesByAssessmentId(assessment.getAssessmentId())));
+		return GradeReportFactory.getGradeComparisonReport(grades, assessments);
+	}
+
+	@Override
+	public List<SpiderGraphDto> getSpiderGraphData(int batchId, int traineeId) {
+		Stream<Assessment> assessments = this.as.findAssessmentsByBatchId(batchId).parallelStream();
+		return assessments.flatMap(assessment ->  {
+			Category category = categoryClient.getCategoryById(assessment.getAssessmentCategory()).getBody();
+			if (category != null && StringUtils.hasText(category.getSkillCategory())) {
+				List<Grade> allGrades = gp.findGradesByAssessmentId(assessment.getAssessmentId());
+				Stream<SpiderGraphDto> traineeGrades = allGrades.parallelStream().filter(grade -> grade.getTraineeId() == traineeId).map(grade -> new SpiderGraphDto(grade.getTraineeId(), category.getSkillCategory(), grade.getScore(), assessment.getWeekNumber()));
+				Stream<SpiderGraphDto> restOfBatchGrades = allGrades.parallelStream().filter(grade -> grade.getTraineeId() != traineeId).map(grade -> new SpiderGraphDto(-1, category.getSkillCategory(), grade.getScore(), assessment.getWeekNumber()));
+				return Stream.concat(traineeGrades, restOfBatchGrades);
+			} else {
+				return Stream.empty();
+			}
+		}).collect(Collectors.toList());
 	}
 }
