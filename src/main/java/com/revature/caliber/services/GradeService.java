@@ -1,9 +1,6 @@
 package com.revature.caliber.services;
 
-import com.revature.caliber.beans.Assessment;
-import com.revature.caliber.beans.Category;
-import com.revature.caliber.beans.Grade;
-import com.revature.caliber.beans.Trainee;
+import com.revature.caliber.beans.*;
 import com.revature.caliber.converter.GradeConverter;
 import com.revature.caliber.dto.*;
 import com.revature.caliber.intercoms.base.CategoryClient;
@@ -14,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -282,5 +285,31 @@ public class GradeService implements GradeServiceInterface{
 				return Stream.empty();
 			}
 		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MissingGrade> getMissingGradesForCurrentBatches(List<BatchEntity> batches) {
+		List<MissingGrade> missingGrades = new ArrayList<>();
+		for (BatchEntity batch : batches) {
+			LocalDateTime today = LocalDateTime.now();
+			LocalDateTime startDate = LocalDateTime.ofInstant(batch.getStartDate().toInstant(), ZoneId.systemDefault());
+			LocalDateTime endDate = LocalDateTime.ofInstant(batch.getEndDate().toInstant(), ZoneId.systemDefault());
+			if (startDate.isBefore(today) && endDate.isAfter(today)) {
+				if (batch.getWeeks() > 0) {
+					List<Integer> missingWeeks = new ArrayList<>();
+					for (int i = 1; i <= batch.getWeeks(); i++) {
+						List<Grade> grades = this.findGradesByBatchIdAndWeekNumber(batch.getBatchId(), i);
+						if (grades != null && grades.isEmpty()) {
+							missingWeeks.add(i);
+						}
+					}
+					if (!missingWeeks.isEmpty()) {
+						missingGrades.add(new MissingGrade(batch.getBatchId(), batch.getTrainer(), batch.getLocation(), missingWeeks, batch.getSkillType()));
+					}
+				}
+			}
+		}
+
+		return missingGrades;
 	}
 }
