@@ -3,6 +3,8 @@ package com.revature.caliber.services;
 import java.util.List;
 import java.util.Set;
 
+import com.revature.caliber.beans.BatchEntity;
+import com.revature.caliber.beans.MissingGrade;
 import com.revature.caliber.dto.BatchGradeDto;
 import com.revature.caliber.dto.GradeComparisonDto;
 import com.revature.caliber.dto.SpiderGraphDto;
@@ -32,4 +34,5 @@ public interface GradeServiceInterface {
 	GradeComparisonDto compareGradesOfBatchForWeek(int batchId, int week);
 	List<SpiderGraphDto> getSpiderGraphData(int batchId);
 	List<SpiderGraphDto> getSpiderGraphData(int batchId, int traineeId);
+	List<MissingGrade> getMissingGradesForCurrentBatches(List<BatchEntity> batches);
 }
