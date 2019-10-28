@@ -160,7 +160,7 @@ public class NoteService implements NoteServiceInterface{
 	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week) {
 		Map<Integer, List<Note>> noteMap = new HashMap<>();
 		Stream<Note> notes = np.findNotesByBatchIdAndWeekNumber(batchId, week).stream();
-		notes.peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
+		notes.filter(note -> note.getTraineeId() != null && note.getTraineeId() > 0).peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
 			noteMap.get(note.getTraineeId()).add(note);
 		});
 		return noteMap;
