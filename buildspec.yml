@@ -14,8 +14,7 @@ phases:
     commands:
       - echo Building Maven Project
       - mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
-      - mvn clean
-      - mvn install
+      - mvn clean package
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $SERVICE_NAME:$BUILD_ID --build-arg CATEGORY_URL=$CATEGORY_URL --build-arg BATCH_URL=$BATCH_URL --build-arg TRAINEE_URL=$TRAINEE_URL --build-arg JAR_FILE=AssessmentService-0.0.1-SNAPSHOT.jar  --build-arg SPRING_ENV=$SPRING_ENV --build-arg DB_USER=$DB_USER --build-arg DB_PASS=$DB_PASS --build-arg DB_URL=$DB_URL .

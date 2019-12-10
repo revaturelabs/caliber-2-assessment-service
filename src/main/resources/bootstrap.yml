@@ -45,3 +45,23 @@ eureka:
 ---
 spring:
   profiles: prod
+
+---
+server:
+  port: 80
+
+spring:
+  profiles: perf
+  cloud:
+    config:
+      discovery:
+        enabled: false
+      uri: http://config.caliber-2-perf
+eureka:
+  client:
+    enabled: false
+intercom:
+  service:
+    trainee: ${TRAINEE_URL}
+    category: ${CATEGORY_URL}
+    batch: ${BATCH_URL}
