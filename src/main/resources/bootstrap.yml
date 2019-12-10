@@ -60,8 +60,3 @@ spring:
 eureka:
   client:
     enabled: false
-intercom:
-  service:
-    trainee: ${TRAINEE_URL}
-    category: ${CATEGORY_URL}
-    batch: ${BATCH_URL}

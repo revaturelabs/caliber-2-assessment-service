@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Profile;
  * @author William Gentry
  */
 @Profile("perf")
-@FeignClient(url = "${intercom.service.category}")
+@FeignClient(url = "http://batch.caliber-2-perf")
 public interface CategoryClientPerf extends CategoryClient {
 }
