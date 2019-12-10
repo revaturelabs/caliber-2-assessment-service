@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.revature.caliber.beans.Trainee;
 
-@Profile("!dev && !prod")
+@Profile("local")
 @FeignClient(name="user-service", fallback=TraineeClientFallback.class)
 public interface TraineeClientLocal extends TraineeClient {
 	

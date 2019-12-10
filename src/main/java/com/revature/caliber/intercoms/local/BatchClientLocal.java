@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.revature.caliber.beans.BatchEntity;
 
-@Profile("!dev && !prod")
+@Profile("local")
 @FeignClient(name = "batch-service", fallback= BatchClientLocalFallback.class)
 public interface BatchClientLocal extends BatchClient {
 

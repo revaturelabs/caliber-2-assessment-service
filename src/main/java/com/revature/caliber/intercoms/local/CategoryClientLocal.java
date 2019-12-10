@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.revature.caliber.beans.Category;
 
-@Profile("!dev && !prod")
+@Profile("local")
 @FeignClient(name="category-service", fallback= CategoryClientLocalFallback.class)
 public interface CategoryClientLocal extends CategoryClient {
 }
