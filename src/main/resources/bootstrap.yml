@@ -55,7 +55,7 @@ spring:
     config:
       discovery:
         enabled: false
-      uri: http://config.caliber-2-perf
+      uri: ${CONFIG_URL}
 eureka:
   client:
     enabled: false
