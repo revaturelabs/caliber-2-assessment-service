@@ -60,14 +60,16 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	public Assessment createAssessment(AssessmentDTO assessmentDTO) {
-		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
-//		if(ar.findOne(assessment.getAssessmentId()) != null) return null;
-		return ar.save(assessment);
+		Assessment assessment = Assessment.fromDto(assessmentDTO);
+		if (assessment != null) {
+			return ar.save(assessment);
+		}
+		return null;
 	}
   
 	@Override
 	public Assessment updateAssessment(AssessmentDTO assessmentDTO) {
-		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
+		Assessment assessment = Assessment.fromDto(assessmentDTO);
 		log.debug("Updating Assessment: " + assessment);
 		if(ar.findOne(assessment.getAssessmentId()) == null) return null;
 		return ar.save(assessment);

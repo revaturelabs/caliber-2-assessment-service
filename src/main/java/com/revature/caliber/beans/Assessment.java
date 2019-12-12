@@ -1,5 +1,7 @@
 package com.revature.caliber.beans;
 
+import com.revature.caliber.dto.AssessmentDTO;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -144,7 +146,12 @@ public class Assessment {
 				+ batchId + ", assessmentCategory=" + assessmentCategory + "]";
 	}
 
-	
+	public static Assessment fromDto(AssessmentDTO dto) {
+		if (dto != null) {
+			return new Assessment(dto.getAssessmentId(), dto.getRawScore(), dto.getAssessmentTitle(), dto.getAssessmentType(), dto.getWeekNumber(), dto.getBatchId(), dto.getAssessmentCategory());
+		}
+		return null;
+	}
 	
 
 }

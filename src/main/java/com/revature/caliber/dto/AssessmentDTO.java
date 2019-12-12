@@ -1,5 +1,7 @@
 package com.revature.caliber.dto;
 
+import com.revature.caliber.beans.Assessment;
+
 public class AssessmentDTO {
 
 	private Integer assessmentId;
@@ -86,6 +88,13 @@ public class AssessmentDTO {
 
 	public void setAssessmentCategory(Integer assessmentCategory) {
 		this.assessmentCategory = assessmentCategory;
+	}
+
+	public static AssessmentDTO fromAssessment(Assessment assessment) {
+		if (assessment != null) {
+			return new AssessmentDTO(assessment.getAssessmentId(), assessment.getRawScore(), assessment.getAssessmentTitle(), assessment.getAssessmentType(), assessment.getWeekNumber(), assessment.getBatchId(), assessment.getAssessmentCategory());
+		}
+		return new AssessmentDTO();
 	}
 
 }
