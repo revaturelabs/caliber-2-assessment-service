@@ -40,12 +40,12 @@ public class AssessmentConverterTest {
 
 		AssessmentConverter.convert(as);
 
-		assertEquals(Integer.valueOf(2), as.getAssessmentId());
-		assertEquals(Integer.valueOf(60), as.getRawScore());
+		assertEquals(2, as.getAssessmentId());
+		assertEquals(60, as.getRawScore());
 		assertEquals("Spring", as.getAssessmentTitle());
 		assertEquals("Verbal", as.getAssessmentType());
-		assertEquals(Integer.valueOf(8), as.getWeekNumber());
-		assertEquals(Integer.valueOf(7), as.getBatchId());
-		assertEquals(Integer.valueOf(8), as.getAssessmentCategory());
+		assertEquals(8, as.getWeekNumber());
+		assertEquals(7, as.getBatchId());
+		assertEquals(8, as.getAssessmentCategory());
 	}
 }
