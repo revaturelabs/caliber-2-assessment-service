@@ -95,13 +95,6 @@
 			<artifactId>spring-cloud-starter-feign</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
-		<dependency>
-			<groupId>net.logstash.logback</groupId>
-			<artifactId>logstash-logback-encoder</artifactId>
-			<version>6.3</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>com.oracle</groupId>
