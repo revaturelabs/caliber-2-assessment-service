@@ -75,7 +75,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactBatchService(Assessment as) {
 		try {
-			if(as.getBatchId() != null) bc.getBatchById(as.getBatchId());
+			if(as.getBatchId() >= 0) bc.getBatchById(as.getBatchId());
 			
 			return true;
 		} catch(Exception e) {
@@ -102,7 +102,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	
 	private boolean contactCategoryService(Assessment as) {
 		try {
-			if(as.getAssessmentCategory() != null) cc.getCategoryById(as.getAssessmentCategory()).getBody();
+			if(as.getAssessmentCategory() >= 0) cc.getCategoryById(as.getAssessmentCategory()).getBody();
 			
 			return true;
 		} catch(Exception e) {

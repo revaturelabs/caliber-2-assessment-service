@@ -111,7 +111,7 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactBatchService(Note n) {
 		try {
-			if(n.getBatchId() != null) bc.getBatchById(n.getBatchId());
+			if(n.getBatchId() >= 0) bc.getBatchById(n.getBatchId());
 			
 			return true;
 		} catch(Exception e) {
@@ -124,7 +124,7 @@ public class NoteService implements NoteServiceInterface{
 	
 	private boolean contactTraineeService(Note n) {
 		try {
-			if(n.getTraineeId() != null) tc.findTraineeById(n.getTraineeId());
+			if(n.getTraineeId() >=0) tc.findTraineeById(n.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
@@ -160,7 +160,7 @@ public class NoteService implements NoteServiceInterface{
 	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week) {
 		Map<Integer, List<Note>> noteMap = new HashMap<>();
 		Stream<Note> notes = np.findNotesByBatchIdAndWeekNumber(batchId, week).stream();
-		notes.filter(note -> note.getTraineeId() != null && note.getTraineeId() > 0).peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
+		notes.filter(note -> note.getTraineeId() >= 0 && note.getTraineeId() > 0).peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
 			noteMap.get(note.getTraineeId()).add(note);
 		});
 		return noteMap;

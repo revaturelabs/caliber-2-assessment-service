@@ -20,7 +20,7 @@ public class GradeReportFactory {
 		final List<BatchGradeDto> overallTraineeGrades = new ArrayList<>();
 		if (trainees != null && grades != null) {
 			trainees.forEach(trainee -> {
-				Stream<Grade> gradeStream = grades.parallelStream().filter(grade -> grade.getTraineeId().equals(trainee.getTraineeId()));
+				Stream<Grade> gradeStream = grades.parallelStream().filter(grade -> grade.getTraineeId() == trainee.getTraineeId());
 				double average = gradeStream.mapToDouble(Grade::getScore).summaryStatistics().getAverage();
 				overallTraineeGrades.add(new BatchGradeDto(trainee.getName(), average));
 			});
@@ -32,9 +32,9 @@ public class GradeReportFactory {
 		final GradeComparisonDto gradeComparisonDto = new GradeComparisonDto();
 		if (grades != null && assessments != null) {
 			for (Assessment assessment : assessments) {
-				Stream<Grade> traineeGrades = grades.parallelStream().filter(grade -> grade.getTraineeId().equals(traineeId) && grade.getAssessmentId().equals(assessment.getAssessmentId()));
+				Stream<Grade> traineeGrades = grades.parallelStream().filter(grade -> grade.getTraineeId() == traineeId && grade.getAssessmentId() == assessment.getAssessmentId());
 				gradeComparisonDto.addTraineeGrade(assessment.getAssessmentType(), traineeGrades.mapToDouble(Grade::getScore).summaryStatistics().getAverage());
-				Stream<Grade> batchGrades = grades.parallelStream().filter(grade -> !grade.getTraineeId().equals(traineeId) && grade.getAssessmentId().equals(assessment.getAssessmentId()));
+				Stream<Grade> batchGrades = grades.parallelStream().filter(grade -> grade.getTraineeId() != traineeId && grade.getAssessmentId() == assessment.getAssessmentId());
 				gradeComparisonDto.addRestOfBatchGrades(assessment.getAssessmentType(), batchGrades.mapToDouble(Grade::getScore).summaryStatistics().getAverage());
 			}
 		}
@@ -45,7 +45,7 @@ public class GradeReportFactory {
 		final GradeComparisonDto gradeComparisonDto = new GradeComparisonDto();
 		if (grades != null && assessments != null) {
 			for (Assessment assessment : assessments) {
-				Stream<Grade> batchGrades = grades.parallelStream().filter(grade -> grade.getAssessmentId().equals(assessment.getAssessmentId()));
+				Stream<Grade> batchGrades = grades.parallelStream().filter(grade -> grade.getAssessmentId() == assessment.getAssessmentId());
 				gradeComparisonDto.addRestOfBatchGrades(assessment.getAssessmentType(), batchGrades.mapToDouble(Grade::getScore).summaryStatistics().getAverage());
 			}
 		}

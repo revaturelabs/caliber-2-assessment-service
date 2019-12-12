@@ -90,7 +90,7 @@ public class GradeService implements GradeServiceInterface{
 	
 	private boolean contactTraineeService(Grade g) {
 		try {
-			if(g.getTraineeId() != null) tc.findTraineeById(g.getTraineeId());
+			if(g.getTraineeId() >= 0) tc.findTraineeById(g.getTraineeId());
 			
 			return true;
 		} catch(Exception e) {
