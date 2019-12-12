@@ -5,6 +5,8 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Objects;
+
 @Entity
 @Table(name="NOTE")
 public class Note {
@@ -13,7 +15,7 @@ public class Note {
 	@Column(name="NOTE_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "NOTE_ID_SEQUENCE")
 	@SequenceGenerator(name="NOTE_ID_SEQUENCE", sequenceName = "NOTE_ID_SEQUENCE")
-	private Integer noteId;
+	private int noteId;
 	
 	@Length(min=0, max=4000)
 	@Column(name="NOTE_CONTENT")
@@ -24,20 +26,20 @@ public class Note {
 	
 	@Min(value=1)
 	@Column(name="WEEK_NUMBER")
-	private Integer weekNumber;
+	private int weekNumber;
 	
 	@Column(name="BATCH_ID")
-	private Integer batchId;
+	private int batchId;
 	
 	@Column(name="TRAINEE_ID")
-	private Integer traineeId;
+	private int traineeId;
 
 	public Note() {
 		super();
 	}
 
-	public Note(Integer noteId, String noteContent, String noteType, Integer weekNumber, Integer batchId,
-			Integer traineeId) {
+	public Note(int noteId, String noteContent, String noteType, int weekNumber, int batchId,
+			int traineeId) {
 		super();
 		this.noteId = noteId;
 		this.noteContent = noteContent;
@@ -47,11 +49,11 @@ public class Note {
 		this.traineeId = traineeId;
 	}
 
-	public Integer getNoteId() {
+	public int getNoteId() {
 		return noteId;
 	}
 
-	public void setNoteId(Integer noteId) {
+	public void setNoteId(int noteId) {
 		this.noteId = noteId;
 	}
 
@@ -71,77 +73,46 @@ public class Note {
 		this.noteType = noteType;
 	}
 
-	public Integer getWeekNumber() {
+	public int getWeekNumber() {
 		return weekNumber;
 	}
 
-	public void setWeekNumber(Integer weekNumber) {
+	public void setWeekNumber(int weekNumber) {
 		this.weekNumber = weekNumber;
 	}
 
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
 
-	public Integer getTraineeId() {
+	public int getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(Integer traineeId) {
+	public void setTraineeId(int traineeId) {
 		this.traineeId = traineeId;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
-		result = prime * result + ((noteContent == null) ? 0 : noteContent.hashCode());
-		result = prime * result + ((noteId == null) ? 0 : noteId.hashCode());
-		result = prime * result + ((noteType == null) ? 0 : noteType.hashCode());
-		result = prime * result + ((traineeId == null) ? 0 : traineeId.hashCode());
-		result = prime * result + ((weekNumber == null) ? 0 : weekNumber.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Note note = (Note) o;
+		return noteId == note.noteId &&
+						weekNumber == note.weekNumber &&
+						batchId == note.batchId &&
+						traineeId == note.traineeId &&
+						Objects.equals(noteContent, note.noteContent) &&
+						Objects.equals(noteType, note.noteType);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Note other = (Note) obj;
-		if (batchId == null) {
-			if (other.batchId != null)
-				return false;
-		} else if (!batchId.equals(other.batchId)) return false;
-		if (noteContent == null) {
-			if (other.noteContent != null)
-				return false;
-		} else if (!noteContent.equals(other.noteContent)) return false;
-		if (noteId == null) {
-			if (other.noteId != null)
-				return false;
-		} else if (!noteId.equals(other.noteId)) return false;
-		if (noteType == null) {
-			if (other.noteType != null)
-				return false;
-		} else if (!noteType.equals(other.noteType)) return false;
-		if (traineeId == null) {
-			if (other.traineeId != null)
-				return false;
-		} else if (!traineeId.equals(other.traineeId)) return false;
-		if (weekNumber == null) {
-			if (other.weekNumber != null)
-				return false;
-		} else if (!weekNumber.equals(other.weekNumber)) return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(noteId, noteContent, noteType, weekNumber, batchId, traineeId);
 	}
 
 	@Override

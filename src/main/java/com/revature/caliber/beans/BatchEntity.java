@@ -1,9 +1,10 @@
 package com.revature.caliber.beans;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class BatchEntity {
-	private Integer batchId;
+	private int batchId;
 	
 	private String trainingName;
 	
@@ -15,7 +16,7 @@ public class BatchEntity {
 	
 	private String coTrainer;
 	
-	private Integer locationId;
+	private int locationId;
 	
 	private String location;
 	
@@ -23,15 +24,15 @@ public class BatchEntity {
 	
 	private Date endDate;
 	
-	private Integer goodGrade;
+	private int goodGrade;
 	
-	private Integer passingGrade;
+	private int passingGrade;
 	
-	private Integer weeks;
+	private int weeks;
 	
 	public BatchEntity(String trainingName, String trainingType, String skillType, String trainer,
-			String coTrainer, Integer locationId, Date startDate, Date endDate, Integer goodGrade,
-			Integer passingGrade, Integer weeks) {
+			String coTrainer, int locationId, Date startDate, Date endDate, int goodGrade,
+			int passingGrade, int weeks) {
 		super();
 		this.trainingName = trainingName;
 		this.trainingType = trainingType;
@@ -156,42 +157,42 @@ public class BatchEntity {
 	 * Getter for good grade.
 	 * @return A Date that holds the batch's good grade.
 	 */
-	public Integer getGoodGrade() {
+	public int getGoodGrade() {
 		return goodGrade;
 	}
 	/**
 	 * Setter for good date.
-	 * @param goodGrade A Integer that holds the batch's good grade.
+	 * @param goodGrade A int that holds the batch's good grade.
 	 */
-	public void setGoodGrade(Integer goodGrade) {
+	public void setGoodGrade(int goodGrade) {
 		this.goodGrade = goodGrade;
 	}
 	/**
 	 * Getter for passing grade.
-	 * @return A Integer that holds the batch's passing grade.
+	 * @return A int that holds the batch's passing grade.
 	 */
-	public Integer getPassingGrade() {
+	public int getPassingGrade() {
 		return passingGrade;
 	}
 	/**
 	 * Setter for passing grade.
-	 * @param passingGrade A Integer that holds the batch's passing grade.
+	 * @param passingGrade A int that holds the batch's passing grade.
 	 */
-	public void setPassingGrade(Integer passingGrade) {
+	public void setPassingGrade(int passingGrade) {
 		this.passingGrade = passingGrade;
 	}
 	/**
 	 * Getter for batch id.
-	 * @return A Integer that holds the batch's id.
+	 * @return A int that holds the batch's id.
 	 */
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 	/**
 	 * Setter for batch id.
-	 * @param batchId A Integer that holds the batch's id.
+	 * @param batchId A int that holds the batch's id.
 	 */
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
 	
@@ -202,18 +203,18 @@ public class BatchEntity {
 		this.location = location;
 	}
 	
-	public Integer getLocationId() {
+	public int getLocationId() {
 		return locationId;
 	}
-	public void setLocationId(Integer locationId) {
+	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
 	
-	public Integer getWeeks() {
+	public int getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(Integer weeks) {
+	public void setWeeks(int weeks) {
 		this.weeks = weeks;
 	}
 	
@@ -229,41 +230,27 @@ public class BatchEntity {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
-		result = prime * result + ((coTrainer == null) ? 0 : coTrainer.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + ((goodGrade == null) ? 0 : goodGrade.hashCode());
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
-		result = prime * result + ((passingGrade == null) ? 0 : passingGrade.hashCode());
-		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((trainer == null) ? 0 : trainer.hashCode());
-		result = prime * result + ((trainingName == null) ? 0 : trainingName.hashCode());
-		result = prime * result + ((trainingType == null) ? 0 : trainingType.hashCode());
-		result = prime * result + ((weeks == null) ? 0 : weeks.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BatchEntity that = (BatchEntity) o;
+		return batchId == that.batchId &&
+						locationId == that.locationId &&
+						goodGrade == that.goodGrade &&
+						passingGrade == that.passingGrade &&
+						weeks == that.weeks &&
+						Objects.equals(trainingName, that.trainingName) &&
+						Objects.equals(trainingType, that.trainingType) &&
+						Objects.equals(skillType, that.skillType) &&
+						Objects.equals(trainer, that.trainer) &&
+						Objects.equals(coTrainer, that.coTrainer) &&
+						Objects.equals(location, that.location) &&
+						Objects.equals(startDate, that.startDate) &&
+						Objects.equals(endDate, that.endDate);
 	}
-	
+
 	@Override
-	public boolean equals(Object obj) {
-		if(obj == null) return false;
-		if(this.getClass() != obj.getClass()) return false;
-		
-		BatchEntity other = (BatchEntity) obj;
-		
-		boolean result = true;
-		if((obj.getClass() != BatchEntity.class || !this.coTrainer.equals(other.getCoTrainer()) || !this.locationId.equals(other.getLocationId()) || !this.goodGrade.equals(other.getGoodGrade())
-				|| !this.passingGrade.equals(other.getPassingGrade()) || !this.skillType.equals(other.getSkillType()) 
-				|| !this.trainer.equals(other.getTrainer()) || !this.trainingName.equals(other.getTrainingName()) 
-				|| !this.trainingType.equals(other.getTrainingType()) || this.startDate.getTime() != other.getStartDate().getTime() || this.endDate.getTime() != other.getEndDate().getTime())) {
-			result = false;
-		}
-		
-		return result;
+	public int hashCode() {
+		return Objects.hash(batchId, trainingName, trainingType, skillType, trainer, coTrainer, locationId, location, startDate, endDate, goodGrade, passingGrade, weeks);
 	}
-	
 }

@@ -6,7 +6,7 @@ public class Trainee implements Serializable {
 
 	private static final long serialVersionUID = -9090223980655307018L;
 
-	private Integer traineeId;
+	private int traineeId;
 	
 	private String resourceId;
 
@@ -16,7 +16,7 @@ public class Trainee implements Serializable {
 
 	private TrainingStatus trainingStatus;
 
-	private Integer batchId;
+	private int batchId;
 
 	private String phoneNumber;
 
@@ -55,7 +55,7 @@ public class Trainee implements Serializable {
 	 * @param email      The trainee's email address
 	 * @param batchId    The id of the trainee's batch
 	 */
-	public Trainee(String name, String resourceId, String email, Integer batchId) {
+	public Trainee(String name, String resourceId, String email, int batchId) {
 		super();
 		this.name = name;
 		this.resourceId = resourceId;
@@ -64,11 +64,11 @@ public class Trainee implements Serializable {
 		this.batchId = batchId;
 	}
 
-	public Integer getTraineeId() {
+	public int getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(Integer traineeId) {
+	public void setTraineeId(int traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -96,11 +96,11 @@ public class Trainee implements Serializable {
 		this.trainingStatus = trainingStatus;
 	}
 
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
 

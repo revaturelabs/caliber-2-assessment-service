@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MissingGrade {
 
-	private Integer batchId;
+	private int batchId;
 	
 	private String trainer;
 	
@@ -19,7 +19,7 @@ public class MissingGrade {
 	
 	private String skillType;	
 
-	public MissingGrade(Integer batchId, String trainer, String location, List<Integer> missingWeeks,
+	public MissingGrade(int batchId, String trainer, String location, List<Integer> missingWeeks,
 			String skillType) {
 		super();
 		this.batchId = batchId;
@@ -35,13 +35,11 @@ public class MissingGrade {
 		super();
 	}
 
-
-
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
 
