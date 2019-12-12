@@ -25,10 +25,10 @@ public class GradeConverterTest {
 
 		GradeConverter.convert(g);
 
-		assertEquals(Integer.valueOf(5), g.getAssessmentId());
-		assertEquals(Integer.valueOf(80), g.getGradeId());
+		assertEquals(5, g.getAssessmentId());
+		assertEquals(80, g.getGradeId());
 		assertEquals(Float.valueOf(60), g.getScore(), .05);
-		assertEquals(Integer.valueOf(6), g.getTraineeId());
+		assertEquals(6, g.getTraineeId());
 		assertEquals(d, g.getDateReceived());
 	}
 

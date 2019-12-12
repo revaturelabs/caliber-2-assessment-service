@@ -24,13 +24,13 @@ public class AssessmentConverterTest {
 
 		AssessmentConverter.convert(a);
 
-		assertEquals(Integer.valueOf(2), a.getAssessmentCategory());
-		assertEquals(Integer.valueOf(4), a.getAssessmentId());
+		assertEquals(2, a.getAssessmentCategory());
+		assertEquals(3, a.getAssessmentId());
 		assertEquals("Exam", a.getAssessmentType());
 		assertEquals("Java", a.getAssessmentTitle());
-		assertEquals(Integer.valueOf(5), a.getBatchId());
-		assertEquals(Integer.valueOf(80), a.getRawScore());
-		assertEquals(Integer.valueOf(3), a.getWeekNumber());
+		assertEquals(4, a.getBatchId());
+		assertEquals(80, a.getRawScore());
+		assertEquals(3, a.getWeekNumber());
 	}
 
 	@Test

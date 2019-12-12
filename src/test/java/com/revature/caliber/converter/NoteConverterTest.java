@@ -22,12 +22,12 @@ public class NoteConverterTest {
 
 		NoteConverter.convert(n);
 
-		assertEquals(Integer.valueOf(1), n.getNoteId());
+		assertEquals(1, n.getNoteId());
 		assertEquals("Great", n.getNoteContent());
 		assertEquals("QC", n.getNoteType());
-		assertEquals(Integer.valueOf(4), n.getWeekNumber());
-		assertEquals(Integer.valueOf(100), n.getBatchId());
-		assertEquals(Integer.valueOf(6), n.getTraineeId());
+		assertEquals(4, n.getWeekNumber());
+		assertEquals(100, n.getBatchId());
+		assertEquals(6, n.getTraineeId());
 	}
 
 	@Test
