@@ -4,26 +4,26 @@ import com.revature.caliber.beans.Assessment;
 
 public class AssessmentDTO {
 
-	private Integer assessmentId;
+	private int assessmentId;
 
-	private Integer rawScore;
+	private int rawScore;
 
 	private String assessmentTitle;
 
 	private String assessmentType;
 
-	private Integer weekNumber;
+	private int weekNumber;
 
-	private Integer batchId;
+	private int batchId;
 
-	private Integer assessmentCategory;
+	private int assessmentCategory;
 
 	public AssessmentDTO() {
 		super();
 	}
 
-	public AssessmentDTO(Integer assessmentId, Integer rawScore, String assessmentTitle, String assessmentType,
-			Integer weekNumber, Integer batchId, Integer assessmentCategory) {
+	public AssessmentDTO(int assessmentId, int rawScore, String assessmentTitle, String assessmentType,
+			int weekNumber, int batchId, int assessmentCategory) {
 		super();
 		this.assessmentId = assessmentId;
 		this.rawScore = rawScore;
@@ -34,19 +34,19 @@ public class AssessmentDTO {
 		this.assessmentCategory = assessmentCategory;
 	}
 
-	public Integer getAssessmentId() {
+	public int getAssessmentId() {
 		return assessmentId;
 	}
 
-	public void setAssessmentId(Integer assessmentId) {
+	public void setAssessmentId(int assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
-	public Integer getRawScore() {
+	public int getRawScore() {
 		return rawScore;
 	}
 
-	public void setRawScore(Integer rawScore) {
+	public void setRawScore(int rawScore) {
 		this.rawScore = rawScore;
 	}
 
@@ -66,27 +66,27 @@ public class AssessmentDTO {
 		this.assessmentType = assessmentType;
 	}
 
-	public Integer getWeekNumber() {
+	public int getWeekNumber() {
 		return weekNumber;
 	}
 
-	public void setWeekNumber(Integer weekNumber) {
+	public void setWeekNumber(int weekNumber) {
 		this.weekNumber = weekNumber;
 	}
 
-	public Integer getBatchId() {
+	public int getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
 
-	public Integer getAssessmentCategory() {
+	public int getAssessmentCategory() {
 		return assessmentCategory;
 	}
 
-	public void setAssessmentCategory(Integer assessmentCategory) {
+	public void setAssessmentCategory(int assessmentCategory) {
 		this.assessmentCategory = assessmentCategory;
 	}
 
