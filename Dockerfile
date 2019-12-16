@@ -2,7 +2,7 @@ FROM docker.elastic.co/beats/metricbeat:7.5.0 as metricbeat
 ARG DB_HOST
 ARG DB_USER
 ARG DB_PASS
-ARG ES_HOST
+ARG ES_HOSTS
 ARG KIBANA_HOST
 ARG ES_USER
 ARG ES_PASS
@@ -10,7 +10,7 @@ ARG CLOUD_AUTH_TOKEN
 ENV DB_HOST=$DB_HOST
 ENV DB_USER=$DB_USER
 ENV DB_PASS=$DB_PASS
-ENV ES_HOST=$ES_HOST
+ENV ES_HOSTS=$ES_HOSTS
 ENV KIBANA_HOST=$KIBANA_HOST
 ENV ES_USER=$ES_USER
 ENV ES_PASS=$ES_PASS
@@ -19,7 +19,7 @@ COPY src/main/resources/metricbeat.yml /usr/share/metricbeat/metricbeat.yml:ro
 USER root
 RUN chown root:metricbeat /usr/share/metricbeat/metricbeat.yml
 USER metricbeat
-RUN ["metricbeat", "-e"]
+RUN ["systemctl", "enable", "metricbeat"]
 
 FROM maven:3.6.1-jdk-8
 VOLUME /tmp

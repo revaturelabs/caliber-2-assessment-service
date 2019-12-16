@@ -1,13 +1,12 @@
 output.elasticsearch:
   enabled: true
-  hosts: ${ES_HOST}
+  hosts: '${ES_HOSTS}'
 setup.kibana:
   enabled: true
-  host: ${KIBANA_HOST}
+  host: '${KIBANA_HOST}'
 
-cloud:
-  auth: ${ES_USER}:${ES_PASS}
-  id: ${CLOUD_AUTH_TOKEN}
+cloud.auth: '${ES_USER}:${ES_PASS}'
+cloud.id: '${CLOUD_AUTH_TOKEN}'
 
 setup.dashboards:
   enabled: true
@@ -16,8 +15,8 @@ metricbeat.modules:
    - module: oracle
      metricsets: ["performance", "tablespace"]
      hosts: ["oracle://${DB_USER}:${DB_PASS}@${DB_HOST}"]
-     username: ${DB_USER}
-     password: ${DB_PASS}
+     username: '${DB_USER}'
+     password: '${DB_PASS}'
 
   - module: system
     metricsets:
