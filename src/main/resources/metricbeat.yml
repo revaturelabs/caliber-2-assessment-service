@@ -1,6 +1,5 @@
 output.elasticsearch:
-  enabled: true
-  hosts: '${ES_HOSTS}'
+  hosts: ['${ES_HOSTS}']
 setup.kibana:
   enabled: true
   host: '${KIBANA_HOST}'
