@@ -19,7 +19,7 @@ COPY src/main/resources/metricbeat.yml /usr/share/metricbeat/metricbeat.yml:ro
 USER root
 RUN chown root:metricbeat /usr/share/metricbeat/metricbeat.yml
 USER metricbeat
-RUN ["systemctl", "enable", "metricbeat"]
+RUN ["service", "metricbeat", "enable"]
 
 FROM maven:3.6.1-jdk-8
 VOLUME /tmp
