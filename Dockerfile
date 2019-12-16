@@ -1,25 +1,3 @@
-FROM docker.elastic.co/beats/metricbeat:7.5.0 as metricbeat
-ARG DB_HOST
-ARG DB_USER
-ARG DB_PASS
-ARG ES_HOSTS
-ARG KIBANA_HOST
-ARG ES_USER
-ARG ES_PASS
-ARG CLOUD_AUTH_TOKEN
-ENV DB_HOST=$DB_HOST
-ENV DB_USER=$DB_USER
-ENV DB_PASS=$DB_PASS
-ENV ES_HOSTS=$ES_HOSTS
-ENV KIBANA_HOST=$KIBANA_HOST
-ENV ES_USER=$ES_USER
-ENV ES_PASS=$ES_PASS
-ENV CLOUD_AUTH_TOKEN=$CLOUD_AUTH_TOKEN
-COPY src/main/resources/metricbeat.yml /usr/share/metricbeat/metricbeat.yml:ro
-USER root
-RUN chown root:metricbeat /usr/share/metricbeat/metricbeat.yml
-USER metricbeat
-
 FROM maven:3.6.1-jdk-8
 VOLUME /tmp
 EXPOSE 80
@@ -42,8 +20,6 @@ ENV CONFIG_URL=$CONFIG_URL
 ENV APM_SERVER_URL=$APM_SERVER_URL
 ENV APM_SECRET_TOKEN=$APM_SECRET_TOKEN
 ENV CLIENT_URL=$CLIENT_URL
-ENV JMX_PORT=$JMX_PORT
-ENV JMX_HOST=$JMX_HOST
 ENV JAVA_OPTS="-javaagent:elastic-apm-agent.jar -Delastic.apm.server_url=$APM_SERVER_URL -Delastic.apm.secret_token=$APM_SECRET_TOKEN"
 COPY src/main/resources/ojdbc7.jar .
 COPY pom.xml pom.xml
