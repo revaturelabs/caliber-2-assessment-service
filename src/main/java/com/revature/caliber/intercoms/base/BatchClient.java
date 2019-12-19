@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BatchClient {
 
   @GetMapping(value="batch/all/batch/{id}")
-  public BatchEntity getBatchById(@PathVariable(value="id") Integer batchId);
+  public BatchEntity getBatchById(@PathVariable(value="id") int batchId);
 }

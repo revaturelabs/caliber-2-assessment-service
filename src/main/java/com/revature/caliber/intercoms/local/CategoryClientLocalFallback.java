@@ -9,7 +9,7 @@ import com.revature.caliber.beans.Category;
 public class CategoryClientLocalFallback implements CategoryClientLocal {
 
 	@Override
-	public ResponseEntity<Category> getCategoryById(Integer categoryId) {
+	public ResponseEntity<Category> getCategoryById(int categoryId) {
 		return null;
 	}
 
