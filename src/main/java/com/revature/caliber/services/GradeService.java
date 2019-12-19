@@ -210,7 +210,7 @@ public class GradeService implements GradeServiceInterface{
 		for (Assessment assessment : assessments) {
 			grades.addAll(this.gp.findGradesByAssessmentId(assessment.getAssessmentId()));
 		}
-		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(Integer.valueOf(batchId));
+		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(batchId);
 		return GradeReportFactory.getOverallGradeReport(grades, trainees);
 	}
 
@@ -221,7 +221,7 @@ public class GradeService implements GradeServiceInterface{
 		for (Assessment assessment : assessments) {
 			grades.addAll(gp.findGradesByAssessmentId(assessment.getAssessmentId()));
 		}
-		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(Integer.valueOf(batchId));
+		List<Trainee> trainees = this.tc.getAllTraineesByBatchId(batchId);
 		return GradeReportFactory.getOverallGradeReport(grades, trainees);
 	}
 
