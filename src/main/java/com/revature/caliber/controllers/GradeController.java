@@ -42,7 +42,7 @@ public class GradeController {
     }
     
     @GetMapping("/all/grade/trainee/{id}")
-    public ResponseEntity<List<Grade>> findGradesByTrainee(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Grade>> findGradesByTrainee(@PathVariable("id") int id){
         log.debug("Inside findGradesByTrainee");
         List<Grade> temp =  gs.findGradesByTraineeId(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -50,7 +50,7 @@ public class GradeController {
     }
     
     @GetMapping("/all/grade/assessment/{id}")
-    public ResponseEntity<List<Grade>> findGradesByAssessment(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Grade>> findGradesByAssessment(@PathVariable("id") int id){
         log.debug("Inside findGradesByAssessment");
         List<Grade> temp =  gs.findGradesByAssessmentId(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -58,11 +58,11 @@ public class GradeController {
     }
 
     @GetMapping("/all/grade/batch/{id}")
-    public ResponseEntity<List<Grade>> findGradesByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNumber){
+    public ResponseEntity<List<Grade>> findGradesByBatch(@PathVariable("id") int id, @RequestParam(name="week", required=false) int weekNumber){
         log.debug("Inside findGradesByBatch");
         List<Grade> temp =  null;
         
-        if(weekNumber != null) temp = gs.findGradesByBatchIdAndWeekNumber(id, weekNumber);
+        if(weekNumber != 0) temp = gs.findGradesByBatchIdAndWeekNumber(id, weekNumber);
         else temp = gs.findGradesByBatchId(id);
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -70,7 +70,7 @@ public class GradeController {
     }
     
     @GetMapping("/all/grade/{id}")
-    public ResponseEntity<Grade> findGradeById(@PathVariable("id") Integer id){
+    public ResponseEntity<Grade> findGradeById(@PathVariable("id") int id){
         log.debug("Inside findGradeById");
         Grade temp = gs.findGradeById(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -96,23 +96,23 @@ public class GradeController {
     @DeleteMapping(value="all/grade/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody GradeDTO grade) {
-      Boolean temp = gs.deleteGrade(grade);
+      boolean temp = gs.deleteGrade(grade);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
 
     
     @GetMapping("/all/grade/average")
-    public ResponseEntity<Float> findAverageGradeByWeek(@RequestParam(name="assessment", required=false) Integer assessmentId, @RequestParam(name="batch", required=false) Integer batchId, @RequestParam(name="week", required=false) Integer weekNum){
-    	if(assessmentId != null && batchId == null && weekNum == null) {
+    public ResponseEntity<Float> findAverageGradeByWeek(@RequestParam(name="assessment", required=false) int assessmentId, @RequestParam(name="batch", required=false) int batchId, @RequestParam(name="week", required=false) int weekNum){
+    	if(assessmentId != 0 && batchId == 0 && weekNum == 0) {
             log.debug("Inside findAverageGradeByAssessment");
-            Float temp =  gs.findAverageAssessment(assessmentId);
-            if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            float temp =  gs.findAverageAssessment(assessmentId);
+            if(temp == 0) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(temp, HttpStatus.OK);
-        } else if (assessmentId == null && batchId != null && weekNum != null) {
+        } else if (assessmentId == 0 && batchId != 0 && weekNum != 0) {
         	log.debug("Inside findAverageGradeByWeek");
-            Float temp =  gs.findAvgAssessments(batchId, weekNum);
-            if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
+            float temp =  gs.findAvgAssessments(batchId, weekNum);
+            if(temp == 0) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(temp, HttpStatus.OK);
         } else  {
         	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

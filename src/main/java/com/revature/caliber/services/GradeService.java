@@ -49,7 +49,7 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public Grade findGradeById(Integer id) {
+	public Grade findGradeById(int id) {
 		Grade g = gp.findOne(id);
 		if(g != null) contactTraineeService(g);
 		
@@ -74,10 +74,10 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public Boolean deleteGrade(GradeDTO grade) {
+	public boolean deleteGrade(GradeDTO grade) {
 		Grade g = GradeConverter.convert(grade);
 		log.debug("Deleting Grade: " + g);
-		Boolean exists = false;
+		boolean exists = false;
 		if(gp.findOne(g.getGradeId()) != null) exists = true;
 		if(exists) {
 			gp.delete(g);
@@ -102,21 +102,21 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public List<Grade> findGradesByTraineeId(Integer id) {
+	public List<Grade> findGradesByTraineeId(int id) {
 		List<Grade> gradeList = gp.findGradesByTraineeId(id);
 		
 		return checkTrainee(gradeList);
 	}
 
 	@Override
-	public List<Grade> findGradesByAssessmentId(Integer id) {
+	public List<Grade> findGradesByAssessmentId(int id) {
 		List<Grade> gradeList = gp.findGradesByAssessmentId(id);
 		
 		return checkTrainee(gradeList);
 	}
 	
 	@Override
-	public List<Grade> findGradesByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+	public List<Grade> findGradesByBatchIdAndWeekNumber(int id, int weekNumber) {
 		List<Assessment> assessmentList = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
 		List<Integer> assessmentIds = new ArrayList<>();
 		for(Assessment a : assessmentList) {
@@ -128,7 +128,7 @@ public class GradeService implements GradeServiceInterface{
 	}
 	
 	@Override
-	public List<Grade> findGradesByBatchId(Integer id) {
+	public List<Grade> findGradesByBatchId(int id) {
 		List<Assessment> assessmentList = as.findAssessmentsByBatchId(id);
 		List<Integer> assessmentIds = new ArrayList<>();
 		for(Assessment a : assessmentList) {
@@ -140,7 +140,7 @@ public class GradeService implements GradeServiceInterface{
 	}
 
 	@Override
-	public Float findAvgAssessments(Integer id, Integer weekNum) {
+	public float findAvgAssessments(int id, int weekNum) {
 		List<Assessment> assessments = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNum);
 		int temp = 0;
 		float temp2 =0;
@@ -153,16 +153,16 @@ public class GradeService implements GradeServiceInterface{
 			
 		}
 		if(temp != 0) return (temp2/temp)*100;
-		else return null;
+		else return 0;
 
 
 	}
 
 
   @Override
-	public Float findAverageAssessment(Integer id) {
+	public float findAverageAssessment(int id) {
 		List<Grade> grades = this.findGradesByAssessmentId(id);
-		Float average = 0f;
+		float average = 0f;
 		for(Grade g : grades) {
 			average += g.getScore();
 		}
@@ -174,7 +174,7 @@ public class GradeService implements GradeServiceInterface{
 		
 		for(int i = 0; i < gradeList.size(); i++) {
 			Grade g = gradeList.get(i);
-			Integer tempTrainee = g.getTraineeId();
+			int tempTrainee = g.getTraineeId();
 			
 			if(!alreadyConnected.containsKey(g.getTraineeId())) {
 				boolean result = false;

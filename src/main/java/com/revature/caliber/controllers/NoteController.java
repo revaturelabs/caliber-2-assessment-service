@@ -47,7 +47,7 @@ public class NoteController {
     }
     
     @GetMapping("/all/note/trainee/{id}")
-    public ResponseEntity<List<Note>> findNotesByTrainee(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Note>> findNotesByTrainee(@PathVariable("id") int id){
         log.debug("Inside findNotesByTrainee");
         List<Note> temp = ns.findNotesByTraineeId(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -55,11 +55,11 @@ public class NoteController {
     }
     
     @GetMapping("/all/note/batch/{id}")
-    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNum){
+    public ResponseEntity<List<Note>> findNotesByBatch(@PathVariable("id") int id, @RequestParam(name="week", required=false) int weekNum){
         log.debug("Inside findNotesByBatch");
         List<Note> temp = null;
         
-        if(weekNum != null) temp = ns.findNotesByBatchIdAndWeekNumber(id, weekNum);
+        if(weekNum != 0) temp = ns.findNotesByBatchIdAndWeekNumber(id, weekNum);
         else temp = ns.findNotesByBatchId(id);
         
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -67,7 +67,7 @@ public class NoteController {
     }
 
     @GetMapping("all/note/batch/{batchId}/{week}")
-    public ResponseEntity<Map<Integer, List<Note>>> findNoteMapByBatchIdAndWeekNumber(@PathVariable("batchId") Integer batchId, @PathVariable("week") Integer week) {
+    public ResponseEntity<Map<Integer, List<Note>>> findNoteMapByBatchIdAndWeekNumber(@PathVariable("batchId") int batchId, @PathVariable("week") int week) {
         Map<Integer, List<Note>> noteMap = ns.findNotesByBatchAndWeek(batchId, week);
         if (noteMap != null) {
             return ResponseEntity.ok(noteMap);
@@ -76,7 +76,7 @@ public class NoteController {
     }
 
     @GetMapping("batch/{batchId}/{week}/note")
-    public ResponseEntity<Note> findBatchNoteByBatchIdAndWeekNumber(@PathVariable("batchId") Integer batchId, @PathVariable("week") Integer week) {
+    public ResponseEntity<Note> findBatchNoteByBatchIdAndWeekNumber(@PathVariable("batchId") int batchId, @PathVariable("week") int week) {
         Optional<Note> note = ns.findBatchNoteByBatchAndWeek(batchId, week);
         if (note.isPresent()) {
             return ResponseEntity.ok(note.get());
@@ -85,7 +85,7 @@ public class NoteController {
     }
     
     @GetMapping("/all/note/{id}")
-    public ResponseEntity<Note> findNoteById(@PathVariable("id") Integer id){
+    public ResponseEntity<Note> findNoteById(@PathVariable("id") int id){
         log.debug("Inside findNoteById");
         Note temp = ns.findNoteById(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -113,7 +113,7 @@ public class NoteController {
     @DeleteMapping(value="all/note/delete", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody NoteDTO note) {
-      Boolean temp = ns.deleteNote(note);
+      boolean temp = ns.deleteNote(note);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }
