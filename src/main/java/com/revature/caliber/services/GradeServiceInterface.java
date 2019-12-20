@@ -16,16 +16,16 @@ import com.revature.caliber.dto.GradeDTO;
 @Service
 public interface GradeServiceInterface {
 	public List<Grade> findAllGrades();
-	public Grade findGradeById(Integer id);
+	public Grade findGradeById(int id);
 	public Grade createGrade(GradeDTO g);
 	public Grade updateGrade(GradeDTO g);
-	public Boolean deleteGrade(GradeDTO g);
-	public List<Grade> findGradesByTraineeId(Integer id);
-	public List<Grade> findGradesByBatchId(Integer id);
-	public List<Grade> findGradesByAssessmentId(Integer id);
-	public List<Grade> findGradesByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
-	public Float findAvgAssessments(Integer id, Integer weekNum);
-	public Float findAverageAssessment(Integer id);
+	public boolean deleteGrade(GradeDTO g);
+	public List<Grade> findGradesByTraineeId(int id);
+	public List<Grade> findGradesByBatchId(int id);
+	public List<Grade> findGradesByAssessmentId(int id);
+	public List<Grade> findGradesByBatchIdAndWeekNumber(int id, int weekNumber);
+	public float findAvgAssessments(int id, int weekNum);
+	public float findAverageAssessment(int id);
 	Grade upsertGrade(GradeDTO g);
 	List<BatchGradeDto> getOverallGradeReportByBatchId(int batchId);
 	List<BatchGradeDto> getWeeklyGradeReportByBatchId(int batchId, int week);

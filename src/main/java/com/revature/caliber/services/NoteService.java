@@ -35,8 +35,8 @@ public class NoteService implements NoteServiceInterface{
 		
 		for(int i = 0; i < noteList.size(); i++) {
 			Note n = noteList.get(i);
-			Integer tempTrainee = n.getTraineeId();
-			Integer tempBatch = n.getBatchId();
+			int tempTrainee = n.getTraineeId();
+			int tempBatch = n.getBatchId();
 			
 			if(!traineeConected.containsKey(n.getTraineeId())) {
 				boolean result = false;
@@ -69,7 +69,7 @@ public class NoteService implements NoteServiceInterface{
 	}
 
 	@Override
-	public Note findNoteById(Integer id) {
+	public Note findNoteById(int id) {
 		Note n = np.findOne(id);
 		if(n!= null) {
 			contactTraineeService(n);
@@ -96,10 +96,10 @@ public class NoteService implements NoteServiceInterface{
 	}
 
 	@Override
-	public Boolean deleteNote(NoteDTO noteDTO) {
+	public boolean deleteNote(NoteDTO noteDTO) {
 		Note n = NoteConverter.convert(noteDTO);
 		log.debug("Deleing Note: " + n);
-		Boolean exists = false;
+		boolean exists = false;
 		if(np.findOne(n.getNoteId()) != null) exists = true;  
 		if(exists) {
 			np.delete(n);
@@ -136,28 +136,28 @@ public class NoteService implements NoteServiceInterface{
 	}
 
 	@Override
-	public List<Note> findNotesByTraineeId(Integer id) {
+	public List<Note> findNotesByTraineeId(int id) {
 		List<Note> noteList = np.findNotesByTraineeId(id);
 		
 		return checkTraineeAndBatch(noteList);
 	}
 
 	@Override
-	public List<Note> findNotesByBatchId(Integer id) {
+	public List<Note> findNotesByBatchId(int id) {
 		List<Note> noteList = np.findNotesByBatchId(id);
 		
 		return checkTraineeAndBatch(noteList);
 	}
 
 	@Override
-	public List<Note> findNotesByBatchIdAndWeekNumber(Integer bid, Integer weekNum) {
+	public List<Note> findNotesByBatchIdAndWeekNumber(int bid, int weekNum) {
 		List<Note> noteList = np.findNotesByBatchIdAndWeekNumber(bid, weekNum);
 		
 		return checkTraineeAndBatch(noteList);
 	}
 
 	@Override
-	public Map<Integer, List<Note>> findNotesByBatchAndWeek(Integer batchId, Integer week) {
+	public Map<Integer, List<Note>> findNotesByBatchAndWeek(int batchId, int week) {
 		Map<Integer, List<Note>> noteMap = new HashMap<>();
 		Stream<Note> notes = np.findNotesByBatchIdAndWeekNumber(batchId, week).stream();
 		notes.filter(note -> note.getTraineeId() >= 0 && note.getTraineeId() > 0).peek(note -> noteMap.putIfAbsent(note.getTraineeId(), new ArrayList<>())).forEach(note -> {
@@ -167,7 +167,7 @@ public class NoteService implements NoteServiceInterface{
 	}
 
 	@Override
-	public Optional<Note> findBatchNoteByBatchAndWeek(Integer batchId, Integer week) {
+	public Optional<Note> findBatchNoteByBatchAndWeek(int batchId, int week) {
 		return np.findBatchNoteByBatchIdAndWeekNumber(batchId, week);
 	}
 

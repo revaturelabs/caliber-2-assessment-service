@@ -8,7 +8,7 @@ import com.revature.caliber.beans.Grade;
 
 public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	
-	public List<Grade> findGradesByTraineeId(Integer id);
-	public List<Grade> findGradesByAssessmentId(Integer id);
+	public List<Grade> findGradesByTraineeId(int id);
+	public List<Grade> findGradesByAssessmentId(int id);
 	public List<Grade> findGradesByAssessmentIdIn(List<Integer> id);
 }

@@ -190,7 +190,7 @@ public class GradeControllerTest {
 
 		gradeObj.setAssessmentId(5);
 		gradeObj.setDateReceived(date1);
-		Integer gradeId = 7;
+		int gradeId = 7;
 		gradeObj.setGradeId(gradeId);
 		gradeObj.setScore(80);
 
@@ -320,9 +320,9 @@ public class GradeControllerTest {
 
 		BatchEntity batch = new BatchEntity();
 
-		Integer batchId = 100;
+		int batchId = 100;
 		batch.setBatchId(batchId);
-		Integer weeks = 5;
+		int weeks = 5;
 		batch.setWeeks(weeks);
 
 		Grade gradeObj = new Grade();

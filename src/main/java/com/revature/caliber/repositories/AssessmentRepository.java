@@ -8,8 +8,8 @@ import com.revature.caliber.beans.Assessment;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Integer>{
 	
-	public List<Assessment> findAssessmentsByBatchId(Integer id);
-	public List<Assessment> findAssessmentsByAssessmentCategory(Integer id);
-	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber);
+	public List<Assessment> findAssessmentsByBatchId(int id);
+	public List<Assessment> findAssessmentsByAssessmentCategory(int id);
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(int id, int weekNumber);
 	
 }

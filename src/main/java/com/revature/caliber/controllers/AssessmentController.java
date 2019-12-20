@@ -44,17 +44,17 @@ public class AssessmentController {
     }
     
     @GetMapping("/all/assessment/batch/{id}")
-    public ResponseEntity<List<Assessment>> findAssessmentsByBatch(@PathVariable("id") Integer id, @RequestParam(name="week", required=false) Integer weekNumber){
+    public ResponseEntity<List<Assessment>> findAssessmentsByBatch(@PathVariable("id") int id, @RequestParam(name="week", required=false) int weekNumber){
         log.debug("Inside findAssessmentsByBatch");
         List<Assessment> temp = null;
-        if(weekNumber != null) temp = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
+        if(weekNumber != 0) temp = as.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
         else temp = as.findAssessmentsByBatchId(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(temp, HttpStatus.OK);
     }
     
     @GetMapping("/all/assessment/category/{id}")
-    public ResponseEntity<List<Assessment>> findAssessmentsByCategory(@PathVariable("id") Integer id){
+    public ResponseEntity<List<Assessment>> findAssessmentsByCategory(@PathVariable("id") int id){
         log.debug("Inside findAssessmentsByCategory");
         List<Assessment> temp = as.findAssessmentsByCategory(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -62,7 +62,7 @@ public class AssessmentController {
     }
     
     @GetMapping("/all/assessment/{id}")
-    public ResponseEntity<Assessment> findAssessmentById(@PathVariable("id") Integer id){
+    public ResponseEntity<Assessment> findAssessmentById(@PathVariable("id") int id){
         log.debug("Inside findAssessmentById");
         Assessment temp = as.findAssessmentById(id);
         if(temp == null) return new ResponseEntity<>(temp, HttpStatus.NOT_FOUND);
@@ -89,7 +89,7 @@ public class AssessmentController {
     @DeleteMapping(value="all/assessment/delete/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
     @Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED)
     public ResponseEntity<Boolean> deleteLocation(@Valid @RequestBody AssessmentDTO assessmentDTO) {
-      Boolean temp = as.deleteAssessment(assessmentDTO);
+      boolean temp = as.deleteAssessment(assessmentDTO);
       if(!temp) return new ResponseEntity<>(temp, HttpStatus.BAD_REQUEST);
       return new ResponseEntity<>(temp, HttpStatus.OK);
     }

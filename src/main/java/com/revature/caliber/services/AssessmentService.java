@@ -36,7 +36,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
  
 	@Override
-	public Assessment findAssessmentById(Integer id) {
+	public Assessment findAssessmentById(int id) {
 		Assessment as = ar.findOne(id);
 		if(as != null) {
 			contactBatchService(as);
@@ -47,8 +47,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 	
 	@Override
-	public Boolean deleteAssessment(AssessmentDTO assessmentDTO) {
-		Boolean exists = false;
+	public boolean deleteAssessment(AssessmentDTO assessmentDTO) {
+		boolean exists = false;
 		Assessment assessment = AssessmentConverter.convert(assessmentDTO);
 		if(ar.findOne(assessment.getAssessmentId()) != null) exists = true;
 		if(exists) {
@@ -89,14 +89,14 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 
 	@Override
-	public List<Assessment> findAssessmentsByBatchId(Integer batchId) {
+	public List<Assessment> findAssessmentsByBatchId(int batchId) {
 		List<Assessment> assessmentList = ar.findAssessmentsByBatchId(batchId);
 		
 		return checkBatchAndCategory(assessmentList);
 	}
 
 	@Override
-	public List<Assessment> findAssessmentsByCategory(Integer categoryId) {
+	public List<Assessment> findAssessmentsByCategory(int categoryId) {
 		List<Assessment> assessmentList = ar.findAssessmentsByAssessmentCategory(categoryId);
 		
 		return checkBatchAndCategory(assessmentList);
@@ -116,7 +116,7 @@ public class AssessmentService implements AssessmentServiceInterface{
 	}
 
 	@Override
-	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(Integer id, Integer weekNumber) {
+	public List<Assessment> findAssessmentsByBatchIdAndWeekNumber(int id, int weekNumber) {
 		List<Assessment> assessmentList = ar.findAssessmentsByBatchIdAndWeekNumber(id, weekNumber);
 		return checkBatchAndCategory(assessmentList);
 	}
@@ -127,8 +127,8 @@ public class AssessmentService implements AssessmentServiceInterface{
 		
 		for(int i = 0; i < assessmentList.size(); i++) {
 			Assessment a = assessmentList.get(i);
-			Integer tempBatch = a.getBatchId();
-			Integer tempCategory = a.getAssessmentCategory();
+			int tempBatch = a.getBatchId();
+			int tempCategory = a.getAssessmentCategory();
 			
 			if(!batchConnected.containsKey(a.getBatchId())) {
 				boolean result = false;
