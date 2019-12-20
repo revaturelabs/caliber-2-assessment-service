@@ -11,12 +11,12 @@ import java.util.List;
 public class TraineeClientFallback implements TraineeClientLocal {
 
 	@Override
-	public Trainee findTraineeById(Integer id) {
+	public Trainee findTraineeById(int id) {
 		return null;
 	}
 
 	@Override
-	public List<Trainee> getAllTraineesByBatchId(Integer batchId) {
+	public List<Trainee> getAllTraineesByBatchId(int batchId) {
 		return null;
 	}
 }

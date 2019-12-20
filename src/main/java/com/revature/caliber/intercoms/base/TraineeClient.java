@@ -14,8 +14,8 @@ import java.util.List;
 public interface TraineeClient {
 
   @GetMapping(value="/user/all/trainee/{id}")
-  public Trainee findTraineeById(@PathVariable("id") Integer id);
+  public Trainee findTraineeById(@PathVariable("id") int id);
 
   @GetMapping(value="/user/all/trainee")
-  public List<Trainee> getAllTraineesByBatchId(@RequestParam("batch") Integer batch);
+  public List<Trainee> getAllTraineesByBatchId(@RequestParam("batch") int batch);
 }
